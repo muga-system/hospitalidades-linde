@@ -1,0 +1,44 @@
+---
+import { formatBedrooms, statusLabel } from '../../data/content';
+import type { Project } from '../../data/types';
+
+type Props = { project: Project; index?: number; variant?: 'grid' | 'feature' | 'plain' };
+const { project, index = 0, variant = 'grid' } = Astro.props;
+const cover = project.images[0];
+---
+
+<article class:list={['project-card', `project-card--${variant}`]}>
+  <a class="project-card__link" href={`/proyectos/${project.slug}/`}>
+    <figure class="project-card__media media media--rounded">
+      <img class="media__image" src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} loading={index > 0 ? 'lazy' : 'eager'} style={`object-position:${cover.position ?? 'center'};`} />
+      <span class="project-card__status">{statusLabel[project.status]}<small>Demo</small></span>
+    </figure>
+    <div class="project-card__body">
+      <div>
+        <h3 class="project-card__name">{project.name}</h3>
+        <p>{project.city}, {project.province}</p>
+      </div>
+      <div class="project-card__meta">
+        <span>{project.areaM2} m²</span>
+        {project.bedrooms !== undefined && <span>{formatBedrooms(project.bedrooms)}</span>}
+        <span>{project.modelSlugs[0].replace('-', ' ')}</span>
+      </div>
+      <span class="project-card__arrow" aria-hidden="true">↗</span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .project-card__link { display: block; }
+  .project-card__media { aspect-ratio: 4 / 3; }
+  .project-card--feature .project-card__media { aspect-ratio: 1.25 / 1; }
+  .project-card__status { position: absolute; left: 1rem; bottom: .9rem; display: inline-flex; align-items: center; gap: .45rem; border-radius: 999px; padding: .45rem .6rem; color: var(--ink); background: var(--paper); font-size: .64rem; font-weight: 700; letter-spacing: .035em; text-transform: uppercase; }
+  .project-card__status small { color: var(--forest); font-size: .58rem; }
+  .project-card__body { position: relative; padding: .9rem .1rem 0; }
+  .project-card__name { font-family: var(--display); font-size: clamp(1.7rem, 2.9vw, 3rem); font-weight: 400; letter-spacing: -.055em; line-height: .96; }
+  .project-card__body p { margin-top: .35rem; font-size: .73rem; }
+  .project-card__meta { display: flex; flex-wrap: wrap; gap: .35rem .7rem; margin-top: .9rem; padding-right: 2.5rem; color: var(--forest); font-size: .65rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+  .project-card__meta span + span::before { content: '·'; margin-right: .7rem; color: var(--earth); }
+  .project-card__arrow { position: absolute; right: 0; bottom: 0; display: grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid var(--ink); border-radius: 50%; transition: transform var(--motion-base) var(--ease), background var(--motion-base) var(--ease); }
+  .project-card__link:hover .project-card__arrow { transform: translate(.2rem, -.2rem); background: var(--leaf); }
+</style>

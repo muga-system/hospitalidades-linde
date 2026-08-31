@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "nido-38",
+    "name": "Nido 38",
+    "areaM2": 38,
+    "bedrooms": "studio",
+    "bathrooms": 1,
+    "tagline": "Una pieza mínima con una relación máxima con el exterior.",
+    "summary": "Base compacta para estudio, huéspedes o primera unidad en un terreno.",
+    "features": ["Núcleo técnico compacto", "Expansión semicubierta", "Abertura principal orientable"],
+    "recommendedFor": ["unidad-complementaria", "hospitalidad"],
+    "isFeatured": true,
+    "isDemo": true
+  },
+  {
+    "slug": "cauce-62",
+    "name": "Cauce 62",
+    "areaM2": 62,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "tagline": "Un refugio lineal que ordena programa, vistas y recorrido.",
+    "summary": "Vivienda compacta de un dormitorio para uso permanente o segunda vivienda.",
+    "features": ["Planta simple", "Galería longitudinal", "Dormitorio independiente"],
+    "recommendedFor": ["refugio", "vivienda-territorio"],
+    "isFeatured": false,
+    "isDemo": true
+  },
+  {
+    "slug": "lenga-84",
+    "name": "Lenga 84",
+    "areaM2": 84,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "tagline": "Dos áreas privadas y un centro común abierto al paisaje.",
+    "summary": "Punto de partida equilibrado para pareja, familia pequeña o renta de baja escala.",
+    "features": ["Dos dormitorios equivalentes", "Estar central", "Expansión exterior protegida"],
+    "recommendedFor": ["refugio", "hospitalidad", "vivienda-territorio"],
+    "isFeatured": true,
+    "isDemo": true
+  },
+  {
+    "slug": "abra-105",
+    "name": "Abra 105",
+    "areaM2": 105,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "flexibleSpace": true,
+    "tagline": "Una casa compacta con una pieza flexible para trabajo, huéspedes o crecimiento.",
+    "summary": "Modelo con mayor independencia de usos sin multiplicar circulaciones.",
+    "features": ["Estudio flexible", "Dos baños", "Área social pasante"],
+    "recommendedFor": ["vivienda-territorio", "refugio"],
+    "isFeatured": false,
+    "isDemo": true
+  },
+  {
+    "slug": "patio-128",
+    "name": "Patio 128",
+    "areaM2": 128,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "tagline": "Dos alas que construyen reparo y un vacío exterior habitable.",
+    "summary": "Configuración en torno a un patio protegido para climas de gran amplitud y vida exterior.",
+    "features": ["Patio protegido", "Sector privado separado", "Posible ejecución por etapas"],
+    "recommendedFor": ["vivienda-territorio", "hospitalidad"],
+    "isFeatured": true,
+    "isDemo": true
+  },
+  {
+    "slug": "galpon-156",
+    "name": "Galpón 156",
+    "areaM2": 156,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "flexibleSpace": true,
+    "tagline": "Una nave clara para vivir, trabajar y reunir sin fragmentar de más.",
+    "summary": "La variante de mayor escala, con gran espacio social y volumen flexible.",
+    "features": ["Gran sala común", "Altura interior generosa", "Taller o espacio flexible"],
+    "recommendedFor": ["vivienda-territorio", "hospitalidad"],
+    "isFeatured": false,
+    "isDemo": true
+  }
+]

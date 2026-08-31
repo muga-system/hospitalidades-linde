@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActionLink from '../../components/global/ActionLink.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+import { projects, statusLabel } from '../../data/content';
+import type { Project } from '../../data/types';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const hero = project.images[0];
+const related = projects.filter((item) => item.slug !== project.slug && item.solutionSlugs.some((slug) => project.solutionSlugs.includes(slug))).slice(0, 3);
+---
+
+<BaseLayout title={`${project.name} — Proyectos LINDE`} description={project.intro} image={hero.src} headerMode="overlay">
+  <article class="page project-detail">
+    <header class="page-hero">
+      <div class="page-hero__image"><img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" style={`object-position:${hero.position};`} /></div>
+      <div class="page-hero__veil"></div>
+      <div class="page-hero__content">
+        <p class="eyebrow">Proyecto demo · {project.city}, {project.province}</p>
+        <h1 class="display-xl">{project.name}</h1>
+        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{project.areaM2} m²</span><span class="tag tag--light">{statusLabel[project.status]}</span><span class="tag tag--light">{project.modelSlugs[0].replace('-', ' ')}</span></div><ActionLink href="/empezar/" label="Consultar un proyecto" variant="light" /></div>
+      </div>
+    </header>
+
+    <section class="project-detail__intro section">
+      <div class="contained project-detail__intro-grid">
+        <div><p class="eyebrow">El escenario</p><h2 class="section-title">{project.intro}</h2></div>
+        <dl class="project-detail__facts">{project.technicalNotes.map((note) => <div><dt>{note.label}</dt><dd>{note.value}</dd></div>)}</dl>
+      </div>
+    </section>
+
+    <section class="project-detail__story section--surface">
+      <div class="contained">
+        <div class="project-detail__story-row"><figure class="media media--rounded"><img class="media__image" src={project.images[1].src} alt={project.images[1].alt} width="1536" height="1024" loading="lazy" style={`object-position:${project.images[1].position};`} /></figure><div><p class="eyebrow">Desafío</p><h2 class="media-title">{project.challenge}</h2><p class="body-copy">Un proyecto no se resuelve al sumar habitaciones. La relación entre acceso, reparo, orientación y rutina es la base para que las decisiones materiales tengan sentido.</p></div></div>
+        <div class="project-detail__story-row project-detail__story-row--reverse"><div><p class="eyebrow">Respuesta</p><h2 class="media-title">{project.response}</h2><p class="body-copy">Las soluciones mostradas son ficticias y sirven como material de demostración. Lo importante es hacer visible una metodología de lectura y ajuste para cada situación territorial.</p></div><figure class="media media--rounded"><img class="media__image" src={project.images[2].src} alt={project.images[2].alt} width="1536" height="1024" loading="lazy" style={`object-position:${project.images[2].position};`} /></figure></div>
+      </div>
+    </section>
+
+    <section class="project-detail__map-section section">
+      <div class="contained project-detail__map-grid"><div><p class="eyebrow">Ubicación aproximada</p><h2 class="section-title">Territorio como dato de proyecto.</h2><p class="body-copy">La ubicación se presenta como una referencia demostrativa, no como un dato de obra. Mapa, accesos y orientación se usan para conversar sobre las condiciones que sí cambian una arquitectura.</p><div style="margin-top:1.8rem"><ActionLink href="/proyectos/" label="Volver al mapa" /></div></div><figure class="project-detail__map-art"><img src="/graphics/map-territory.svg" alt={`Mapa esquemático de ${project.city}, ${project.province}.`} width="1400" height="820" /><figcaption class="meta">{project.city}, {project.province} · marcador demo</figcaption></figure></div>
+    </section>
+
+    <section class="project-detail__gallery"><figure class="media"><img class="media__image" src={project.images[0].src} alt={project.images[0].alt} width="1536" height="1024" loading="lazy" style={`object-position:${project.images[0].position};`} /></figure><div class="contained project-detail__gallery-caption"><p class="body-large">Arquitectura en territorio no es una estética fija. Es la capacidad de responder bien a una condición que ya está ahí.</p><span class="meta">{project.name} · material demostrativo</span></div></section>
+
+    <section class="section project-detail__related"><div class="contained"><div class="section-head"><div><p class="eyebrow">Seguir explorando</p><h2 class="section-title">Otros proyectos y escenarios.</h2></div><ActionLink href="/proyectos/" label="Ver todos" /></div><div class="project-detail__related-grid">{related.map((item, index) => <ProjectCard project={item} index={index} />)}</div></div></section>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-detail__intro { padding-block: clamp(5rem, 10vw, 11rem); }
+  .project-detail__intro-grid { display: grid; grid-template-columns: 1.15fr .65fr; gap: clamp(2rem, 8vw, 10rem); align-items: end; }
+  .project-detail__intro-grid .eyebrow { margin-bottom: 1rem; }
+  .project-detail__facts { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .project-detail__facts div { padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .project-detail__facts dt { color: var(--forest); font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .project-detail__facts dd { margin: .48rem 0 0; font-family: var(--display); font-size: 1.55rem; line-height: 1.04; letter-spacing: -.045em; }
+  .project-detail__story { padding-block: clamp(4.5rem, 9vw, 10rem); }
+  .project-detail__story-row { display: grid; grid-template-columns: 1.04fr .68fr; gap: clamp(2rem, 8vw, 10rem); align-items: center; }
+  .project-detail__story-row + .project-detail__story-row { margin-top: clamp(5rem, 12vw, 13rem); }
+  .project-detail__story-row figure { aspect-ratio: 1.16 / 1; }
+  .project-detail__story-row .eyebrow { margin-bottom: .9rem; }
+  .project-detail__story-row .body-copy { margin-top: 1.4rem; }
+  .project-detail__map-section { padding-block: clamp(5rem, 10vw, 11rem); }
+  .project-detail__map-grid { display: grid; grid-template-columns: .72fr 1.1fr; gap: clamp(2rem, 7vw, 9rem); align-items: center; }
+  .project-detail__map-grid .eyebrow { margin-bottom: .9rem; }
+  .project-detail__map-grid .body-copy { margin-top: 1.4rem; }
+  .project-detail__map-art { overflow: hidden; background: var(--leaf); border-radius: var(--radius-media); }
+  .project-detail__map-art img { width: 100%; height: 100%; object-fit: cover; }
+  .project-detail__map-art figcaption { padding: .75rem 1rem; background: var(--paper); }
+  .project-detail__gallery figure { height: min(76svh, 860px); }
+  .project-detail__gallery-caption { display: grid; grid-template-columns: .7fr 1fr; gap: 2rem; align-items: end; padding-block: clamp(2.6rem, 6vw, 6rem); }
+  .project-detail__gallery-caption .meta { justify-self: end; }
+  .project-detail__related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2.25rem); }
+  @media (max-width: 900px) { .project-detail__intro-grid, .project-detail__story-row, .project-detail__map-grid, .project-detail__gallery-caption { grid-template-columns: 1fr; } .project-detail__story-row--reverse > :first-child { order: 2; } .project-detail__related-grid { grid-template-columns: 1fr 1fr; } .project-detail__gallery-caption .meta { justify-self: start; } }
+  @media (max-width: 560px) { .project-detail__related-grid { grid-template-columns: 1fr; } .project-detail__gallery figure { height: 58svh; } }
+</style>

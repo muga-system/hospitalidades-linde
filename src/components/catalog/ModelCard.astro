@@ -1,0 +1,43 @@
+---
+import { formatBedrooms } from '../../data/content';
+import type { Model } from '../../data/types';
+
+type Props = { model: Model; index?: number; size?: 'regular' | 'featured' };
+const { model, index = 0, size = 'regular' } = Astro.props;
+const cover = model.images[0];
+---
+
+<article class:list={['model-card', `model-card--${size}`]}>
+  <a class="model-card__link" href={`/modelos/${model.slug}/`}>
+    <figure class="model-card__media media media--rounded">
+      <img class="media__image" src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} loading={index > 1 ? 'lazy' : 'eager'} style={`object-position:${cover.position ?? 'center'};`} />
+      <span class="model-card__number">{String(index + 1).padStart(2, '0')}</span>
+      {model.isFeatured && <span class="model-card__badge">Elegido para empezar</span>}
+    </figure>
+    <div class="model-card__body">
+      <div>
+        <p class="eyebrow">Modelo base</p>
+        <h3 class="model-card__name">{model.name}</h3>
+      </div>
+      <div class="model-card__specs"><span>{model.areaM2} m²</span><span>{formatBedrooms(model.bedrooms)}</span><span>{model.bathrooms} baño{model.bathrooms > 1 ? 's' : ''}</span></div>
+      <span class="model-card__arrow" aria-hidden="true">↗</span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .model-card__link { display: block; }
+  .model-card__media { aspect-ratio: 1.08 / 1; }
+  .model-card--featured .model-card__media { aspect-ratio: 1.38 / 1; }
+  .model-card__number, .model-card__badge { position: absolute; z-index: 1; top: 1rem; color: var(--white); font-size: .67rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+  .model-card__number { left: 1rem; }
+  .model-card__badge { right: 1rem; max-width: 11rem; color: var(--ink); background: var(--leaf); border-radius: 999px; padding: .48rem .58rem; letter-spacing: .025em; }
+  .model-card__body { position: relative; display: grid; grid-template-columns: 1fr auto; gap: .7rem; padding: 1rem .1rem 0; }
+  .model-card__body .eyebrow { color: var(--forest); margin-bottom: .35rem; }
+  .model-card__name { font-family: var(--display); font-size: clamp(1.9rem, 2.9vw, 3.1rem); font-weight: 400; letter-spacing: -.06em; line-height: .95; }
+  .model-card__specs { grid-column: 1; display: flex; flex-wrap: wrap; gap: .35rem .7rem; font-size: .68rem; font-weight: 650; }
+  .model-card__specs span + span::before { content: '·'; margin-right: .7rem; color: var(--earth); }
+  .model-card__arrow { position: absolute; right: 0; bottom: 0; display: grid; place-items: center; width: 2.1rem; height: 2.1rem; border: 1px solid var(--ink); border-radius: 50%; transition: transform var(--motion-base) var(--ease), background var(--motion-base) var(--ease); }
+  .model-card__link:hover .model-card__arrow { transform: translate(.2rem, -.2rem); background: var(--leaf); }
+  @media (max-width: 560px) { .model-card__media { aspect-ratio: 1.25 / 1; } }
+</style>

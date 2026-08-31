@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ActionLink from '../components/global/ActionLink.astro';
+import ProjectCard from '../components/projects/ProjectCard.astro';
+import ModelCard from '../components/catalog/ModelCard.astro';
+import SolutionEntry from '../components/home/SolutionEntry.astro';
+import SectionIntro from '../components/global/SectionIntro.astro';
+import TopographicMark from '../components/global/TopographicMark.astro';
+import { featuredModels, featuredProjects, guides, projects, site, solutions } from '../data/content';
+
+const featureProject = projects[1];
+---
+
+<BaseLayout headerMode="overlay">
+  <div class="page page--home">
+    <section class="home-hero" aria-labelledby="hero-title">
+      <img class="home-hero__image" src="/images/home/hero-linde.png" alt="" width="1536" height="1024" fetchpriority="high" />
+      <div class="home-hero__veil"></div>
+      <div class="home-hero__content">
+        <p class="eyebrow">Arquitectura + desarrollo</p>
+        <h1 id="hero-title" class="display-xl">{site.heroTitle}</h1>
+        <p class="home-hero__summary">{site.heroSummary}</p>
+        <div class="home-hero__actions">
+          <ActionLink href={site.primaryCta.href} label={site.primaryCta.label} variant="solid" />
+          <a class="hero-secondary" href={site.secondaryCta.href}>Ver proyectos <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <TopographicMark light className="home-hero__mark" />
+      <p class="home-hero__location meta">Patagonia, Argentina <span>·</span> Demo comercial</p>
+    </section>
+
+    <section class="section home-solutions" aria-labelledby="soluciones-title">
+      <div class="contained">
+        <SectionIntro eyebrow="01 · Soluciones" title="¿Qué querés construir?" copy="Un punto de partida para ordenar una situación concreta antes de llegar a un modelo o a una forma." href="/soluciones/" action="Ver todas las soluciones" centered />
+      </div>
+      <div class="home-solutions__rail" aria-label="Soluciones de LINDE">
+        {solutions.map((solution, index) => <SolutionEntry solution={solution} index={index} />)}
+      </div>
+      <div class="contained home-solutions__tail"><TopographicMark /></div>
+    </section>
+
+    <section class="territory section--surface" aria-labelledby="territorio-title">
+      <div class="contained territory__grid">
+        <div class="territory__collage" data-reveal>
+          <figure class="territory__media territory__media--large media media--rounded"><img class="media__image" src="/images/library/threshold-linde.png" alt="Terraza protegida de un refugio en relación con el bosque." width="1536" height="1024" loading="lazy" /></figure>
+          <figure class="territory__media territory__media--small media media--rounded"><img class="media__image" src="/images/home/hero-linde.png" alt="Refugio LINDE y su entorno natural." width="1536" height="1024" loading="lazy" style="object-position:79% center" /></figure>
+          <span class="territory__note meta">Lugar · orientación · clima · acceso</span>
+        </div>
+        <div class="territory__copy" data-reveal>
+          <p class="eyebrow">02 · Proyectos en territorio</p>
+          <h2 id="territorio-title" class="section-title">Cada proyecto encuentra su forma en la lectura del lugar.</h2>
+          <p class="body-large">La pendiente, la vegetación y la forma de llegar no son un contexto decorativo: son parte del programa.</p>
+          <ActionLink href="/proyectos/" label="Explorar en el mapa" />
+        </div>
+      </div>
+    </section>
+
+    <section class="process-strip section--dark" aria-labelledby="proceso-title">
+      <div class="contained">
+        <div class="process-strip__head">
+          <p class="eyebrow">03 · Cómo trabajamos</p>
+          <h2 id="proceso-title" class="section-title">Una secuencia clara para decisiones que no se resuelven de una vez.</h2>
+          <ActionLink href="/proceso/" label="Conocer el proceso" variant="light" />
+        </div>
+        <ol class="process-strip__steps">
+          {['Leer el lugar', 'Definir programa y números', 'Diseñar y documentar', 'Coordinar la ejecución'].map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{step}</strong><i aria-hidden="true">↘</i></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section models-home" aria-labelledby="modelos-title">
+      <div class="contained">
+        <SectionIntro eyebrow="04 · Modelos" title="Puntos de partida, no respuestas cerradas." copy="Seis configuraciones base para conversar con más precisión sobre escala, usos y posibilidades del sitio." href="/modelos/" action="Ver todos los modelos" />
+      </div>
+      <div class="models-home__rail">
+        {featuredModels.map((model, index) => <div class="models-home__item"><ModelCard model={model} index={index} size="featured" /></div>)}
+      </div>
+    </section>
+
+    <section class="feature-project" aria-labelledby="destacado-title">
+      <div class="feature-project__media media"><img class="media__image" src={featureProject.images[0].src} alt={featureProject.images[0].alt} width="1536" height="1024" loading="lazy" style={`object-position:${featureProject.images[0].position};`} /><div class="feature-project__veil"></div></div>
+      <div class="feature-project__content" data-reveal>
+        <p class="eyebrow">Proyecto destacado · {featureProject.city}</p>
+        <h2 id="destacado-title" class="display-l">{featureProject.name}</h2>
+        <p>{featureProject.intro}</p>
+        <div class="tag-row"><span class="tag tag--light">{featureProject.areaM2} m²</span><span class="tag tag--light">{featureProject.modelSlugs[0].replace('-', ' ')}</span><span class="tag tag--light">{featureProject.status} · demo</span></div>
+        <ActionLink href={`/proyectos/${featureProject.slug}/`} label="Ver proyecto" variant="light" />
+      </div>
+    </section>
+
+    <section class="section projects-home" aria-labelledby="proyectos-title">
+      <div class="contained">
+        <SectionIntro eyebrow="05 · Selección" title="Obras y escenarios para imaginar posibilidades concretas." href="/proyectos/" action="Ver portfolio completo" />
+        <div class="project-grid">
+          {featuredProjects.map((project, index) => <ProjectCard project={project} index={index} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="principle section--leaf" aria-labelledby="principio-title">
+      <div class="contained principle__grid">
+        <div><p class="eyebrow">06 · Principio LINDE</p><TopographicMark /></div>
+        <div><h2 id="principio-title" class="display-l">El terreno no es el fondo del proyecto. Es una parte del proyecto.</h2></div>
+        <ol class="principle__list"><li><span>01</span><p>La mejor vista no siempre es la primera decisión.</p></li><li><span>02</span><p>El reparo puede ser más importante que la forma.</p></li><li><span>03</span><p>La construcción empieza con una lectura compartida.</p></li></ol>
+      </div>
+    </section>
+
+    <section class="proof section--surface" aria-labelledby="prueba-title">
+      <div class="contained proof__grid">
+        <div><p class="eyebrow">07 · Experiencia demostrativa</p><h2 id="prueba-title" class="section-title">Una web que permite entrar por una necesidad y salir con una conversación mejor planteada.</h2></div>
+        <div class="proof__quote"><p>“Queríamos saber si el lote tenía sentido antes de enamorarnos de una casa.”</p><span>Consulta ficticia · muestra de contenido</span></div>
+        <div class="proof__metrics"><div><strong>06</strong><span>modelos demo</span></div><div><strong>06</strong><span>proyectos demo</span></div><div><strong>04</strong><span>situaciones de partida</span></div></div>
+      </div>
+    </section>
+
+    <section class="section guides-home" aria-labelledby="guias-title">
+      <div class="contained">
+        <SectionIntro eyebrow="08 · Guías" title="Para mirar con más atención antes de decidir." href="/guias/" action="Ir a las guías" />
+        <div class="guides-home__grid">
+          {guides.map((guide) => <article class="guide-card"><a href={`/guias/${guide.slug}/`}><figure class="guide-card__media media media--rounded"><img class="media__image" src={guide.cover.src} alt={guide.cover.alt} width={guide.cover.width} height={guide.cover.height} loading="lazy" style={`object-position:${guide.cover.position};`} /></figure><p class="eyebrow">{guide.category}</p><h3>{guide.title}</h3><p>{guide.description}</p><span>Leer guía ↗</span></a></article>)}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .home-hero { position: relative; min-height: 100svh; display: grid; place-items: center; isolation: isolate; color: var(--white); background: var(--forest); text-align: center; }
+  .home-hero__image { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 72% center; }
+  .home-hero__veil, .feature-project__veil { position: absolute; z-index: -1; inset: 0; background: rgba(9, 17, 9, .43); }
+  .home-hero__content { width: min(100% - 3rem, 82rem); padding-top: var(--header-height); }
+  .home-hero__content .eyebrow { margin-bottom: 1.35rem; }
+  .home-hero__content h1 { max-width: 12ch; margin-inline: auto; }
+  .home-hero__summary { max-width: 38rem; margin: 1.9rem auto 0; font-size: clamp(1rem, 1.45vw, 1.3rem); line-height: 1.45; }
+  .home-hero__actions { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; }
+  .hero-secondary { display: inline-flex; align-items: center; gap: .7rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+  .hero-secondary span { display: grid; place-items: center; width: 2.35rem; height: 2.35rem; border: 1px solid var(--white); border-radius: 50%; }
+  .home-hero__mark { position: absolute; right: 4vw; bottom: 9%; opacity: .82; }
+  .home-hero__location { position: absolute; left: var(--gutter); bottom: 1.7rem; }
+  .home-hero__location span { padding-inline: .4rem; color: var(--leaf); }
+  .home-solutions { overflow: hidden; }
+  .home-solutions__rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(19rem, 29vw); align-items: start; gap: clamp(1rem, 2.5vw, 2.6rem); width: max-content; padding: .2rem max(var(--gutter), calc((100vw - 1730px) / 2)) 0; }
+  .home-solutions__tail { display: flex; justify-content: flex-end; margin-top: 2.6rem; }
+  .territory { padding-block: clamp(5rem, 10vw, 11rem); }
+  .territory__grid { display: grid; grid-template-columns: 1.1fr .85fr; align-items: center; gap: clamp(3rem, 8vw, 10rem); }
+  .territory__collage { position: relative; min-height: 37rem; }
+  .territory__media--large { width: 82%; height: 31rem; }
+  .territory__media--small { position: absolute; width: 46%; height: 16rem; right: 0; bottom: 0; }
+  .territory__note { position: absolute; left: 1.2rem; bottom: 1.3rem; width: min-content; color: var(--ink); background: var(--leaf); padding: .65rem; }
+  .territory__copy .eyebrow { margin-bottom: 1.2rem; }
+  .territory__copy .body-large { margin: 1.6rem 0 2rem; }
+  .process-strip { padding-block: clamp(4rem, 7vw, 7.5rem); }
+  .process-strip__head { display: grid; grid-template-columns: .3fr 1fr auto; gap: 2rem; align-items: end; }
+  .process-strip__head .eyebrow { color: var(--moss); }
+  .process-strip__steps { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(3rem, 6vw, 6rem); list-style: none; border-top: 1px solid rgba(248,245,236,.35); }
+  .process-strip__steps li { min-height: 13rem; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; padding: 1rem 1rem 1rem 0; border-right: 1px solid rgba(248,245,236,.28); }
+  .process-strip__steps li + li { padding-left: 1rem; }
+  .process-strip__steps span { color: var(--moss); font-size: .69rem; font-weight: 700; letter-spacing: .08em; }
+  .process-strip__steps strong { max-width: 9ch; font-family: var(--display); font-size: clamp(1.8rem, 2.7vw, 3rem); font-weight: 400; line-height: .96; letter-spacing: -.055em; }
+  .process-strip__steps i { color: var(--leaf); font-size: 1.35rem; font-style: normal; }
+  .models-home { overflow: hidden; }
+  .models-home__rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(24rem, 39vw); gap: clamp(1rem, 2.3vw, 2.7rem); width: max-content; padding: 0 max(var(--gutter), calc((100vw - 1730px) / 2)); }
+  .feature-project { position: relative; min-height: 57rem; display: flex; align-items: end; isolation: isolate; color: var(--white); }
+  .feature-project__media { position: absolute; z-index: -2; inset: 0; }
+  .feature-project__media img { width: 100%; height: 100%; object-fit: cover; object-position: 28% center; }
+  .feature-project__content { width: min(100% - var(--gutter) * 2, 1730px); margin: 0 auto; padding-bottom: clamp(3.5rem, 7vw, 7rem); }
+  .feature-project__content .eyebrow { margin-bottom: .8rem; }
+  .feature-project__content .display-l { max-width: 8ch; }
+  .feature-project__content > p:not(.eyebrow) { max-width: 37rem; margin: 1.3rem 0; font-size: 1.02rem; line-height: 1.55; }
+  .feature-project__content .action-link { margin-top: 1.65rem; }
+  .principle { padding-block: clamp(5rem, 11vw, 12rem); }
+  .principle__grid { display: grid; grid-template-columns: .3fr 1fr .46fr; gap: clamp(1.5rem, 4vw, 4rem); }
+  .principle .topo-mark { margin-top: 2.2rem; }
+  .principle__list { list-style: none; align-self: end; }
+  .principle__list li { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid rgba(25,32,23,.25); }
+  .principle__list li:last-child { border-bottom: 1px solid rgba(25,32,23,.25); }
+  .principle__list span { font-size: .64rem; font-weight: 700; }
+  .principle__list p { font-family: var(--display); font-size: 1.38rem; line-height: 1.05; letter-spacing: -.04em; }
+  .proof { padding-block: clamp(4.5rem, 9vw, 9rem); }
+  .proof__grid { display: grid; grid-template-columns: 1.1fr .7fr; gap: clamp(2rem, 6vw, 8rem); }
+  .proof__grid .eyebrow { margin-bottom: 1rem; }
+  .proof__quote { align-self: end; padding: 1.6rem; background: var(--leaf); }
+  .proof__quote p { font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.8rem); line-height: 1; letter-spacing: -.05em; }
+  .proof__quote span { display: block; margin-top: 1.8rem; font-size: .65rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .proof__metrics { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .proof__metrics div { display: grid; gap: .3rem; padding: 1.3rem 1rem 0 0; border-right: 1px solid var(--line); }
+  .proof__metrics div + div { padding-left: 1rem; }
+  .proof__metrics strong { font-family: var(--display); font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 400; line-height: .82; letter-spacing: -.08em; }
+  .proof__metrics span { font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .guides-home__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2.2rem); }
+  .guide-card__media { aspect-ratio: 1.24 / 1; }
+  .guide-card .eyebrow { margin-top: 1rem; color: var(--forest); }
+  .guide-card h3 { margin-top: .5rem; font-family: var(--display); font-size: clamp(1.7rem, 2.5vw, 2.75rem); font-weight: 400; line-height: .98; letter-spacing: -.055em; }
+  .guide-card p:not(.eyebrow) { margin-top: .8rem; font-size: .78rem; line-height: 1.5; }
+  .guide-card span { display: inline-block; margin-top: 1.1rem; font-size: .67rem; font-weight: 700; text-transform: uppercase; }
+  @media (max-width: 900px) { .home-solutions__rail { grid-auto-columns: minmax(17rem, 62vw); } .territory__grid, .principle__grid, .proof__grid { grid-template-columns: 1fr; } .territory__collage { min-height: 30rem; } .territory__media--large { height: 25rem; } .process-strip__head { grid-template-columns: 1fr; gap: 1.2rem; } .process-strip__steps { grid-template-columns: repeat(2, 1fr); } .process-strip__steps li:nth-child(2) { border-right: 0; } .models-home__rail { grid-auto-columns: minmax(22rem, 72vw); } .feature-project { min-height: 48rem; } .principle__list { max-width: 38rem; } .proof__metrics { grid-column: auto; } }
+  @media (max-width: 560px) { .home-hero { min-height: 92svh; } .home-hero__image { object-position: 66% center; } .home-hero__content { width: min(100% - 2.5rem, 35rem); } .home-hero__summary { font-size: .94rem; } .home-hero__actions { flex-direction: column; } .home-hero__mark { right: -3rem; bottom: 7rem; width: 14rem; } .home-hero__location { left: 1.25rem; bottom: 1.25rem; } .home-solutions__rail { grid-auto-columns: minmax(17rem, 82vw); padding-left: 1.25rem; } .territory__collage { min-height: 25rem; } .territory__media--large { width: 88%; height: 21rem; } .territory__media--small { height: 11rem; } .process-strip__steps { grid-template-columns: 1fr; } .process-strip__steps li, .process-strip__steps li + li { min-height: 9.8rem; padding: 1rem 0; border-right: 0; border-bottom: 1px solid rgba(248,245,236,.28); } .models-home__rail { grid-auto-columns: 82vw; padding-left: 1.25rem; } .feature-project { min-height: 42rem; } .feature-project__content { width: calc(100% - 2.5rem); } .proof__metrics { grid-template-columns: 1fr; } .proof__metrics div, .proof__metrics div + div { padding: 1rem 0; border-right: 0; border-bottom: 1px solid var(--line); } .guides-home__grid { grid-template-columns: 1fr; gap: 2.8rem; } }
+</style>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActionLink from '../../components/global/ActionLink.astro';
+import ModelCard from '../../components/catalog/ModelCard.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+import { relatedModels, relatedProjects, solutions } from '../../data/content';
+import type { Solution } from '../../data/types';
+
+export function getStaticPaths() { return solutions.map((solution) => ({ params: { slug: solution.slug }, props: { solution } })); }
+const { solution } = Astro.props as { solution: Solution };
+const linkedModels = relatedModels(solution.modelSlugs);
+const linkedProjects = relatedProjects(solution.projectSlugs);
+---
+
+<BaseLayout title={`${solution.title} — LINDE`} description={solution.summary} image={solution.image.src} headerMode="overlay">
+  <article class="page solution-detail">
+    <header class="page-hero solution-detail__hero">
+      <div class="page-hero__image"><img src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} fetchpriority="high" style={`object-position:${solution.image.position};`} /></div><div class="page-hero__veil"></div>
+      <div class="page-hero__content"><p class="eyebrow">Solución LINDE</p><h1 class="display-xl">{solution.title}</h1><div class="page-hero__footer"><p class="page-hero__lead">{solution.summary}</p><ActionLink href="/empezar/" label="Contanos tu proyecto" variant="light" /></div></div>
+    </header>
+    <section class="solution-detail__problem section"><div class="contained solution-detail__problem-grid"><div><p class="eyebrow">Lo que suele pasar</p><h2 class="section-title">{solution.problem}</h2></div><div><p class="body-large">La clave no es elegir una forma antes de tiempo. Es poder ordenar prioridades y restricciones con una secuencia de decisiones compartida.</p><ActionLink href="/empezar/" label="Empezar una consulta" /></div></div></section>
+    <section class="solution-detail__principles section--leaf"><div class="contained"><p class="eyebrow">Principios de trabajo</p><div class="solution-detail__principles-grid">{solution.principles.map((principle, index) => <article><span>{String(index + 1).padStart(2, '0')}</span><h2>{principle.title}</h2><p>{principle.body}</p></article>)}</div></div></section>
+    <section class="solution-detail__consider section"><div class="contained solution-detail__consider-grid"><figure class="media media--rounded"><img class="media__image" src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} loading="lazy" style={`object-position:${solution.image.position};`} /></figure><div><p class="eyebrow">Conversaciones necesarias</p><h2 class="section-title">Antes de pasar a una forma, hay cosas que conviene mirar.</h2><ol>{solution.considerations.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}</ol></div></div></section>
+    <section class="section--surface solution-detail__models"><div class="contained"><div class="section-head"><div><p class="eyebrow">Modelos relacionados</p><h2 class="section-title">Bases que pueden ayudar a abrir la conversación.</h2></div><ActionLink href="/modelos/" label="Ver modelos" /></div><div class="solution-detail__models-grid">{linkedModels.map((model, index) => <ModelCard model={model} index={index} />)}</div></div></section>
+    {linkedProjects.length > 0 && <section class="section solution-detail__projects"><div class="contained"><div class="section-head"><div><p class="eyebrow">Proyectos demo</p><h2 class="section-title">Situaciones del territorio que orientan la búsqueda.</h2></div><ActionLink href="/proyectos/" label="Explorar proyectos" /></div><div class="solution-detail__projects-grid">{linkedProjects.map((project, index) => <ProjectCard project={project} index={index} />)}</div></div></section>}
+  </article>
+</BaseLayout>
+
+<style>
+  .solution-detail__problem { padding-block: clamp(5rem, 10vw, 11rem); }
+  .solution-detail__problem-grid { display: grid; grid-template-columns: 1.1fr .65fr; gap: clamp(2rem, 8vw, 10rem); }
+  .solution-detail__problem-grid .eyebrow { margin-bottom: 1rem; }
+  .solution-detail__problem-grid .action-link { margin-top: 2rem; }
+  .solution-detail__principles { padding-block: clamp(4rem, 8vw, 8rem); }
+  .solution-detail__principles > .contained > .eyebrow { margin-bottom: 2rem; }
+  .solution-detail__principles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(25,32,23,.25); border: 1px solid rgba(25,32,23,.25); }
+  .solution-detail__principles-grid article { min-height: 20rem; display: flex; flex-direction: column; padding: clamp(1.4rem, 2.5vw, 2.5rem); background: var(--leaf); }
+  .solution-detail__principles-grid span { font-size: .66rem; font-weight: 700; }
+  .solution-detail__principles-grid h2 { max-width: 9ch; margin-top: auto; font-family: var(--display); font-size: clamp(2.2rem, 4vw, 4rem); font-weight: 400; line-height: .94; letter-spacing: -.06em; }
+  .solution-detail__principles-grid p { max-width: 35ch; margin-top: 1rem; font-size: .8rem; line-height: 1.5; }
+  .solution-detail__consider { padding-block: clamp(5rem, 10vw, 11rem); }
+  .solution-detail__consider-grid { display: grid; grid-template-columns: .84fr 1fr; gap: clamp(2rem, 7vw, 9rem); align-items: center; }
+  .solution-detail__consider-grid figure { min-height: 38rem; }
+  .solution-detail__consider-grid .eyebrow { margin-bottom: .9rem; }
+  .solution-detail__consider-grid ol { margin-top: 2rem; list-style: none; border-top: 1px solid var(--line); }
+  .solution-detail__consider-grid li { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .solution-detail__consider-grid li > span { color: var(--forest); font-size: .66rem; font-weight: 700; }
+  .solution-detail__consider-grid h3 { font-family: var(--display); font-size: 1.65rem; font-weight: 400; line-height: 1; letter-spacing: -.04em; }
+  .solution-detail__consider-grid li p { margin-top: .45rem; font-size: .76rem; line-height: 1.45; }
+  .solution-detail__models { padding-block: clamp(4.5rem, 9vw, 9rem); }
+  .solution-detail__models-grid, .solution-detail__projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2.2rem); }
+  @media (max-width: 900px) { .solution-detail__problem-grid, .solution-detail__consider-grid { grid-template-columns: 1fr; } .solution-detail__consider-grid figure { min-height: 25rem; } .solution-detail__models-grid, .solution-detail__projects-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .solution-detail__principles-grid { grid-template-columns: 1fr; } .solution-detail__principles-grid article { min-height: 15rem; } .solution-detail__models-grid, .solution-detail__projects-grid { grid-template-columns: 1fr; } }
+</style>

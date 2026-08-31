@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "vivienda-territorio",
+    "title": "Vivienda en territorio",
+    "shortTitle": "Vivienda",
+    "summary": "Una casa para vivir todos los días, pensada desde el clima, el acceso, el mantenimiento y la forma real de usar el lugar.",
+    "problem": "Cuando terreno, presupuesto y programa se deciden por separado, la complejidad aparece tarde y cuesta más corregirla.",
+    "modelSlugs": ["cauce-62", "lenga-84", "abra-105", "patio-128", "galpon-156"],
+    "isDemo": true
+  },
+  {
+    "slug": "refugio",
+    "title": "Refugio / segunda vivienda",
+    "shortTitle": "Refugio",
+    "summary": "Espacios de uso parcial que necesitan llegar, abrir, habitar y cerrar con muy poca fricción.",
+    "problem": "Una segunda vivienda puede volverse una carga si demanda demasiado mantenimiento o no resuelve bien la llegada y el uso estacional.",
+    "modelSlugs": ["cauce-62", "lenga-84", "abra-105"],
+    "isDemo": true
+  },
+  {
+    "slug": "hospitalidad",
+    "title": "Hospitalidad de pequeña escala",
+    "shortTitle": "Hospitalidad",
+    "summary": "Unidades, recorridos y espacios comunes diseñados como una experiencia operable, no como habitaciones aisladas.",
+    "problem": "La experiencia del huésped y la operación diaria deben resolverse juntas desde el sitio y el programa.",
+    "modelSlugs": ["nido-38", "lenga-84", "patio-128", "galpon-156"],
+    "isDemo": true
+  },
+  {
+    "slug": "unidad-complementaria",
+    "title": "Ampliación / unidad complementaria",
+    "shortTitle": "Unidad complementaria",
+    "summary": "Una nueva pieza —estudio, huéspedes, renta o taller— que agrega capacidad sin desordenar el terreno existente.",
+    "problem": "Agregar metros sin una lógica de implantación puede romper recorridos, privacidad y futuras etapas.",
+    "modelSlugs": ["nido-38", "cauce-62"],
+    "isDemo": true
+  }
+]

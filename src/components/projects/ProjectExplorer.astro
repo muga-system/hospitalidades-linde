@@ -1,0 +1,102 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects, statusLabel } from '../../data/content';
+
+const mapData = projects.map((project) => ({
+  slug: project.slug,
+  name: project.name,
+  city: project.city,
+  province: project.province,
+  lat: project.lat,
+  lng: project.lng,
+  areaM2: project.areaM2,
+  status: statusLabel[project.status],
+  solutionSlugs: project.solutionSlugs,
+}));
+---
+
+<section class="project-explorer" data-project-explorer data-view="map" aria-label="Explorador de proyectos">
+  <div class="project-explorer__bar contained">
+    <div><p class="eyebrow">Portfolio · Patagonia</p><h1 class="page-title">Proyectos en territorio.</h1></div>
+    <div class="project-explorer__controls">
+      <div class="view-toggle" role="group" aria-label="Vista del portfolio"><a href="/proyectos/" data-view-toggle="map">Mapa</a><a href="/proyectos/?view=grid" data-view-toggle="grid">Grilla</a></div>
+      <button class="filter-button" type="button" data-filter-toggle aria-expanded="false">Filtrar <span aria-hidden="true">+</span></button>
+    </div>
+  </div>
+  <div class="project-explorer__filter contained" data-filter-panel hidden>
+    <p class="meta">Tipo de punto de partida</p>
+    <div class="project-explorer__filter-row" role="group" aria-label="Filtros de proyecto">
+      <button class="is-active" type="button" data-filter="all">Todos <span>{projects.length}</span></button>
+      <button type="button" data-filter="vivienda-territorio">Vivienda</button>
+      <button type="button" data-filter="refugio">Refugio</button>
+      <button type="button" data-filter="hospitalidad">Hospitalidad</button>
+      <button type="button" data-filter="unidad-complementaria">Unidad complementaria</button>
+    </div>
+  </div>
+  <div class="project-explorer__views">
+    <div class="project-explorer__map-view" data-explorer-view="map">
+      <div class="project-map" data-project-map aria-label="Mapa interactivo de proyectos demo en Patagonia">
+        <div class="project-map__canvas" data-map-canvas></div>
+        <div class="map-fallback" data-map-fallback>
+          <img class="map-fallback__art" src="/graphics/map-territory.svg" alt="Mapa esquemático de proyectos demo en Patagonia." width="1400" height="820" />
+          <p class="map-fallback__label"><strong>Mapa de muestra</strong><br />Los proyectos siguen disponibles en la vista grilla, incluso si el mapa no puede cargar.</p>
+        </div>
+      </div>
+      <p class="project-explorer__map-note meta">Marcadores demo · Patagonia argentina</p>
+    </div>
+    <div class="project-explorer__grid-view contained" data-explorer-view="grid">
+      <div class="project-explorer__grid">
+        {projects.map((project, index) => <div data-project-card data-solutions={project.solutionSlugs.join(' ')}><ProjectCard project={project} index={index} /></div>)}
+      </div>
+      <p class="project-explorer__none empty-notice" data-no-results hidden>No hay proyectos demo para este filtro todavía.</p>
+    </div>
+  </div>
+  <script is:inline type="application/json" data-map-projects set:html={JSON.stringify(mapData)}></script>
+</section>
+
+<script>
+  import { initProjectExplorer } from '../../scripts/project-explorer';
+  initProjectExplorer();
+</script>
+
+<style>
+  .project-explorer { padding-top: var(--header-height); }
+  .project-explorer__bar { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem; padding-top: clamp(4.2rem, 7vw, 7.2rem); padding-bottom: 2rem; }
+  .project-explorer__bar .eyebrow { margin-bottom: .9rem; color: var(--forest); }
+  .project-explorer__controls { display: flex; gap: .8rem; align-items: center; }
+  .view-toggle { display: inline-flex; padding: .25rem; background: var(--surface); border-radius: 999px; }
+  .view-toggle a { padding: .65rem .9rem; border-radius: 999px; font-size: .67rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; }
+  .view-toggle a.is-active { background: var(--forest); color: var(--white); }
+  .filter-button { border: 1px solid var(--ink); padding: .67rem .88rem; border-radius: 999px; color: var(--ink); background: transparent; font-size: .67rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; }
+  .filter-button span { padding-left: .35rem; }
+  .filter-button[aria-expanded="true"] span { display: inline-block; transform: rotate(45deg); }
+  .project-explorer__filter { padding-bottom: 1.4rem; }
+  .project-explorer__filter[hidden] { display: none; }
+  .project-explorer__filter .meta { margin-bottom: .75rem; }
+  .project-explorer__filter-row { display: flex; flex-wrap: wrap; gap: .55rem; }
+  .project-explorer__filter-row button { border: 1px solid var(--line); padding: .57rem .7rem; border-radius: 999px; color: var(--ink); background: transparent; font-size: .67rem; font-weight: 700; }
+  .project-explorer__filter-row button.is-active { border-color: var(--forest); color: var(--white); background: var(--forest); }
+  .project-explorer__filter-row span { margin-left: .25rem; opacity: .7; }
+  .project-explorer__map-view { position: relative; }
+  .project-map { position: relative; min-height: min(74svh, 820px); background: var(--leaf); }
+  .project-map__canvas { position: absolute; z-index: 1; inset: 0; }
+  .project-map__canvas:empty { display: none; }
+  .project-map.is-loaded [data-map-fallback] { display: none; }
+  .project-explorer__map-note { position: absolute; z-index: 2; left: max(var(--gutter), calc((100vw - 1730px) / 2)); bottom: 1.5rem; color: var(--ink); background: rgba(246,243,234,.92); padding: .7rem; border-radius: .55rem; }
+  .project-explorer__grid-view { padding-bottom: clamp(4rem, 8vw, 8rem); }
+  .project-explorer__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 3.8vw, 4.5rem) clamp(1rem, 2.4vw, 2.6rem); }
+  .project-explorer__grid [data-project-card][hidden] { display: none; }
+  [data-explorer-view="grid"] { display: none; }
+  .project-explorer[data-view="grid"] [data-explorer-view="map"] { display: none; }
+  .project-explorer[data-view="grid"] [data-explorer-view="grid"] { display: block; }
+  .project-explorer[data-view="map"] [data-view-toggle="map"], .project-explorer[data-view="grid"] [data-view-toggle="grid"] { background: var(--forest); color: var(--white); }
+  .map-pin { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 2px solid var(--paper); border-radius: 50%; color: var(--ink); background: var(--leaf); box-shadow: 0 3px 10px rgba(25,32,23,.22); font: 700 .7rem var(--ui); }
+  .maplibregl-popup-content { min-width: 13rem; padding: 1rem; color: var(--ink); background: var(--paper); border-radius: .7rem; box-shadow: 0 10px 24px rgba(25,32,23,.17); font-family: var(--ui); }
+  .maplibregl-popup-close-button { font-size: 1.2rem; }
+  .map-popup__eyebrow { margin-bottom: .35rem; color: var(--forest); font-size: .61rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+  .map-popup__title { font-family: var(--display); font-size: 1.6rem; line-height: .95; letter-spacing: -.05em; }
+  .map-popup__meta { margin: .5rem 0 .8rem; font-size: .68rem; }
+  .map-popup__link { font-size: .65rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+  @media (max-width: 800px) { .project-explorer__bar { grid-template-columns: 1fr; align-items: start; gap: 1.4rem; } .project-explorer__controls { justify-content: space-between; } .project-explorer__grid { grid-template-columns: 1fr; gap: 2.7rem; } .project-map { min-height: 65svh; } }
+  @media (max-width: 430px) { .project-explorer__controls { align-items: stretch; flex-direction: column; } .view-toggle, .filter-button { width: 100%; } .view-toggle a { flex: 1; text-align: center; } }
+</style>

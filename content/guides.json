@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "leer-un-terreno-antes-de-dibujar",
+    "title": "Qué mirar en un terreno antes de dibujar la casa",
+    "category": "Terreno",
+    "description": "Pendiente, acceso, agua, orientación, vegetación y normativa como primeras capas de decisión.",
+    "isDemo": true
+  },
+  {
+    "slug": "menos-metros-mejor-programa",
+    "title": "Menos metros no significa menos programa",
+    "category": "Diseño",
+    "description": "Cómo reducir circulaciones y duplicaciones para concentrar superficie en espacios realmente usados.",
+    "isDemo": true
+  },
+  {
+    "slug": "hospitalidad-pequena-como-sistema",
+    "title": "Una cabaña no es todavía un sistema de hospitalidad",
+    "category": "Hospitalidad",
+    "description": "Llegada, privacidad, mantenimiento, servicios y espacios comunes como parte de la experiencia.",
+    "isDemo": true
+  }
+]

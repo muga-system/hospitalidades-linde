@@ -1,0 +1,140 @@
+---
+import { solutions } from '../../data/content';
+---
+
+<section class="lead-wizard" data-lead-wizard aria-labelledby="wizard-title">
+  <div class="lead-wizard__header"><a class="lead-wizard__brand" href="/" aria-label="Volver a LINDE">LINDE</a><span class="lead-wizard__progress-count" data-wizard-count>01 / 06</span></div>
+  <div class="lead-wizard__bar"><span data-wizard-progress></span></div>
+  <form class="lead-wizard__form" novalidate>
+    <p class="lead-wizard__eyebrow eyebrow" data-wizard-label>01 · Contacto</p>
+    <p class="lead-wizard__error" data-wizard-error role="alert" aria-live="polite"></p>
+    <fieldset class="lead-wizard__step" data-wizard-step="0">
+      <legend id="wizard-title">¿Con quién estamos hablando?</legend>
+      <p class="lead-wizard__intro">Con dos datos alcanza para empezar. No vamos a enviar nada en esta demo.</p>
+      <div class="lead-wizard__fields"><label>Nombre<input name="name" autocomplete="name" required placeholder="Tu nombre" /></label><label>Email o teléfono<input name="contact" autocomplete="email" required placeholder="nombre@correo.com" /></label></div>
+    </fieldset>
+    <fieldset class="lead-wizard__step" data-wizard-step="1" hidden>
+      <legend>¿Dónde sería el proyecto?</legend>
+      <p class="lead-wizard__intro">Una localidad, una zona aproximada o un terreno que estás mirando.</p>
+      <div class="lead-wizard__fields"><label>Localidad o zona<input name="location" required placeholder="Ej. El Bolsón, Río Negro" /></label></div>
+      <div class="lead-wizard__choice"><span>¿Ya tenés terreno?</span><div><label><input type="radio" name="land" value="Sí, ya tengo" required /> Sí, ya tengo</label><label><input type="radio" name="land" value="Estoy buscando" /> Estoy buscando</label><label><input type="radio" name="land" value="Todavía no" /> Todavía no</label></div></div>
+    </fieldset>
+    <fieldset class="lead-wizard__step" data-wizard-step="2" hidden>
+      <legend>¿Qué tipo de situación estás pensando?</legend>
+      <p class="lead-wizard__intro">Elegí la que se parezca más a tu punto de partida. Después se puede precisar.</p>
+      <div class="lead-wizard__cards">{solutions.map((solution) => <label><input type="radio" name="projectType" value={solution.title} required /><span><small>{solution.shortTitle}</small>{solution.title}<em>{solution.summary}</em></span></label>)}</div>
+    </fieldset>
+    <fieldset class="lead-wizard__step" data-wizard-step="3" hidden>
+      <legend>¿Qué escala imaginás?</legend>
+      <p class="lead-wizard__intro">No hace falta que sea un número exacto. Nos ayuda a ubicar la conversación.</p>
+      <div class="lead-wizard__cards lead-wizard__cards--compact">{['Hasta 50 m²', 'Entre 50 y 90 m²', 'Entre 90 y 140 m²', 'Más de 140 m²', 'Aún no lo sé'].map((area) => <label><input type="radio" name="area" value={area} required /><span>{area}</span></label>)}</div>
+    </fieldset>
+    <fieldset class="lead-wizard__step" data-wizard-step="4" hidden>
+      <legend>¿En qué momento está la idea?</legend>
+      <p class="lead-wizard__intro">El horizonte y un rango tentativo nos permiten sugerir un próximo paso más realista.</p>
+      <div class="lead-wizard__cards lead-wizard__cards--compact">{['Quiero empezar este año', 'Estoy planificando el próximo año', 'Estoy explorando posibilidades'].map((horizon) => <label><input type="radio" name="horizon" value={horizon} required /><span>{horizon}</span></label>)}</div>
+      <div class="lead-wizard__fields" style="margin-top:1.25rem"><label>Rango de inversión (opcional)<select name="budget"><option value="">Prefiero conversarlo</option><option>Hasta USD 80.000</option><option>USD 80.000–150.000</option><option>USD 150.000–250.000</option><option>Más de USD 250.000</option></select></label></div>
+    </fieldset>
+    <fieldset class="lead-wizard__step" data-wizard-step="5" hidden>
+      <legend>Una última idea antes de revisar.</legend>
+      <p class="lead-wizard__intro">Si hay una condición importante —una vista, un uso, una persona o un límite— podés dejarla escrita.</p>
+      <div class="lead-wizard__fields"><label>¿Qué no debería perder este proyecto?<textarea name="message" rows="4" placeholder="Ej. que podamos usarlo todo el año, sin depender de demasiadas cosas."></textarea></label></div>
+      <div class="lead-wizard__review" data-wizard-review aria-live="polite"></div>
+      <p class="lead-wizard__privacy">Esta demo no envía, almacena ni comparte datos personales. En producción, este es el punto para conectar un endpoint seguro de contacto.</p>
+    </fieldset>
+    <div class="lead-wizard__footer"><button class="lead-wizard__back" type="button" data-wizard-back hidden>Atrás</button><button class="lead-wizard__next" type="button" data-wizard-next>Siguiente <span aria-hidden="true">→</span></button><button class="lead-wizard__submit" type="submit" data-wizard-submit hidden>Enviar consulta demo <span aria-hidden="true">→</span></button></div>
+  </form>
+</section>
+
+<script>
+  const wizard = document.querySelector<HTMLElement>('[data-lead-wizard]');
+  if (wizard) {
+    const form = wizard.querySelector<HTMLFormElement>('form');
+    const steps = [...wizard.querySelectorAll<HTMLElement>('[data-wizard-step]')];
+    const label = wizard.querySelector<HTMLElement>('[data-wizard-label]');
+    const count = wizard.querySelector<HTMLElement>('[data-wizard-count]');
+    const progress = wizard.querySelector<HTMLElement>('[data-wizard-progress]');
+    const error = wizard.querySelector<HTMLElement>('[data-wizard-error]');
+    const back = wizard.querySelector<HTMLButtonElement>('[data-wizard-back]');
+    const next = wizard.querySelector<HTMLButtonElement>('[data-wizard-next]');
+    const submit = wizard.querySelector<HTMLButtonElement>('[data-wizard-submit]');
+    const review = wizard.querySelector<HTMLElement>('[data-wizard-review]');
+    const labels = ['Contacto', 'Lugar', 'Tipo', 'Programa', 'Horizonte', 'Revisión'];
+    let current = 0;
+    const fieldLabel = (field: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement) => field.closest('label')?.textContent?.trim().replace(/\s+/g, ' ') || 'Este campo';
+    const validate = () => {
+      const fields = [...steps[current].querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[required]')];
+      const radioNames = new Set(fields.filter((field) => field.type === 'radio').map((field) => field.name));
+      const invalid = fields.find((field) => field.type !== 'radio' && !field.value.trim()) ?? [...radioNames].map((name) => fields.find((field) => field.name === name)).find((field) => !form?.querySelector(`input[name="${field?.name}"]:checked`));
+      if (invalid) { error!.textContent = `${fieldLabel(invalid)} es necesario para seguir.`; invalid.focus(); return false; }
+      error!.textContent = '';
+      return true;
+    };
+    const renderReview = () => {
+      if (!form || !review) return;
+      const values = new FormData(form);
+      const entries: [string, string][] = [['Nombre', 'name'], ['Contacto', 'contact'], ['Zona', 'location'], ['Terreno', 'land'], ['Proyecto', 'projectType'], ['Escala', 'area'], ['Horizonte', 'horizon'], ['Inversión', 'budget'], ['Nota', 'message']];
+      review.innerHTML = `<p class="meta">Resumen de consulta</p>${entries.filter(([, key]) => values.get(key)).map(([name, key]) => `<div><span>${name}</span><strong>${values.get(key)}</strong></div>`).join('')}`;
+    };
+    const render = () => {
+      steps.forEach((step, index) => { step.hidden = index !== current; });
+      if (label) label.textContent = `${String(current + 1).padStart(2, '0')} · ${labels[current]}`;
+      if (count) count.textContent = `${String(current + 1).padStart(2, '0')} / 06`;
+      if (progress) progress.style.width = `${((current + 1) / steps.length) * 100}%`;
+      if (back) back.hidden = current === 0;
+      if (next) next.hidden = current === steps.length - 1;
+      if (submit) submit.hidden = current !== steps.length - 1;
+      if (current === steps.length - 1) renderReview();
+      const heading = steps[current].querySelector<HTMLElement>('legend');
+      heading?.focus();
+    };
+    next?.addEventListener('click', () => { if (validate()) { current += 1; render(); } });
+    back?.addEventListener('click', () => { current -= 1; error!.textContent = ''; render(); });
+    form?.addEventListener('submit', (event) => { event.preventDefault(); window.location.assign('/gracias/'); });
+    render();
+  }
+</script>
+
+<style>
+  .lead-wizard { min-height: 100svh; color: var(--ink); background: var(--paper); }
+  .lead-wizard__header { min-height: 5.6rem; display: flex; align-items: center; justify-content: space-between; padding-inline: var(--gutter); }
+  .lead-wizard__brand { font-family: var(--display); font-size: 2rem; line-height: 1; letter-spacing: -.08em; }
+  .lead-wizard__progress-count { font-size: .68rem; font-weight: 750; letter-spacing: .08em; }
+  .lead-wizard__bar { height: 2px; background: var(--surface); }
+  .lead-wizard__bar span { display: block; height: 100%; width: 16.66%; background: var(--forest); transition: width var(--motion-slow) var(--ease); }
+  .lead-wizard__form { width: min(100% - var(--gutter) * 2, 770px); min-height: calc(100svh - 5.7rem); display: flex; flex-direction: column; margin-inline: auto; padding-block: clamp(4rem, 10vh, 7rem) 2rem; }
+  .lead-wizard__eyebrow { color: var(--forest); margin-bottom: 1.1rem; }
+  .lead-wizard__error { min-height: 1.35rem; margin-bottom: .75rem; color: #9a3222; font-size: .75rem; font-weight: 650; }
+  .lead-wizard__step { border: 0; padding: 0; margin: 0; }
+  .lead-wizard__step legend { width: 100%; padding: 0; font-family: var(--display); font-size: clamp(3.2rem, 7vw, 6.4rem); font-weight: 400; line-height: .91; letter-spacing: -.065em; outline: 0; }
+  .lead-wizard__intro { max-width: 43rem; margin-top: 1.2rem; font-size: 1rem; line-height: 1.5; }
+  .lead-wizard__fields { display: grid; gap: 1rem; margin-top: 2.2rem; }
+  .lead-wizard label { display: grid; gap: .55rem; font-size: .72rem; font-weight: 700; letter-spacing: .025em; }
+  .lead-wizard input[type="text"], .lead-wizard input:not([type]), .lead-wizard input[type="email"], .lead-wizard input[type="tel"], .lead-wizard input[name="name"], .lead-wizard input[name="contact"], .lead-wizard input[name="location"], .lead-wizard textarea, .lead-wizard select { width: 100%; appearance: none; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; outline: 0; padding: .7rem 0; color: var(--ink); background: transparent; font-size: clamp(1.2rem, 2vw, 1.7rem); font-weight: 420; letter-spacing: -.025em; }
+  .lead-wizard textarea { resize: vertical; }
+  .lead-wizard select { background: var(--paper); }
+  .lead-wizard__choice { display: grid; gap: 1rem; margin-top: 2rem; font-size: .78rem; font-weight: 700; }
+  .lead-wizard__choice > div { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .lead-wizard__choice label, .lead-wizard__cards label { display: inline-flex; cursor: pointer; }
+  .lead-wizard__choice input, .lead-wizard__cards input { position: absolute; opacity: 0; pointer-events: none; }
+  .lead-wizard__choice label { border: 1px solid var(--line); border-radius: 999px; padding: .65rem .8rem; }
+  .lead-wizard__choice label:has(input:checked) { border-color: var(--forest); background: var(--leaf); }
+  .lead-wizard__cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; margin-top: 2rem; }
+  .lead-wizard__cards label span { min-height: 10rem; width: 100%; display: flex; flex-direction: column; justify-content: end; border: 1px solid var(--line); border-radius: .95rem; padding: 1rem; font-family: var(--display); font-size: clamp(1.65rem, 3vw, 2.5rem); font-weight: 400; line-height: .95; letter-spacing: -.05em; transition: color var(--motion-base) var(--ease), background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease); }
+  .lead-wizard__cards label small { margin-bottom: auto; font-family: var(--ui); font-size: .64rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+  .lead-wizard__cards label em { margin-top: .7rem; font-family: var(--ui); font-size: .7rem; font-style: normal; font-weight: 450; line-height: 1.4; letter-spacing: 0; }
+  .lead-wizard__cards label:has(input:checked) span { border-color: var(--forest); background: var(--forest); color: var(--white); }
+  .lead-wizard__cards--compact { grid-template-columns: repeat(3, 1fr); }
+  .lead-wizard__cards--compact label span { min-height: 7.5rem; }
+  .lead-wizard__review { display: grid; gap: 0; margin-top: 2rem; border-top: 1px solid var(--line); }
+  .lead-wizard__review .meta { padding: 1rem 0; color: var(--forest); }
+  .lead-wizard__review div { display: grid; grid-template-columns: .4fr 1fr; gap: 1rem; padding: .6rem 0; border-top: 1px solid var(--line); font-size: .75rem; }
+  .lead-wizard__review span { color: var(--forest); font-weight: 700; }
+  .lead-wizard__review strong { font-weight: 500; }
+  .lead-wizard__privacy { margin-top: 1.4rem; font-size: .68rem; line-height: 1.45; color: rgba(25,32,23,.68); }
+  .lead-wizard__footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 3.4rem; }
+  .lead-wizard__back { border: 0; padding: .55rem 0; color: var(--ink); background: transparent; font-size: .72rem; font-weight: 750; text-transform: uppercase; }
+  .lead-wizard__next, .lead-wizard__submit { border: 0; border-radius: 999px; padding: .9rem 1.1rem; color: var(--ink); background: var(--leaf); font-size: .7rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+  .lead-wizard__next span, .lead-wizard__submit span { padding-left: .6rem; }
+  @media (max-width: 560px) { .lead-wizard__header { min-height: 4.6rem; padding-inline: 1.25rem; } .lead-wizard__form { width: calc(100% - 2.5rem); padding-top: 3.3rem; } .lead-wizard__cards, .lead-wizard__cards--compact { grid-template-columns: 1fr; } .lead-wizard__cards label span { min-height: 7rem; } .lead-wizard__footer { padding-top: 2.4rem; } }
+</style>
