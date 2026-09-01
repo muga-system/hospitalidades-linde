@@ -1,108 +1,50 @@
-# 11 — Arquitectura técnica
+# 11 — Arquitectura técnica vigente
 
-## Decisión de stack
+## Stack
 
-### Astro + TypeScript
+- Astro 7 con salida `static`.
+- TypeScript estricto y datos JSON locales.
+- CSS propio con tokens y estilos próximos a cada componente Astro.
+- Fuentes open source autoalojadas (`Newsreader` e `Inter`).
+- `@astrojs/sitemap` para el sitemap de producción.
 
-Motivo:
+La demo no necesita React, Vue, un CMS, un router de cliente ni un mapa con
+clave propietaria. Las interacciones se resuelven con islas Astro pequeñas y
+scripts DOM aislados.
 
-- la mayor parte del sitio es contenido/marketing;
-- excelente control del HTML enviado;
-- hidratación selectiva para mapa y wizard;
-- fácil evolución a CMS;
-- menor complejidad que replicar el stack del referente.
+## Capas
 
-## Dependencias mínimas sugeridas
+1. `content/`: edición de contenido sin lógica de presentación.
+2. `src/data/`: contratos, normalización, media y selectores de dominio.
+3. `src/components/`: piezas visuales con responsabilidad única.
+4. `src/scripts/`: filtros, rails, reel y wizard; inicialización compatible con
+   `astro:page-load`.
+5. `src/pages/`: composición de rutas y metadata.
+6. `src/layouts/` y `src/styles/`: shell global, tokens, tipografía y accesibilidad.
 
-- `astro`
-- `typescript`
-- `maplibre-gl`
-- integración de sitemap si no está incluida en la configuración elegida
+## Media y rendimiento
 
-Opcionales, solo si aportan valor real:
+Todas las imágenes declaran `width`/`height` y `alt`. Hero usa `fetchpriority`
+alto; contenido posterior usa `loading="lazy"`. Las variantes de ilustración se
+seleccionan por rol en `src/data/media.ts`, evitando duplicar rutas o crops en
+componentes.
 
-- librería pequeña de motion;
-- `@fontsource/newsreader` y `@fontsource/inter` si se decide autoalojar fuentes por paquete.
+## Motion y navegación
 
-## No usar por defecto
+`ClientRouter` de `astro:transitions` mantiene transiciones suaves entre
+páginas. El reel fotográfico utiliza un stage sticky con variables CSS y un
+script acotado para actualizar escenas durante el scroll. Cada animación tiene
+salida estática bajo `prefers-reduced-motion: reduce`.
 
-- Tailwind si el objetivo es estudiar/mostrar CSS editorial propio.
-- React/Vue/Svelte para componentes puramente estáticos.
-- GSAP si CSS resuelve los efectos.
-- un CMS antes de validar el sistema.
+## Portfolio y formulario
 
-## Islas interactivas
-
-Hidratar solo:
-
-1. `ProjectMap`.
-2. `ProjectFilters` si requiere estado complejo.
-3. `LeadWizard`.
-4. Menú mobile si la implementación vanilla se vuelve innecesariamente compleja.
-
-## CSS
-
-Estructura sugerida:
-
-```text
-src/styles/
-  tokens.css
-  reset.css
-  typography.css
-  global.css
-  utilities.css
-```
-
-Los estilos específicos pueden vivir cerca de componentes `.astro` si no rompen consistencia.
-
-## Imágenes
-
-- Preferir pipeline de imágenes de Astro para assets importados cuando aplique.
-- Definir `width`/`height`.
-- `loading="lazy"` excepto hero/above-the-fold.
-- AVIF/WebP donde convenga.
-- No degradar renders arquitectónicos con compresión excesiva.
-
-## Mapa
-
-### Implementación
-
-- MapLibre GL JS.
-- Tiles OpenStreetMap mediante proveedor permitido para prototipo o style compatible.
-- Para una demo local sin red, ofrecer fallback `StaticProjectMap` con SVG simplificado y puntos.
-
-### Datos
-
-El mapa consume el mismo array `projects` que la grilla.
-
-## Formulario
-
-MVP:
-
-- validación HTML + TypeScript;
-- estado local;
-- éxito simulado;
-- adaptar luego a endpoint real.
-
-No guardar datos personales en `localStorage` por defecto. Si se usa persistencia temporal, preferir `sessionStorage` y documentarla.
-
-## SEO
-
-Crear componente `SeoHead` con:
-
-- title;
-- description;
-- canonical;
-- OG tags;
-- Twitter/OpenGraph image;
-- noindex opcional para demo privada.
-
-## Entornos
-
-- `PUBLIC_SITE_URL`.
-- flag `PUBLIC_DEMO_MODE=true`.
-- no secrets en el MVP.
+`/proyectos/` prioriza una colección HTML directa y filtrable; el mismo array
+tipado alimenta las tarjetas y los detalles. El wizard valida en cliente y
+termina en éxito local; la conexión a un endpoint real queda fuera de esta
+demo.
 
 ## Despliegue
 
-Compatible con hosting estático si formulario y datos siguen locales. Si luego se agrega backend, elegir adapter según plataforma real.
+`pnpm build` genera `dist/`, apto para hosting estático. `PUBLIC_SITE_URL`
+puede definir el dominio usado por canonical y sitemap. No hay secretos ni
+servicios externos obligatorios en el MVP.

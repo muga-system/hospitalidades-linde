@@ -1,47 +1,46 @@
 # 18 — QA de implementación LINDE
 
-Fecha de revisión: 2026-08-31.
+Fecha de revisión: 2026-09-01.
 
-## Cobertura realizada
+## Verificaciones automatizadas
 
-- `pnpm check`: 0 errores, 0 warnings, 0 hints.
-- `pnpm build`: 25 rutas estáticas generadas y sitemap creado.
-- Enlaces internos de los 25 HTML de `dist/`: 0 destinos internos ausentes.
-- Navegador: home desktop y móvil, dropdown desktop, menú móvil, modelo
-  `Lenga 84`, portfolio grilla/filtro y wizard hasta `/gracias/`.
-- Responsive: comprobación de overflow horizontal en 320, 375, 768, 1024,
-  1440 y 1920 px; sin overflow en las pantallas revisadas.
-- Consola: sin errores ni warnings durante las pruebas de home, detalle de
-  modelo y portfolio.
+- `pnpm check`: 0 errores, 0 warnings, 0 hints (38 archivos Astro/TS).
+- `pnpm build`: 32 rutas estáticas generadas y sitemap creado.
+- `git diff --check`: sin errores de whitespace.
+- Las ocho rutas de opción de la home se generan con slugs e ilustraciones
+  transparentes propios; no comparten por accidente la ruta de vivienda
+  permanente.
 
-## Cierre de `14-qa-acceptance.md`
+## Cobertura funcional
 
-- Identidad: LINDE, copy, tokens, fotografías generadas para la demo y SVGs
-  originales; sin assets, código ni textos del referente.
-- Global/rutas: las 25 rutas requeridas, 404, header, footer y CTA principal
-  están generados y enlazados.
-- Navegación: panel desktop con soluciones ilustradas y proyectos, menú móvil, Escape, foco y estado de scroll
-  verificados en navegador.
-- Home, modelos, portfolio y wizard: funcionalidades y recorridos principales
-  verificados. El portfolio usa una grilla directa y filtrable, sin mapa
-  propietario ni interacción que oculte los proyectos.
-- Accesibilidad: skip link, landmarks, un `h1` por página, inputs etiquetados,
-  errores con `role=alert`, reduced motion y navegación alternativa de mapa
-  implementados.
+- Header, footer, navegación con soluciones y proyectos, menú mobile y CTA.
+- Home, catálogo de seis modelos, detalle de modelo y portfolio filtrable.
+- Detalle de proyecto con navegación relacionada.
+- Detalle de las ocho opciones y cuatro soluciones amplias.
+- Reel de proyectos full bleed y transiciones Astro entre páginas.
+- Wizard de consulta hasta `/gracias/`.
+- 404 estático y sitemap.
 
-## Cierre de `17-ui-fidelity-checklist.md`
+## Revisión visual y responsive
 
-La comparación se realizó contra HUTS en desktop y móvil durante la
-implementación. En las soluciones se preservaron los patrones observados:
-ilustración principal contenida, serif de gran escala frente a UI sans
-compacta, mucho espacio negativo, bloques imagen-texto alternados, listas con
-reglas/checks, secuencia de fotografías a pantalla completa y CTA/footer en
-dos superficies. LINDE mantiene una paleta, marca, planos, copy y assets
-propios.
+La revisión visual previa se realizó en desktop y móvil contra HUTS. Se
+conservaron los patrones aprobados: ilustración principal contenida, serif de
+gran escala frente a sans compacta, espacio negativo, bloques imagen-texto,
+secuencia fotográfica full bleed y CTA/footer en superficies diferenciadas.
 
-## Limitación conocida
+Las comprobaciones responsive cubrieron 320, 375, 768, 1024, 1440 y 1920 px,
+sin overflow horizontal en las pantallas revisadas. El refactor actual solo
+reorganiza responsabilidades y mantiene el markup y CSS resultantes.
 
-La demo usa dos fotografías originales reutilizadas con crops distintos para
-no inventar un banco de fotos externo. `ASSET_TODO.md` identifica el recambio
-por fotografía y video final. Las ilustraciones nuevas viven en
-`public/imagenes/` y se usan tanto en soluciones como en navegación y footer.
+## Criterios de identidad y accesibilidad
+
+LINDE aporta marca, copy, tokens, datos, ilustraciones y fotografías; no se
+incorporan assets ni código del referente. Se mantienen skip link, landmarks,
+un `h1` por página, labels, mensajes de error, foco visible, `alt`, reduced
+motion y una colección de proyectos usable sin mapa propietario.
+
+## Pendientes no bloqueantes
+
+La demo sigue usando dos fotografías de apoyo reutilizadas con crops distintos.
+El recambio por biblioteca fotográfica final está documentado en
+`ASSET_TODO.md` y no requiere cambios de componentes.

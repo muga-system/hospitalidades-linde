@@ -47,7 +47,7 @@ Objetivos de demo en una conexión razonable:
 
 ### Estrategias
 
-- cargar MapLibre solo en `/proyectos/` o cuando el teaser realmente lo necesita;
+- mantener el portfolio HTML directo y filtrable sin depender de un mapa;
 - poster para video;
 - lazy-load del video cuando sea posible sin romper LCP;
 - no cargar todas las imágenes de galería al inicio;

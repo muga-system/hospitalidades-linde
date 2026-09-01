@@ -109,9 +109,9 @@ Awwwards identifica Vue.js, Anime.js y Sanity; Milkshake Studio declara estrateg
 | Serif propietaria | Alternativa open source con presencia y métricas similares |
 | Grotesca propietaria | Sans open source de interfaz |
 | Standards | 6 modelos LINDE |
-| Buyer journeys del referente | 4 soluciones LINDE |
-| Mapa territorial original | Patagonia/Argentina demo |
-| Vue/Anime/Sanity | Astro/TypeScript/CSS/MapLibre |
+| Buyer journeys del referente | 4 soluciones amplias y 8 opciones LINDE |
+| Portfolio/mapa del referente | Portfolio directo y filtrable de LINDE |
+| Vue/Anime/Sanity | Astro/TypeScript/CSS y scripts DOM acotados |
 
 ## Criterio
 
