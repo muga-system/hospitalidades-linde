@@ -1,0 +1,150 @@
+---
+import ActionLink from "../global/ActionLink.astro";
+import type { Media } from "../../data/types";
+
+type Props = {
+  title: string;
+  summary: string;
+  number: number;
+  slug: string;
+  media: Media;
+};
+
+const { title, summary, number, slug, media } = Astro.props;
+---
+
+<header class="solution-detail__hero" aria-labelledby="solution-title">
+  <div class="contained solution-detail__hero-inner">
+    <figure
+      class="solution-detail__hero-art solution-detail__hero-art--transparent"
+      data-reveal
+    >
+      <img
+        src={media.src}
+        alt={media.alt}
+        width={media.width}
+        height={media.height}
+        fetchpriority="high"
+        transition:name={`solution-art-${slug}`}
+      />
+    </figure>
+    <div class="solution-detail__hero-copy" data-reveal>
+      <p class="eyebrow">Solución LINDE · {String(number).padStart(2, "0")}</p>
+      <h1 id="solution-title" class="display-xl">{title}</h1>
+      <p class="solution-detail__hero-summary">{summary}</p>
+      <div class="solution-detail__hero-cta">
+        <ActionLink
+          href="/empezar/"
+          label="Contanos tu proyecto"
+          variant="solid"
+        />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .solution-detail__hero {
+    background: var(--paper);
+  }
+  .solution-detail__hero-inner {
+    display: grid;
+    justify-items: center;
+    padding-block: calc(var(--header-height) + clamp(2rem, 4vw, 3.5rem))
+      clamp(4.5rem, 8vw, 8rem);
+    text-align: center;
+  }
+  .solution-detail__hero-art {
+    width: min(28rem, 64vw);
+    aspect-ratio: 1122 / 1402;
+  }
+  .solution-detail__hero-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .solution-detail__hero-copy {
+    max-width: 52rem;
+    margin-top: clamp(1.2rem, 2vw, 2.2rem);
+  }
+  .solution-detail__hero-copy .eyebrow {
+    color: var(--forest);
+  }
+  .solution-detail__hero-copy h1 {
+    max-width: 11ch;
+    margin: 0.7rem auto 0;
+    color: var(--forest);
+  }
+  .solution-detail__hero-summary {
+    max-width: 35rem;
+    margin: 1.8rem auto 0;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.5;
+  }
+  .solution-detail__hero-copy .action-link {
+    margin-top: 1.7rem;
+  }
+  .solution-detail--compact .solution-detail__hero-inner {
+    padding-block: calc(var(--header-height) + 1.5rem) clamp(3.5rem, 6vw, 5rem);
+  }
+  .solution-detail--compact .solution-detail__hero-art {
+    width: min(20rem, 50vw);
+  }
+  .solution-detail__hero-art--transparent img {
+    mix-blend-mode: normal;
+  }
+  .solution-detail--compact .solution-detail__hero-copy {
+    max-width: 64rem;
+    margin-top: clamp(2rem, 3vw, 3rem);
+  }
+  .solution-detail--compact .solution-detail__hero-copy h1 {
+    max-width: 11ch;
+    margin-top: 1.4rem;
+    font-size: clamp(4rem, 7.6vw, 8rem);
+    line-height: 0.9;
+  }
+  .solution-detail--compact .solution-detail__hero-summary {
+    max-width: 39rem;
+    margin-top: clamp(1.8rem, 2.5vw, 2.5rem);
+  }
+  .solution-detail__hero-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(3rem, 3.8vw, 3.6rem);
+  }
+
+  @media (max-width: 900px) {
+    .solution-detail__hero-inner {
+      padding-top: calc(var(--header-height) + 2.4rem);
+    }
+    .solution-detail__hero-art {
+      width: min(27rem, 78vw);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .solution-detail__hero-inner {
+      padding-bottom: 4.5rem;
+    }
+    .solution-detail__hero-art {
+      width: min(23rem, 86vw);
+    }
+    .solution-detail--compact .solution-detail__hero-art {
+      width: min(18rem, 78vw);
+    }
+    .solution-detail--compact .solution-detail__hero-copy {
+      margin-top: 1.8rem;
+    }
+    .solution-detail--compact .solution-detail__hero-copy h1 {
+      margin-top: 1.1rem;
+      font-size: clamp(3.7rem, 17vw, 5.8rem);
+    }
+    .solution-detail--compact .solution-detail__hero-summary {
+      margin-top: 1.5rem;
+    }
+    .solution-detail__hero-cta {
+      margin-top: 2.75rem;
+    }
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+import type { Media, Solution } from "../../data/types";
+
+type Props = {
+  considerations: Solution["considerations"];
+  media: Media;
+};
+
+const { considerations, media } = Astro.props;
+---
+
+<section
+  class="solution-detail__compact-decisions"
+  aria-labelledby="compact-decisions-title"
+>
+  <div class="contained solution-detail__compact-decisions-grid">
+    <figure
+      class="solution-detail__compact-media media media--rounded"
+      data-reveal
+    >
+      <img
+        class="media__image"
+        src={media.src}
+        alt={media.alt}
+        width={media.width}
+        height={media.height}
+        loading="lazy"
+        style={`object-position:${media.position ?? "center"};`}
+      />
+    </figure>
+    <div class="solution-detail__compact-decisions-copy" data-reveal>
+      <p class="eyebrow">Lo que ordena el proyecto</p>
+      <h2 id="compact-decisions-title" class="section-title">
+        Tres decisiones antes de definir la forma.
+      </h2>
+      <ol>
+        {considerations.map((item, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .solution-detail__compact-decisions {
+    padding-block: clamp(5rem, 9vw, 8rem);
+  }
+  .solution-detail__compact-decisions-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.94fr) minmax(22rem, 0.8fr);
+    gap: clamp(2.5rem, 7vw, 8rem);
+    align-items: center;
+  }
+  .solution-detail__compact-media {
+    aspect-ratio: 1.08 / 1;
+  }
+  .solution-detail__compact-decisions-copy > .eyebrow {
+    margin-bottom: 1rem;
+    color: var(--forest);
+  }
+  .solution-detail__compact-decisions-copy .section-title {
+    max-width: 10ch;
+    color: var(--forest);
+  }
+  .solution-detail__compact-decisions-copy ol {
+    margin-top: 2rem;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .solution-detail__compact-decisions-copy li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    padding-block: 1.15rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .solution-detail__compact-decisions-copy li > span {
+    color: var(--forest);
+    font-family: var(--display);
+    font-size: 1.2rem;
+  }
+  .solution-detail__compact-decisions-copy h3 {
+    color: var(--forest);
+    font-family: var(--display);
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .solution-detail__compact-decisions-copy li p {
+    max-width: 42ch;
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 900px) {
+    .solution-detail__compact-decisions-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .solution-detail__compact-decisions-copy {
+      max-width: 42rem;
+    }
+  }
+</style>

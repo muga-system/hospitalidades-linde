@@ -1,0 +1,327 @@
+---
+import { formatBedrooms } from "../../data/selectors";
+import { statusLabel } from "../../data/projects";
+import type { Project } from "../../data/types";
+
+type Props = {
+  projects: Project[];
+};
+
+const { projects } = Astro.props;
+---
+
+<section class="solution-detail__projects" aria-labelledby="projects-title">
+  <div class="contained solution-detail__projects-intro">
+    <p class="eyebrow">Proyectos en territorio</p>
+    <h2 id="projects-title" class="section-title">
+      Una situación concreta para imaginar lo posible.
+    </h2>
+  </div>
+  <div
+    class="solution-detail__photo-sequence solution-detail__photo-sequence--reel"
+    data-project-reel
+    style={`--reel-count:${projects.length};`}
+  >
+    <div class="solution-detail__photo-stage">
+      {projects.map((project, index) => {
+        const backgroundIndex = index % Math.min(project.images.length, 2);
+        const detailIndex = backgroundIndex === 0 ? 1 : 0;
+        const media = project.images[backgroundIndex];
+        const detailMedia = project.images[detailIndex] ?? project.images[0];
+        const reelStyle = `--reel-stack:${projects.length - index};--reel-scene-y:${index === 0 ? "0px" : "100svh"};--reel-media-y:0px;--reel-content-y:0px;--reel-content-opacity:1;`;
+        return (
+          <a
+            class="solution-detail__photo-panel"
+            href={`/proyectos/${project.slug}/`}
+            data-reel-panel
+            style={reelStyle}
+          >
+            <figure class="solution-detail__photo-background">
+              <img
+                src={media.src}
+                alt=""
+                width={media.width}
+                height={media.height}
+                loading={index === 0 ? "eager" : "lazy"}
+                style={`object-position:${media.position ?? "center"};`}
+              />
+            </figure>
+            <span class="solution-detail__photo-veil" aria-hidden="true" />
+            <span class="solution-detail__photo-sticky">
+              <span class="solution-detail__photo-content">
+                <strong>{project.name}</strong>
+                <span class="tag-row">
+                  <span class="tag tag--light">{project.city}</span>
+                  <span class="tag tag--light">{project.areaM2} m²</span>
+                  {project.bedrooms !== undefined && (
+                    <span class="tag tag--light">
+                      {formatBedrooms(project.bedrooms)}
+                    </span>
+                  )}
+                  {project.bathrooms !== undefined && (
+                    <span class="tag tag--light">
+                      {project.bathrooms} {project.bathrooms === 1 ? "baño" : "baños"}
+                    </span>
+                  )}
+                  <span class="tag tag--light">{statusLabel[project.status]}</span>
+                </span>
+              </span>
+              <figure class="solution-detail__photo-detail media media--rounded">
+                <img
+                  class="media__image"
+                  src={detailMedia.src}
+                  alt={detailMedia.alt}
+                  width={detailMedia.width}
+                  height={detailMedia.height}
+                  loading="lazy"
+                  style={`object-position:${detailMedia.position ?? "center"};`}
+                />
+              </figure>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initProjectReels } from "../../scripts/project-reel";
+
+  initProjectReels();
+</script>
+
+<style>
+  .solution-detail__projects {
+    padding-top: clamp(5rem, 9vw, 9rem);
+    background: var(--paper);
+  }
+  .solution-detail__projects-intro {
+    padding-bottom: clamp(3rem, 6vw, 6rem);
+    text-align: center;
+  }
+  .solution-detail__projects-intro .eyebrow {
+    margin-bottom: 1rem;
+    color: var(--forest);
+  }
+  .solution-detail__projects-intro .section-title {
+    max-width: 15ch;
+    margin-inline: auto;
+    color: var(--forest);
+  }
+  .solution-detail--compact .solution-detail__projects {
+    padding-top: clamp(3.5rem, 6vw, 6rem);
+  }
+  .solution-detail--compact .solution-detail__projects-intro {
+    padding-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+  .solution-detail__photo-stage {
+    display: grid;
+  }
+  .solution-detail__photo-panel {
+    position: relative;
+    min-height: min(100svh, 56rem);
+    display: block;
+    isolation: isolate;
+    overflow: clip;
+    color: var(--white);
+  }
+  .solution-detail__photo-background {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    overflow: hidden;
+  }
+  .solution-detail__photo-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.04);
+    transition: transform var(--motion-slow) var(--ease);
+  }
+  .solution-detail__photo-panel:hover .solution-detail__photo-background img {
+    transform: scale(1.055);
+  }
+  .solution-detail__photo-veil {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(9, 17, 9, 0.08) 25%,
+      rgba(9, 17, 9, 0.72) 100%
+    );
+  }
+  .solution-detail__photo-sticky {
+    position: sticky;
+    top: 0;
+    width: min(100% - (var(--gutter) * 2), 1730px);
+    height: min(100svh, 56rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.72fr);
+    gap: clamp(2rem, 6vw, 7rem);
+    align-items: end;
+    margin-inline: auto;
+    padding-block: 3rem clamp(3rem, 7vw, 6.5rem);
+  }
+  .solution-detail__photo-content {
+    align-self: end;
+  }
+  .solution-detail__photo-content .eyebrow {
+    margin-bottom: 0.9rem;
+    color: var(--leaf);
+  }
+  .solution-detail__photo-content strong {
+    display: block;
+    max-width: 10ch;
+    font-family: var(--display);
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.065em;
+  }
+  .solution-detail__photo-content .tag-row {
+    margin-top: 1.7rem;
+  }
+  .solution-detail__photo-detail {
+    align-self: center;
+    justify-self: end;
+    width: min(100%, 36rem);
+    aspect-ratio: 1.78 / 1;
+  }
+  .solution-detail__photo-detail .media__image {
+    transition: transform var(--motion-slow) var(--ease);
+  }
+  .solution-detail__photo-panel:hover
+    .solution-detail__photo-detail
+    .media__image {
+    transform: scale(1.018);
+  }
+  .solution-detail__photo-sequence--reel {
+    position: relative;
+    height: calc(var(--reel-count) * 100svh);
+  }
+  .solution-detail__photo-sequence--reel .solution-detail__photo-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--forest);
+  }
+  .solution-detail__photo-sequence--reel .solution-detail__photo-panel {
+    position: absolute;
+    z-index: var(--reel-stack);
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    transform: translate3d(0, var(--reel-scene-y), 0);
+    will-change: transform;
+  }
+  .solution-detail__photo-sequence--reel .solution-detail__photo-background {
+    overflow: hidden;
+  }
+  .solution-detail__photo-sequence--reel
+    .solution-detail__photo-background
+    img {
+    position: absolute;
+    top: -9%;
+    left: 0;
+    width: 100%;
+    height: 118%;
+    transform: translate3d(0, var(--reel-media-y), 0) scale(1.035);
+    transition: none;
+    will-change: transform;
+  }
+  .solution-detail__photo-sequence--reel
+    .solution-detail__photo-panel:hover
+    .solution-detail__photo-background
+    img {
+    transform: translate3d(0, var(--reel-media-y), 0) scale(1.035);
+  }
+  .solution-detail__photo-sequence--reel .solution-detail__photo-sticky {
+    position: absolute;
+    inset: 0;
+    width: min(84%, 1730px);
+    height: 100%;
+    grid-template-columns: minmax(0, 0.82fr) minmax(30rem, 1fr);
+    align-items: center;
+    padding-block: clamp(2rem, 5vw, 4.5rem);
+    opacity: var(--reel-content-opacity);
+    transform: translate3d(0, var(--reel-content-y), 0);
+    will-change: transform;
+  }
+  .solution-detail__photo-sequence--reel .solution-detail__photo-content {
+    align-self: center;
+  }
+  .solution-detail__photo-sequence--reel
+    .solution-detail__photo-content
+    strong {
+    font-size: clamp(3.4rem, 5.5vw, 6.5rem);
+  }
+  .solution-detail__photo-sequence--reel .solution-detail__photo-detail {
+    width: min(100%, 46rem);
+  }
+  .solution-detail__photo-sequence--reel .tag--light {
+    border-color: rgba(248, 245, 236, 0.35);
+    background: rgba(16, 20, 14, 0.5);
+    backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 560px) {
+    .solution-detail__photo-panel {
+      min-height: 78svh;
+    }
+    .solution-detail__photo-sticky {
+      height: 78svh;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-content: end;
+      padding-bottom: 3rem;
+    }
+    .solution-detail__photo-detail {
+      grid-row: 1;
+      width: min(100%, 32rem);
+      justify-self: end;
+    }
+    .solution-detail__photo-content {
+      grid-row: 2;
+    }
+    .solution-detail__photo-content strong {
+      font-size: clamp(3.2rem, 15vw, 5.5rem);
+    }
+    .solution-detail__photo-sequence--reel {
+      height: calc(var(--reel-count) * 100svh);
+    }
+    .solution-detail__photo-sequence--reel .solution-detail__photo-stage {
+      height: 100svh;
+    }
+    .solution-detail__photo-sequence--reel .solution-detail__photo-panel {
+      height: 100%;
+      min-height: 0;
+    }
+    .solution-detail__photo-sequence--reel .solution-detail__photo-sticky {
+      width: min(100% - 2rem, 1730px);
+      height: 100%;
+      grid-template-columns: 1fr;
+      align-items: end;
+      align-content: end;
+      padding-block: 2rem 3rem;
+    }
+    .solution-detail__photo-sequence--reel .solution-detail__photo-detail {
+      width: min(100%, 32rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .solution-detail__photo-sequence--reel .solution-detail__photo-panel,
+    .solution-detail__photo-sequence--reel
+      .solution-detail__photo-background
+      img,
+    .solution-detail__photo-sequence--reel .solution-detail__photo-sticky {
+      will-change: auto;
+    }
+  }
+</style>

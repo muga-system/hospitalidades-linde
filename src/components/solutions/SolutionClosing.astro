@@ -1,0 +1,138 @@
+---
+import ActionLink from "../global/ActionLink.astro";
+import { formatBedrooms } from "../../data/selectors";
+import type { Model } from "../../data/types";
+
+type Props = {
+  linkedModels: Model[];
+};
+
+const { linkedModels } = Astro.props;
+---
+
+<section
+  class="solution-detail__compact-end"
+  aria-labelledby="compact-models-title"
+>
+  <div class="contained solution-detail__compact-end-grid">
+    <div>
+      <p class="eyebrow">Modelos relacionados</p>
+      <h2 id="compact-models-title" class="section-title">
+        Puntos de partida, sin cerrar la conversación.
+      </h2>
+      <div class="solution-detail__compact-model-links">
+        {linkedModels.map((model) => (
+          <a href={`/modelos/${model.slug}/`}>
+            <strong>{model.name}</strong>
+            <span>
+              {model.areaM2} m² · {formatBedrooms(model.bedrooms)} ↗
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+    <aside class="solution-detail__compact-cta">
+      <p class="eyebrow">Siguiente paso</p>
+      <h2>Veamos qué puede sumar tu terreno.</h2>
+      <p>
+        Una primera conversación alcanza para ordenar el punto de partida y
+        reconocer las decisiones importantes.
+      </p>
+      <ActionLink
+        href="/empezar/"
+        label="Contanos tu proyecto"
+        variant="solid"
+      />
+    </aside>
+  </div>
+</section>
+
+<style>
+  .solution-detail__compact-end {
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+    background: var(--surface);
+  }
+  .solution-detail__compact-end-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.72fr);
+    gap: clamp(3rem, 8vw, 9rem);
+    align-items: start;
+  }
+  .solution-detail__compact-end-grid > div > .eyebrow {
+    margin-bottom: 1rem;
+    color: var(--forest);
+  }
+  .solution-detail__compact-end-grid .section-title {
+    max-width: 12ch;
+    color: var(--forest);
+  }
+  .solution-detail__compact-model-links {
+    margin-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .solution-detail__compact-model-links a {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--line);
+    transition: opacity var(--motion-fast) var(--ease);
+  }
+  .solution-detail__compact-model-links a:hover {
+    opacity: 0.62;
+  }
+  .solution-detail__compact-model-links strong {
+    color: var(--forest);
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .solution-detail__compact-model-links span {
+    align-self: center;
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .solution-detail__compact-cta {
+    padding: clamp(2rem, 4vw, 3.5rem);
+    border-radius: var(--radius-media);
+    background: var(--leaf);
+  }
+  .solution-detail__compact-cta .eyebrow {
+    margin-bottom: 1rem;
+    color: var(--forest);
+  }
+  .solution-detail__compact-cta h2 {
+    color: var(--forest);
+    font-family: var(--display);
+    font-size: clamp(2.3rem, 3.7vw, 4rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+  }
+  .solution-detail__compact-cta > p:not(.eyebrow) {
+    max-width: 34ch;
+    margin-top: 1.3rem;
+    line-height: 1.5;
+  }
+  .solution-detail__compact-cta .action-link {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 900px) {
+    .solution-detail__compact-end-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .solution-detail__compact-model-links a {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+  }
+</style>
