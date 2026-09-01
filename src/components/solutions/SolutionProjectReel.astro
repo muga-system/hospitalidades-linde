@@ -10,7 +10,10 @@ type Props = {
 const { projects } = Astro.props;
 ---
 
-<section class="solution-detail__projects" aria-labelledby="projects-title">
+<section
+  class="solution-detail__projects solution-detail__projects--compact"
+  aria-labelledby="projects-title"
+>
   <div class="contained solution-detail__projects-intro">
     <p class="eyebrow">Proyectos en territorio</p>
     <h2 id="projects-title" class="section-title">
@@ -109,10 +112,10 @@ const { projects } = Astro.props;
     margin-inline: auto;
     color: var(--forest);
   }
-  .solution-detail--compact .solution-detail__projects {
+  .solution-detail__projects--compact {
     padding-top: clamp(3.5rem, 6vw, 6rem);
   }
-  .solution-detail--compact .solution-detail__projects-intro {
+  .solution-detail__projects--compact .solution-detail__projects-intro {
     padding-bottom: clamp(2.5rem, 4vw, 4rem);
   }
   .solution-detail__photo-stage {
