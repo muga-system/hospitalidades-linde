@@ -6,6 +6,8 @@
   `solutions` y `selectors`) con `content.ts` como fachada compatible.
 - Detalle de soluciones dividido en hero, decisiones, reel de proyectos y
   cierre, sin cambiar la composición visual ni las rutas.
+- Modificadores locales para conservar los estilos compactos al usar CSS scoped
+  en los nuevos componentes.
 - Documentación operativa, decisiones de diseño y roles de assets actualizados.
 
 ## [0.1.0] — 2026-09-01
