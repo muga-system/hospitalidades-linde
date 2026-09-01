@@ -86,18 +86,15 @@ No transformar los modelos en cards de ecommerce o SaaS.
 
 ### Mapa
 
-- mapa protagonista;
-- controles discretos;
-- markers propios pero equivalentes en jerarquía;
-- popup con proporción correcta;
-- toggle visible;
-- metadata compacta.
+La demo actual prioriza una grilla directa y filtrable; no depende de un mapa
+propietario para descubrir proyectos.
 
 ### Grilla
 
 - misma colección;
 - ritmo y ratios cercanos;
 - hover y title treatment coherentes.
+- cada proyecto enlaza a su detalle y permite continuar al anterior/siguiente.
 
 ## 8. Detalle de proyecto/modelo
 
@@ -109,6 +106,10 @@ No transformar los modelos en cards de ecommerce o SaaS.
 - secciones técnicas;
 - navegación relacionada;
 - CTA final.
+
+En el detalle de solución LINDE la apertura usa una ilustración contenida
+centrada, seguida por introducción editorial, bloques imagen-texto alternados,
+listas de decisiones y una secuencia de proyectos fotográficos full bleed.
 
 No usar una única plantilla de artículo para todo.
 
@@ -134,7 +135,7 @@ La versión mobile es parte de la referencia, no una degradación.
 - imágenes conservan crop intencional;
 - metadata sigue compacta;
 - elementos táctiles son usables;
-- el mapa tiene una solución móvil clara.
+- grilla y secuencias fotográficas conservan crop intencional en móvil.
 
 ## 11. Anti-MUGA / anti-template
 

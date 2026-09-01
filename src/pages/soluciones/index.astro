@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ActionLink from '../../components/global/ActionLink.astro';
-import { solutions } from '../../data/content';
+import { homeSolutionDetails } from '../../data/content';
 ---
 
 <BaseLayout title="Soluciones — LINDE" description="Cuatro maneras de iniciar una conversación de arquitectura y territorio.">
@@ -10,7 +10,7 @@ import { solutions } from '../../data/content';
       <div class="contained article-head__grid"><div><p class="eyebrow">Soluciones LINDE</p><h1 class="page-title">No todos los proyectos empiezan de la misma pregunta.</h1></div><p class="article-head__intro body-copy">En lugar de entrar por una disciplina, podés entrar por la situación que tenés delante. Después vamos encontrando alcance, modelos, lugares y decisiones.</p></div>
     </header>
     <section class="solutions-index__list">
-      {solutions.map((solution, index) => <article class="solutions-index__entry"><a href={`/soluciones/${solution.slug}/`}><div class="solutions-index__number">{String(index + 1).padStart(2, '0')}</div><figure class="media media--rounded"><img class="media__image" src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} loading={index > 0 ? 'lazy' : 'eager'} style={`object-position:${solution.image.position};`} /></figure><div class="solutions-index__text"><p class="eyebrow">Situación {String(index + 1).padStart(2, '0')}</p><h2>{solution.title}</h2><p>{solution.summary}</p><span>Explorar solución <b aria-hidden="true">↗</b></span></div></a></article>)}
+      {homeSolutionDetails.map((solution, index) => <article class="solutions-index__entry"><a href={`/soluciones/${solution.slug}/`}><div class="solutions-index__number">{String(index + 1).padStart(2, '0')}</div><figure class="media media--rounded"><img class="media__image" src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} loading={index > 0 ? 'lazy' : 'eager'} style={`object-position:${solution.image.position};`} /></figure><div class="solutions-index__text"><p class="eyebrow">Situación {String(index + 1).padStart(2, '0')}</p><h2>{solution.title}</h2><p>{solution.summary}</p><span>Explorar solución <b aria-hidden="true">↗</b></span></div></a></article>)}
     </section>
     <section class="solutions-index__end section--forest"><div class="contained"><p class="eyebrow">No sabés dónde encaja tu proyecto</p><h2 class="display-l">No hace falta tener todas las respuestas para empezar.</h2><ActionLink href="/empezar/" label="Contanos tu situación" variant="light" /></div></section>
   </div>

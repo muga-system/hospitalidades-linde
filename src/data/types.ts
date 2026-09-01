@@ -33,6 +33,14 @@ export type Solution = {
   isDemo: true;
 };
 
+export type HomeSolutionCard = {
+  slug: string;
+  title: string;
+  summary: string;
+  href: string;
+  image: Media;
+};
+
 export type Model = {
   slug: string;
   name: string;
@@ -70,16 +78,5 @@ export type Project = {
   response: string;
   technicalNotes: { label: string; value: string }[];
   images: Media[];
-  isDemo: true;
-};
-
-export type Guide = {
-  slug: string;
-  title: string;
-  category: string;
-  description: string;
-  publishedAt: string;
-  cover: Media;
-  body: string[];
   isDemo: true;
 };

@@ -69,13 +69,11 @@
 
 ## Portfolio
 
-- [ ] Mapa carga solo donde corresponde.
-- [ ] Vista grilla equivalente.
-- [ ] Toggle conserva filtros.
-- [ ] Markers/popup correctos.
-- [ ] Popup enlaza al detalle.
-- [ ] Sin JS/mapa, la grilla sigue siendo usable.
-- [ ] Mapa/grilla tienen presencia visual comparable al referente.
+- [x] Vista grilla directa y filtrable.
+- [x] Cada proyecto enlaza al detalle.
+- [x] Sin JS/mapa, la colección sigue siendo usable.
+- [x] Detalles permiten avanzar al proyecto anterior/siguiente.
+- [x] La secuencia fotográfica de soluciones conserva presencia full bleed.
 
 ## Wizard
 

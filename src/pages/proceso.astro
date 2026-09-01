@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ActionLink from '../components/global/ActionLink.astro';
-import TopographicMark from '../components/global/TopographicMark.astro';
 
 const steps = [
   ['01', 'Exploración', 'Una primera conversación para entender qué querés hacer, cómo usás el lugar y qué decisiones ya están abiertas.'],
@@ -16,7 +15,7 @@ const steps = [
 <BaseLayout title="Proceso — LINDE" description="Una secuencia clara desde una primera idea hasta la coordinación de obra.">
   <div class="page process-page">
     <header class="article-head process-page__head"><div class="contained article-head__grid"><div><p class="eyebrow">Cómo trabajamos</p><h1 class="page-title">Un proceso para bajar incertidumbre, no para agregar pasos.</h1></div><div class="article-head__intro"><p class="body-copy">Diseñar en territorio implica tomar decisiones en un orden que permita aprender del lugar. El proceso es una herramienta para no decidir todo demasiado pronto.</p><div style="margin-top:1.4rem"><ActionLink href="/empezar/" label="Contanos tu proyecto" /></div></div></div></header>
-    <section class="process-page__opening section--leaf"><div class="contained process-page__opening-grid"><TopographicMark /><p class="display-l">La forma llega después de mirar bien.</p><p class="body-copy">No hay dos terrenos iguales ni dos maneras iguales de habitar. Por eso las etapas no son un paquete fijo: son un marco para sostener las conversaciones correctas en el momento correcto.</p></div></section>
+    <section class="process-page__opening section--leaf"><div class="contained process-page__opening-grid"><p class="display-l">La forma llega después de mirar bien.</p><p class="body-copy">No hay dos terrenos iguales ni dos maneras iguales de habitar. Por eso las etapas no son un paquete fijo: son un marco para sostener las conversaciones correctas en el momento correcto.</p></div></section>
     <section class="process-page__steps section"><div class="contained"><ol>{steps.map(([number, title, copy], index) => <li><div class="process-page__step-number">{number}</div><h2>{title}</h2><p>{copy}</p><figure class:list={['media', 'media--rounded', { 'process-page__step-image': index % 2 === 0 }]}><img class="media__image" src={index % 2 ? '/images/library/threshold-linde.png' : '/images/home/hero-linde.png'} alt="Imagen demostrativa de arquitectura y paisaje de LINDE." width="1536" height="1024" loading="lazy" style={`object-position:${index % 3 === 0 ? '76% center' : index % 3 === 1 ? '40% center' : '60% center'};`} /></figure></li>)}</ol></div></section>
     <section class="process-page__close section--dark"><div class="contained process-page__close-grid"><div><p class="eyebrow">Una conversación bien empezada</p><h2 class="display-l">No necesitás llegar con un proyecto resuelto.</h2></div><div><p class="body-large">Podés empezar con un terreno, una necesidad o una intuición. El primer paso es saber qué información falta para elegir una dirección con criterio.</p><ActionLink href="/empezar/" label="Empezar el recorrido" variant="light" /></div></div></section>
   </div>
@@ -24,7 +23,7 @@ const steps = [
 
 <style>
   .process-page__opening { padding-block: clamp(4rem, 8vw, 8rem); }
-  .process-page__opening-grid { display: grid; grid-template-columns: .35fr 1fr .6fr; gap: clamp(1.5rem, 4vw, 5rem); align-items: end; }
+  .process-page__opening-grid { display: grid; grid-template-columns: 1fr .6fr; gap: clamp(1.5rem, 4vw, 5rem); align-items: end; }
   .process-page__opening-grid .display-l { max-width: 11ch; }
   .process-page__steps ol { list-style: none; }
   .process-page__steps li { display: grid; grid-template-columns: .12fr .58fr .56fr .62fr; gap: clamp(1rem, 3vw, 3.5rem); align-items: center; padding-block: clamp(2.5rem, 5vw, 5.5rem); border-top: 1px solid var(--line); }

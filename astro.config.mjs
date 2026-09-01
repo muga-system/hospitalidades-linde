@@ -7,11 +7,7 @@ export default defineConfig({
   output: 'static',
   vite: {
     build: {
-      // MapLibre se carga de forma diferida sólo en /proyectos/.
       chunkSizeWarningLimit: 1000,
-    },
-    ssr: {
-      noExternal: ['maplibre-gl'],
     },
     server: {
       fs: {

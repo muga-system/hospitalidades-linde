@@ -11,6 +11,9 @@ export function getStaticPaths() {
 
 const { project } = Astro.props as { project: Project };
 const hero = project.images[0];
+const projectIndex = projects.findIndex((item) => item.slug === project.slug);
+const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+const nextProject = projects[(projectIndex + 1) % projects.length];
 const related = projects.filter((item) => item.slug !== project.slug && item.solutionSlugs.some((slug) => project.solutionSlugs.includes(slug))).slice(0, 3);
 ---
 
@@ -41,10 +44,26 @@ const related = projects.filter((item) => item.slug !== project.slug && item.sol
     </section>
 
     <section class="project-detail__map-section section">
-      <div class="contained project-detail__map-grid"><div><p class="eyebrow">Ubicación aproximada</p><h2 class="section-title">Territorio como dato de proyecto.</h2><p class="body-copy">La ubicación se presenta como una referencia demostrativa, no como un dato de obra. Mapa, accesos y orientación se usan para conversar sobre las condiciones que sí cambian una arquitectura.</p><div style="margin-top:1.8rem"><ActionLink href="/proyectos/" label="Volver al mapa" /></div></div><figure class="project-detail__map-art"><img src="/graphics/map-territory.svg" alt={`Mapa esquemático de ${project.city}, ${project.province}.`} width="1400" height="820" /><figcaption class="meta">{project.city}, {project.province} · marcador demo</figcaption></figure></div>
+      <div class="contained project-detail__map-grid"><div><p class="eyebrow">Ubicación aproximada</p><h2 class="section-title">Territorio como dato de proyecto.</h2><p class="body-copy">La ubicación se presenta como una referencia demostrativa, no como un dato de obra. Accesos y orientación se usan para conversar sobre las condiciones que sí cambian una arquitectura.</p><div style="margin-top:1.8rem"><ActionLink href="/proyectos/" label="Volver a proyectos" /></div></div><figure class="project-detail__map-art"><img src="/graphics/map-territory.svg" alt={`Mapa esquemático de ${project.city}, ${project.province}.`} width="1400" height="820" /><figcaption class="meta">{project.city}, {project.province} · referencia demo</figcaption></figure></div>
     </section>
 
     <section class="project-detail__gallery"><figure class="media"><img class="media__image" src={project.images[0].src} alt={project.images[0].alt} width="1536" height="1024" loading="lazy" style={`object-position:${project.images[0].position};`} /></figure><div class="contained project-detail__gallery-caption"><p class="body-large">Arquitectura en territorio no es una estética fija. Es la capacidad de responder bien a una condición que ya está ahí.</p><span class="meta">{project.name} · material demostrativo</span></div></section>
+
+    <nav class="project-detail__pager section--leaf" aria-label="Navegar entre proyectos">
+      <div class="contained project-detail__pager-grid">
+        <a href={`/proyectos/${previousProject.slug}/`} class="project-detail__pager-link">
+          <span class="eyebrow">Anterior</span>
+          <strong>{previousProject.name}</strong>
+          <span aria-hidden="true">← Ver proyecto</span>
+        </a>
+        <a href="/proyectos/" class="project-detail__pager-index"><span class="eyebrow">Todos los proyectos</span><span aria-hidden="true">↗</span></a>
+        <a href={`/proyectos/${nextProject.slug}/`} class="project-detail__pager-link project-detail__pager-link--next">
+          <span class="eyebrow">Siguiente</span>
+          <strong>{nextProject.name}</strong>
+          <span aria-hidden="true">Ver proyecto →</span>
+        </a>
+      </div>
+    </nav>
 
     <section class="section project-detail__related"><div class="contained"><div class="section-head"><div><p class="eyebrow">Seguir explorando</p><h2 class="section-title">Otros proyectos y escenarios.</h2></div><ActionLink href="/proyectos/" label="Ver todos" /></div><div class="project-detail__related-grid">{related.map((item, index) => <ProjectCard project={item} index={index} />)}</div></div></section>
   </article>
@@ -74,7 +93,16 @@ const related = projects.filter((item) => item.slug !== project.slug && item.sol
   .project-detail__gallery figure { height: min(76svh, 860px); }
   .project-detail__gallery-caption { display: grid; grid-template-columns: .7fr 1fr; gap: 2rem; align-items: end; padding-block: clamp(2.6rem, 6vw, 6rem); }
   .project-detail__gallery-caption .meta { justify-self: end; }
+  .project-detail__pager { padding-block: clamp(2.5rem, 5vw, 5rem); }
+  .project-detail__pager-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: end; }
+  .project-detail__pager-link { display: grid; gap: .55rem; max-width: 18rem; }
+  .project-detail__pager-link .eyebrow { color: var(--forest); }
+  .project-detail__pager-link strong { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 3.15rem); font-weight: 400; line-height: .95; letter-spacing: -.055em; }
+  .project-detail__pager-link > span:last-child { font-size: .68rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+  .project-detail__pager-link--next { justify-self: end; text-align: right; }
+  .project-detail__pager-index { display: inline-flex; align-items: center; gap: .7rem; font-size: .68rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+  .project-detail__pager-index > span:last-child { display: grid; place-items: center; width: 2.35rem; height: 2.35rem; border: 1px solid currentColor; border-radius: 50%; }
   .project-detail__related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2.25rem); }
-  @media (max-width: 900px) { .project-detail__intro-grid, .project-detail__story-row, .project-detail__map-grid, .project-detail__gallery-caption { grid-template-columns: 1fr; } .project-detail__story-row--reverse > :first-child { order: 2; } .project-detail__related-grid { grid-template-columns: 1fr 1fr; } .project-detail__gallery-caption .meta { justify-self: start; } }
+  @media (max-width: 900px) { .project-detail__intro-grid, .project-detail__story-row, .project-detail__map-grid, .project-detail__gallery-caption { grid-template-columns: 1fr; } .project-detail__story-row--reverse > :first-child { order: 2; } .project-detail__pager-grid { grid-template-columns: 1fr 1fr; } .project-detail__pager-index { grid-column: 1 / -1; grid-row: 1; } .project-detail__pager-link--next { justify-self: end; } .project-detail__related-grid { grid-template-columns: 1fr 1fr; } .project-detail__gallery-caption .meta { justify-self: start; } }
   @media (max-width: 560px) { .project-detail__related-grid { grid-template-columns: 1fr; } .project-detail__gallery figure { height: 58svh; } }
 </style>

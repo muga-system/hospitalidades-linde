@@ -47,8 +47,10 @@ import { solutions } from '../../data/content';
 </section>
 
 <script>
-  const wizard = document.querySelector<HTMLElement>('[data-lead-wizard]');
-  if (wizard) {
+  const initLeadWizard = () => {
+    const wizard = document.querySelector<HTMLElement>('[data-lead-wizard]');
+    if (!wizard || wizard.dataset.initialized === 'true') return;
+    wizard.dataset.initialized = 'true';
     const form = wizard.querySelector<HTMLFormElement>('form');
     const steps = [...wizard.querySelectorAll<HTMLElement>('[data-wizard-step]')];
     const label = wizard.querySelector<HTMLElement>('[data-wizard-label]');
@@ -92,7 +94,10 @@ import { solutions } from '../../data/content';
     back?.addEventListener('click', () => { current -= 1; error!.textContent = ''; render(); });
     form?.addEventListener('submit', (event) => { event.preventDefault(); window.location.assign('/gracias/'); });
     render();
-  }
+  };
+
+  document.addEventListener('astro:page-load', initLeadWizard);
+  initLeadWizard();
 </script>
 
 <style>

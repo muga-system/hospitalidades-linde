@@ -11,6 +11,6 @@ const external = href.startsWith('http');
 ---
 
 <a class:list={['action-link', `action-link--${variant}`]} href={href} target={target} rel={external ? 'noreferrer' : undefined}>
-  <span>{label}</span>
-  <span class="action-link__mark" aria-hidden="true">↗</span>
+  <span class="action-link__label">{label}</span>
+  <span class="action-link__mark" aria-hidden="true">→</span>
 </a>

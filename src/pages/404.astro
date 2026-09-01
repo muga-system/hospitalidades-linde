@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ActionLink from '../components/global/ActionLink.astro';
-import TopographicMark from '../components/global/TopographicMark.astro';
 ---
 
 <BaseLayout title="Página no encontrada — LINDE" description="La página buscada no existe en LINDE.">
-  <section class="not-found"><div class="contained not-found__content"><p class="eyebrow">404 · Fuera de ruta</p><h1 class="display-xl">Este camino no llega a ningún proyecto.</h1><p class="body-large">La página que buscás no existe o cambió de lugar. Podés volver al inicio o entrar por el mapa de proyectos.</p><div><ActionLink href="/" label="Volver al inicio" variant="solid" /><ActionLink href="/proyectos/" label="Ver proyectos" /></div><TopographicMark /></div></section>
+  <section class="not-found"><div class="contained not-found__content"><p class="eyebrow">404 · Fuera de ruta</p><h1 class="display-xl">Este camino no llega a ningún proyecto.</h1><p class="body-large">La página que buscás no existe o cambió de lugar. Podés volver al inicio o ver todos los proyectos.</p><div><ActionLink href="/" label="Volver al inicio" variant="solid" /><ActionLink href="/proyectos/" label="Ver proyectos" /></div></div></section>
 </BaseLayout>
 
 <style>
@@ -14,5 +13,4 @@ import TopographicMark from '../components/global/TopographicMark.astro';
   .not-found__content h1 { max-width: 11ch; margin-top: 1rem; }
   .not-found__content .body-large { margin-top: 2rem; }
   .not-found__content > div { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
-  .not-found__content .topo-mark { margin-top: 4rem; }
 </style>

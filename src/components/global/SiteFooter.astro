@@ -1,14 +1,17 @@
 ---
-import { models, site, solutions } from '../../data/content';
+import { homeSolutions, models, site } from '../../data/content';
 import ActionLink from './ActionLink.astro';
 ---
 
 <footer class="site-footer">
   <section class="site-footer__cta">
     <div class="contained site-footer__cta-grid">
-      <p class="eyebrow">¿Estás pensando un lugar?</p>
-      <h2 class="display-l">Empecemos por lo que el terreno ya está diciendo.</h2>
-      <ActionLink href="/empezar/" label="Contanos tu proyecto" variant="solid" />
+      <img class="site-footer__cta-art" src="/imagenes/casa-dos-generaciones.png?v=home-restored-20260901" alt="Ilustración LINDE de una casa vinculada al paisaje." width="1122" height="1402" loading="lazy" />
+      <div>
+        <p class="eyebrow">¿Estás pensando un lugar?</p>
+        <h2 class="display-l">Empecemos por lo que el terreno ya está diciendo.</h2>
+      </div>
+      <ActionLink href="/empezar/" label="Contanos tu proyecto" variant="light" />
     </div>
   </section>
   <div class="site-footer__body">
@@ -20,7 +23,7 @@ import ActionLink from './ActionLink.astro';
       </div>
       <div>
         <p class="eyebrow">Soluciones</p>
-        <ul>{solutions.map((item) => <li><a href={`/soluciones/${item.slug}/`}>{item.shortTitle}</a></li>)}</ul>
+        <ul>{homeSolutions.map((item) => <li><a href={item.href}>{item.title}</a></li>)}</ul>
       </div>
       <div>
         <p class="eyebrow">Modelos</p>
@@ -28,33 +31,38 @@ import ActionLink from './ActionLink.astro';
       </div>
       <div>
         <p class="eyebrow">LINDE</p>
-        <ul><li><a href="/proyectos/">Proyectos</a></li><li><a href="/proceso/">Proceso</a></li><li><a href="/servicios/">Servicios</a></li><li><a href="/estudio/">Estudio</a></li><li><a href="/guias/">Guías</a></li></ul>
+        <ul><li><a href="/proyectos/">Proyectos</a></li><li><a href="/proceso/">Proceso</a></li><li><a href="/servicios/">Servicios</a></li></ul>
       </div>
       <div>
         <p class="eyebrow">Contacto</p>
         <ul><li><a href={`mailto:${site.email}`}>{site.email}</a></li>{site.social.map((item) => <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>)}</ul>
       </div>
     </div>
-    <div class="contained site-footer__bottom"><span>© {new Date().getFullYear()} LINDE</span><span>Patagonia, Argentina · Demo</span></div>
+    <div class="contained site-footer__bottom"><span>© {new Date().getFullYear()} LINDE</span><span>Patagonia, Argentina · Demo</span><nav aria-label="Redes sociales">{site.social.map((item) => <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>)}</nav></div>
   </div>
 </footer>
 
 <style>
   .site-footer { color: var(--white); background: var(--ink); }
-  .site-footer__cta { color: var(--ink); background: var(--leaf); }
-  .site-footer__cta-grid { min-height: 31rem; display: grid; align-content: center; grid-template-columns: .25fr 1fr auto; gap: 2rem; }
+  .site-footer__cta { color: var(--ink); background: var(--leaf); border-radius: 2rem 2rem 0 0; overflow: hidden; }
+  .site-footer__cta-grid { min-height: 27rem; display: grid; align-items: center; grid-template-columns: minmax(8rem, .3fr) minmax(0, 1fr) auto; gap: clamp(1.5rem, 5vw, 5rem); }
+  .site-footer__cta-art { align-self: end; width: min(13rem, 18vw); height: 17rem; object-fit: contain; object-position: center bottom; mix-blend-mode: multiply; }
   .site-footer__cta-grid .display-l { max-width: 12ch; }
-  .site-footer__cta-grid .action-link { align-self: end; }
+  .site-footer__cta-grid .eyebrow { margin-bottom: .75rem; }
+  .site-footer__cta-grid .action-link { justify-self: end; }
+  .site-footer__cta .action-link--solid .action-link__label, .site-footer__cta .action-link--solid .action-link__mark { background: var(--white); }
   .site-footer__body { padding-top: clamp(4rem, 8vw, 8rem); }
   .site-footer__grid { display: grid; grid-template-columns: 1.9fr repeat(4, 1fr); gap: 2rem; padding-bottom: clamp(4rem, 7vw, 7rem); }
-  .site-footer__name { margin-bottom: .7rem; font-family: var(--display); font-size: 4rem; letter-spacing: -.08em; line-height: .8; }
+  .site-footer__name { margin-bottom: .7rem; font-family: var(--display); font-size: clamp(5rem, 11vw, 10rem); letter-spacing: -.09em; line-height: .72; }
   .site-footer__brand > p:not(.site-footer__name) { max-width: 19ch; font-size: .82rem; line-height: 1.4; }
   .site-footer__brand .demo-note { margin-top: 2rem; color: rgba(248,245,236,.55); }
   .site-footer .eyebrow { margin-bottom: 1.2rem; color: var(--moss); }
   .site-footer ul { list-style: none; display: grid; gap: .58rem; font-size: .78rem; }
   .site-footer a { transition: color var(--motion-fast) var(--ease); }
   .site-footer a:hover { color: var(--leaf); }
-  .site-footer__bottom { display: flex; justify-content: space-between; padding-block: 1.2rem; border-top: 1px solid rgba(248,245,236,.18); color: rgba(248,245,236,.55); font-size: .66rem; letter-spacing: .035em; text-transform: uppercase; }
-  @media (max-width: 900px) { .site-footer__cta-grid { min-height: 25rem; grid-template-columns: 1fr; align-content: center; gap: 1.4rem; } .site-footer__cta-grid .action-link { align-self: start; } .site-footer__grid { grid-template-columns: repeat(2, 1fr); } .site-footer__brand { grid-column: span 2; } }
-  @media (max-width: 560px) { .site-footer__grid { gap: 2.2rem 1rem; } .site-footer__bottom { display: grid; gap: .5rem; } }
+  .site-footer__bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.2rem; border-top: 1px solid rgba(248,245,236,.18); color: rgba(248,245,236,.55); font-size: .66rem; letter-spacing: .035em; text-transform: uppercase; }
+  .site-footer__bottom nav { display: flex; gap: 1rem; }
+  .site-footer__bottom nav a { color: var(--white); }
+  @media (max-width: 900px) { .site-footer__cta-grid { min-height: 25rem; grid-template-columns: minmax(7rem, .35fr) 1fr; gap: 1.4rem; } .site-footer__cta-grid .action-link { grid-column: 2; justify-self: start; } .site-footer__cta-art { width: 9rem; height: 14rem; } .site-footer__grid { grid-template-columns: repeat(2, 1fr); } .site-footer__brand { grid-column: span 2; } }
+  @media (max-width: 560px) { .site-footer__cta { border-radius: 1.5rem 1.5rem 0 0; } .site-footer__cta-grid { min-height: 31rem; grid-template-columns: 1fr; gap: 1.2rem; padding-block: 3.5rem; } .site-footer__cta-art { width: 9rem; height: 10rem; justify-self: center; } .site-footer__cta-grid .action-link { grid-column: auto; justify-self: start; } .site-footer__grid { gap: 2.2rem 1rem; } .site-footer__bottom { align-items: start; display: grid; gap: .5rem; } }
 </style>

@@ -1,9 +1,8 @@
-import guideSeed from '../../content/guides.json';
 import modelSeed from '../../content/models.json';
 import projectSeed from '../../content/projects.json';
 import siteSeed from '../../content/site.json';
 import solutionSeed from '../../content/solutions.json';
-import type { Guide, Media, Model, Project, SiteConfig, Solution } from './types';
+import type { HomeSolutionCard, Media, Model, Project, SiteConfig, Solution } from './types';
 
 const hero: Media = {
   src: '/images/home/hero-linde.png',
@@ -18,6 +17,14 @@ const threshold: Media = {
   width: 1536,
   height: 1024,
 };
+
+const generatedImage = (filename: string, alt: string): Media => ({
+  src: `/imagenes/${filename}.png?v=home-restored-20260901`,
+  alt,
+  width: 1122,
+  height: 1402,
+  position: 'center center',
+});
 
 export const site: SiteConfig = {
   ...siteSeed,
@@ -65,7 +72,7 @@ const solutionExtras: Record<string, Pick<Solution, 'principles' | 'consideratio
       { title: 'Etapas', body: 'Qué conviene resolver ahora y qué dejar preparado.' },
     ],
     projectSlugs: ['casa-cauce', 'patio-del-nire', 'abra-manso'],
-    image: { ...hero, alt: 'Casa LINDE vinculada con un claro de bosque patagónico.', position: '72% center' },
+    image: generatedImage('vivienda-permanente-transparente', 'Vivienda permanente LINDE vinculada con un claro de bosque patagónico.'),
   },
   refugio: {
     principles: [
@@ -78,7 +85,7 @@ const solutionExtras: Record<string, Pick<Solution, 'principles' | 'consideratio
       { title: 'Autonomía', body: 'Sistemas y guardado compatibles con estadías cortas.' },
     ],
     projectSlugs: ['casa-cauce', 'refugio-lenga'],
-    image: { ...threshold, alt: 'Terraza protegida de un refugio demo de LINDE.', position: '70% center' },
+    image: generatedImage('refugio-de-temporada-transparente', 'Refugio de temporada LINDE entre árboles y montañas.'),
   },
   hospitalidad: {
     principles: [
@@ -91,7 +98,7 @@ const solutionExtras: Record<string, Pick<Solution, 'principles' | 'consideratio
       { title: 'Repetición útil', body: 'Piezas repetibles sin homogeneizar el lugar.' },
     ],
     projectSlugs: ['refugio-lenga', 'galpon-lacar'],
-    image: { ...threshold, alt: 'Interior y paisaje de una hospitalidad demo de LINDE.', position: '42% center' },
+    image: generatedImage('varias-unidades-transparente', 'Varias unidades de hospitalidad LINDE organizadas alrededor de un espacio común.'),
   },
   'unidad-complementaria': {
     principles: [
@@ -104,7 +111,7 @@ const solutionExtras: Record<string, Pick<Solution, 'principles' | 'consideratio
       { title: 'Usos futuros', body: 'Flexibilidad sin agregar superficie superflua.' },
     ],
     projectSlugs: ['base-arrayan'],
-    image: { ...hero, alt: 'Pieza complementaria LINDE entre árboles nativos.', position: '78% center' },
+    image: generatedImage('unidad-complementaria-transparente', 'Unidad complementaria LINDE junto a una vivienda existente.'),
   },
 };
 
@@ -113,6 +120,95 @@ export const solutions: Solution[] = solutionSeed.map((solution) => ({
   ...solutionExtras[solution.slug],
   isDemo: true,
 }));
+
+export const homeSolutions: HomeSolutionCard[] = [
+  {
+    slug: 'vivienda-permanente',
+    title: 'Vivienda permanente',
+    summary: 'Una casa para vivir todos los días, abierta al paisaje y preparada para el clima real.',
+    href: '/soluciones/vivienda-permanente/',
+    image: generatedImage('vivienda-permanente', 'Vivienda permanente LINDE integrada a un terreno patagónico.'),
+  },
+  {
+    slug: 'refugio-de-temporada',
+    title: 'Refugio de temporada',
+    summary: 'Una pieza compacta para llegar, abrir, habitar y cerrar sin esfuerzo.',
+    href: '/soluciones/refugio-de-temporada/',
+    image: generatedImage('refugio-de-temporada', 'Refugio de temporada LINDE en un paisaje de bosque y montaña.'),
+  },
+  {
+    slug: 'varias-unidades',
+    title: 'Varias unidades',
+    summary: 'Un conjunto pequeño de unidades y recorridos pensado como una experiencia común.',
+    href: '/soluciones/varias-unidades/',
+    image: generatedImage('varias-unidades', 'Conjunto de varias unidades LINDE alrededor de un espacio común.'),
+  },
+  {
+    slug: 'casa-dos-generaciones',
+    title: 'Casa para dos generaciones',
+    summary: 'Dos volúmenes vinculados que equilibran autonomía, encuentro y vida compartida.',
+    href: '/soluciones/casa-dos-generaciones/',
+    image: generatedImage('casa-dos-generaciones', 'Casa LINDE para dos generaciones con dos volúmenes vinculados.'),
+  },
+  {
+    slug: 'unidad-complementaria',
+    title: 'Unidad complementaria',
+    summary: 'Una nueva pieza para huéspedes, renta, trabajo o usos que pueden cambiar con el tiempo.',
+    href: '/soluciones/unidad-complementaria/',
+    image: generatedImage('unidad-complementaria', 'Unidad complementaria LINDE junto a una vivienda existente.'),
+  },
+  {
+    slug: 'taller-independiente',
+    title: 'Taller independiente',
+    summary: 'Un espacio de trabajo con luz, guardado y una relación directa con el terreno.',
+    href: '/soluciones/taller-independiente/',
+    image: generatedImage('taller-independiente', 'Taller independiente LINDE para trabajar junto al paisaje.'),
+  },
+  {
+    slug: 'quincho',
+    title: 'Quincho y encuentro',
+    summary: 'Una estructura protegida para cocinar, reunirse y sostener la vida común.',
+    href: '/soluciones/quincho/',
+    image: generatedImage('quincho', 'Quincho LINDE abierto al paisaje para encuentros y comidas.'),
+  },
+  {
+    slug: 'cuarto-de-herramientas',
+    title: 'Cuarto de herramientas',
+    summary: 'Una pieza de apoyo para guardar, mantener y ordenar el funcionamiento cotidiano.',
+    href: '/soluciones/cuarto-de-herramientas/',
+    image: generatedImage('cuarto-de-herramientas', 'Cuarto de herramientas LINDE para guardado y apoyo del terreno.'),
+  },
+];
+
+const parentSolutionByHomeSlug: Record<string, string> = {
+  'vivienda-permanente': 'vivienda-territorio',
+  'refugio-de-temporada': 'refugio',
+  'varias-unidades': 'hospitalidad',
+  'casa-dos-generaciones': 'vivienda-territorio',
+  'unidad-complementaria': 'unidad-complementaria',
+  'taller-independiente': 'unidad-complementaria',
+  quincho: 'hospitalidad',
+  'cuarto-de-herramientas': 'unidad-complementaria',
+};
+
+export const homeSolutionDetails: Solution[] = homeSolutions.map((entry) => {
+  const parent = solutions.find(
+    (solution) => solution.slug === parentSolutionByHomeSlug[entry.slug],
+  );
+
+  if (!parent) {
+    throw new Error(`No se encontró la solución base para ${entry.slug}.`);
+  }
+
+  return {
+    ...parent,
+    slug: entry.slug,
+    title: entry.title,
+    shortTitle: entry.title,
+    summary: entry.summary,
+    image: generatedImage(`${entry.slug}-transparente`, entry.image.alt),
+  };
+});
 
 const technicalByProject: Record<string, { label: string; value: string }[]> = {
   'casa-cauce': [{ label: 'Estado', value: 'Obra terminada · demo' }, { label: 'Sistema', value: 'Estructura liviana y galería profunda' }, { label: 'Orientación', value: 'Apertura oeste filtrada' }],
@@ -135,27 +231,11 @@ export const projects: Project[] = projectSeed.map((project, index) => ({
   ],
 }));
 
-export const guides: Guide[] = guideSeed.map((guide, index) => ({
-  ...guide,
-  isDemo: true,
-  publishedAt: ['2026-05-20', '2026-06-10', '2026-07-02'][index],
-  cover: index === 1
-    ? { ...threshold, alt: `Imagen editorial para la guía ${guide.title}.`, position: '63% center' }
-    : { ...hero, alt: `Imagen editorial para la guía ${guide.title}.`, position: imagePositions[index + 1] },
-  body: [
-    'Un terreno no se entiende con una única visita. Las condiciones que parecen pequeñas —una sombra persistente, el modo de llegar o una pendiente suave— cambian el proyecto cuando se miran temprano.',
-    'En LINDE usamos estas preguntas como una primera conversación de trabajo: no para cerrar respuestas prematuras, sino para ordenar prioridades reales antes de convertirlas en metros, materiales y etapas.',
-    'Este contenido es una guía demostrativa. Su función es mostrar el tipo de información que una futura publicación editorial del estudio podría desarrollar.',
-  ],
-}));
-
 export const featuredModels = models.filter((model) => model.isFeatured);
 export const featuredProjects = projects.slice(0, 4);
 export const getModel = (slug: string) => models.find((model) => model.slug === slug);
 export const getProject = (slug: string) => projects.find((project) => project.slug === slug);
 export const getSolution = (slug: string) => solutions.find((solution) => solution.slug === slug);
-export const getGuide = (slug: string) => guides.find((guide) => guide.slug === slug);
-
 export const relatedModels = (slugs: string[]) => models.filter((model) => slugs.includes(model.slug));
 export const relatedProjects = (slugs: string[]) => projects.filter((project) => slugs.includes(project.slug));
 
