@@ -64,24 +64,35 @@ export function createModelMedia(name: string, index: number): Media[] {
   ];
 }
 
-export function createProjectMedia(name: string, index: number): Media[] {
+export function createProjectMedia(
+  name: string,
+  index: number,
+  overrides?: ProjectMediaOverrides,
+): Media[] {
+  const { hero, detail, response } = overrides ?? {};
   const position = projectPositions[index % projectPositions.length];
 
   return [
-    {
+    hero ?? {
       ...heroMedia,
       alt: `${name}, proyecto demo de LINDE en territorio.`,
       position,
     },
-    {
+    detail ?? {
       ...thresholdMedia,
       alt: `Detalle de materialidad de ${name}.`,
       position: index % 2 ? '68% center' : '35% center',
     },
-    {
+    response ?? {
       ...heroMedia,
       alt: `Relación entre arquitectura y paisaje en ${name}.`,
       position: projectPositions[(index + 2) % projectPositions.length],
     },
   ];
 }
+
+export type ProjectMediaOverrides = {
+  hero?: Media;
+  detail?: Media;
+  response?: Media;
+};
