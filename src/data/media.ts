@@ -42,27 +42,38 @@ const projectPositions = [
   '84% center',
 ];
 
-export function createModelMedia(name: string, index: number): Media[] {
+export function createModelMedia(
+  name: string,
+  index: number,
+  overrides?: ModelMediaOverrides,
+): Media[] {
+  const { hero, detail, response } = overrides ?? {};
   const position = imagePositions[index % imagePositions.length];
 
   return [
-    {
+    hero ?? {
       ...heroMedia,
       alt: `${name}, arquitectura demo de LINDE en relación con el paisaje.`,
       position,
     },
-    {
+    detail ?? {
       ...thresholdMedia,
       alt: `Materialidad y expansión exterior de ${name}.`,
       position: index % 2 ? '35% center' : '68% center',
     },
-    {
+    response ?? {
       ...heroMedia,
       alt: `Vista amplia del entorno de ${name}.`,
       position: imagePositions[(index + 2) % imagePositions.length],
     },
   ];
 }
+
+export type ModelMediaOverrides = {
+  hero?: Media;
+  detail?: Media;
+  response?: Media;
+};
 
 export function createProjectMedia(
   name: string,
