@@ -21,12 +21,14 @@ const { solution, index } = Astro.props;
 
 <style>
   .solution-entry a { position: relative; display: flex; min-height: min(79svh, 46rem); align-items: flex-end; overflow: hidden; border: 1px solid rgba(25,32,23,.2); border-radius: var(--radius-media); background: var(--paper); }
-  .solution-entry__media { position: absolute; inset: 0; border-radius: inherit; }
+  .solution-entry__media { position: absolute; inset: 0; border-radius: inherit; background: var(--paper); }
+  .solution-entry__media .media__image { object-fit: contain; transform: none; }
   .solution-entry__number { position: absolute; z-index: 1; top: 1rem; left: 1rem; color: var(--ink); font-size: .68rem; font-weight: 700; letter-spacing: .07em; }
   .solution-entry__title { position: absolute; z-index: 1; top: 3.6rem; left: 1.8rem; right: 1.8rem; max-width: 12ch; color: var(--ink); font-family: var(--display); font-size: clamp(2rem, 3.2vw, 3.4rem); font-weight: 400; line-height: .96; letter-spacing: -.06em; }
   .solution-entry__text { position: relative; z-index: 1; width: 100%; max-width: 30rem; padding: 0 1.8rem 1.7rem; }
   .solution-entry__text p { margin-top: .9rem; font-size: .82rem; line-height: 1.5; }
   .solution-entry__action { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.25rem; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .solution-entry__action b { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border: 1px solid currentColor; border-radius: 50%; font-weight: 400; transition: transform var(--motion-base) var(--ease); }
+  .solution-entry a:hover .solution-entry__media .media__image { transform: none; }
   .solution-entry a:hover .solution-entry__action b { transform: translateX(.2rem); }
 </style>

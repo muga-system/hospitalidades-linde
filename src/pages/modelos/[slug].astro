@@ -82,11 +82,12 @@ const hero = model.images[0];
   .model-detail__plan-grid .body-copy { margin-top: 1.5rem; }
   .model-detail__recommended { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem; margin-top: 1.8rem; }
   .model-detail__recommended .meta { width: 100%; margin-bottom: .15rem; }
-  .model-detail__gallery-primary { height: min(80svh, 860px); }
+  .model-detail__gallery-primary { aspect-ratio: 3 / 2; background: var(--surface); }
   .model-detail__gallery-sub { display: grid; grid-template-columns: .72fr .45fr; gap: clamp(2rem, 7vw, 9rem); align-items: center; padding-block: clamp(3rem, 7vw, 8rem); }
-  .model-detail__gallery-sub figure { aspect-ratio: 1.25 / 1; }
+  .model-detail__gallery-sub figure { aspect-ratio: 3 / 2; background: var(--surface); }
+  .model-detail__gallery .media__image { object-fit: contain; transform: none; }
   .model-detail__related-projects, .model-detail__other-models { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2rem); }
   .model-detail__next { padding-block: clamp(4rem, 8vw, 8rem); }
   @media (max-width: 900px) { .model-detail__overview-grid, .model-detail__plan-grid, .model-detail__gallery-sub { grid-template-columns: 1fr; } .model-detail__facts { grid-template-columns: repeat(2, 1fr); } .model-detail__related-projects, .model-detail__other-models { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .model-detail__facts { grid-template-columns: 1fr; } .model-detail__facts div, .model-detail__facts div + div { padding: 1rem 0; border-right: 0; border-bottom: 1px solid var(--line); } .model-detail__features li { grid-template-columns: 2rem 1fr; } .model-detail__features i { display: none; } .model-detail__gallery-primary { height: 62svh; } .model-detail__related-projects, .model-detail__other-models { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .model-detail__facts { grid-template-columns: 1fr; } .model-detail__facts div, .model-detail__facts div + div { padding: 1rem 0; border-right: 0; border-bottom: 1px solid var(--line); } .model-detail__features li { grid-template-columns: 2rem 1fr; } .model-detail__features i { display: none; } .model-detail__related-projects, .model-detail__other-models { grid-template-columns: 1fr; } }
 </style>
