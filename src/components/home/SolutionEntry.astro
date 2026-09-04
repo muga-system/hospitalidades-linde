@@ -6,7 +6,7 @@ const { solution, index } = Astro.props;
 ---
 
 <article class="solution-entry">
-  <a href={solution.href}>
+  <a href={solution.href} style={`--solution-image-ratio: ${solution.image.width} / ${solution.image.height};`}>
     <span class="solution-entry__number">{String(index + 1).padStart(2, '0')}</span>
     <h3 class="solution-entry__title">{solution.title}</h3>
     <figure class="solution-entry__media media media--rounded">
@@ -20,7 +20,8 @@ const { solution, index } = Astro.props;
 </article>
 
 <style>
-  .solution-entry a { position: relative; display: flex; min-height: min(79svh, 46rem); align-items: flex-end; overflow: hidden; border: 1px solid rgba(25,32,23,.2); border-radius: var(--radius-media); background: var(--paper); }
+  .solution-entry a { position: relative; display: flex; aspect-ratio: var(--solution-image-ratio); min-height: 0; align-items: flex-end; overflow: hidden; border-radius: var(--radius-media); background: var(--paper); }
+  .solution-entry a::after { content: ''; position: absolute; z-index: 2; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(25,32,23,.2); pointer-events: none; }
   .solution-entry__media { position: absolute; inset: 0; border-radius: inherit; background: var(--paper); }
   .solution-entry__media .media__image { object-fit: contain; transform: none; }
   .solution-entry__number { position: absolute; z-index: 1; top: 1rem; left: 1rem; color: var(--ink); font-size: .68rem; font-weight: 700; letter-spacing: .07em; }
