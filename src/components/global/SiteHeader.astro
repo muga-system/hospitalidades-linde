@@ -1,5 +1,6 @@
 ---
 import { homeSolutions, models, projects, site } from '../../data/content';
+import ActionLink from './ActionLink.astro';
 
 type Props = { mode?: 'default' | 'overlay' };
 const { mode = 'default' } = Astro.props;
@@ -32,7 +33,7 @@ const navGroups: NavGroup[] = [
       ))}
     </nav>
 
-    <a class="header-cta" href={site.primaryCta.href}><span class="header-cta__label">{site.primaryCta.label}</span><span class="header-cta__mark" aria-hidden="true">→</span></a>
+    <div class="header-cta"><ActionLink href={site.primaryCta.href} label={site.primaryCta.label} variant="nav" /></div>
     <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" data-mobile-toggle>
       <span class="sr-only">Abrir menú</span><span aria-hidden="true">☰</span>
     </button>
@@ -77,7 +78,7 @@ const navGroups: NavGroup[] = [
         </details>
       ))}
     </nav>
-    <a class="mobile-panel__cta" href={site.primaryCta.href}><span>{site.primaryCta.label}</span><span aria-hidden="true">→</span></a>
+    <div class="mobile-panel__cta"><ActionLink href={site.primaryCta.href} label={site.primaryCta.label} variant="nav" /></div>
   </div>
 </header>
 
@@ -160,10 +161,7 @@ const navGroups: NavGroup[] = [
   .desktop-nav__trigger { display: inline-flex; gap: .3rem; border: 0; padding: 0; color: inherit; background: transparent; font: inherit; }
   .desktop-nav__trigger span { transition: transform var(--motion-base) var(--ease); }
   .desktop-nav__trigger[aria-expanded="true"] span { transform: rotate(45deg); }
-  .header-cta, .mobile-panel__cta { display: inline-flex; align-items: center; gap: 0; border-radius: 999px; color: var(--ink); background: transparent; font-size: .68rem; font-weight: 750; letter-spacing: .015em; white-space: nowrap; }
-  .header-cta__label, .mobile-panel__cta > span:first-child { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .72rem 1.15rem .72rem 1.3rem; border-radius: 999px 0 0 999px; background: var(--leaf); }
-  .header-cta__mark, .mobile-panel__cta > span:last-child { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--leaf); font-size: 1rem; }
-  .header-cta:hover .header-cta__mark, .mobile-panel__cta:hover > span:last-child { color: var(--white); background: var(--forest); }
+  .header-cta, .mobile-panel__cta { --cta-height: 2.75rem; --cta-padding: .72rem 1.3rem; --cta-font-size: .68rem; --cta-font-weight: 750; display: flex; align-items: center; white-space: nowrap; }
   .mobile-toggle { display: none; border: 0; width: 2.65rem; height: 2.65rem; place-items: center; border-radius: 50%; color: var(--ink); background: var(--leaf); font-size: 1rem; }
   .desktop-panel { position: absolute; z-index: 1; top: 0; left: 0; width: 100%; padding-top: var(--header-height); color: var(--ink); background: var(--paper); border-radius: 0 0 2.5rem 2.5rem; box-shadow: 0 18px 42px rgba(25,32,23,.13); opacity: 0; pointer-events: none; transform: translateY(-1rem); transition: opacity var(--motion-base) var(--ease), transform var(--motion-slow) var(--ease); }
   .site-header.is-menu-open .desktop-panel { opacity: 1; pointer-events: auto; transform: none; }
@@ -187,7 +185,7 @@ const navGroups: NavGroup[] = [
   .desktop-panel__grid--soluciones .desktop-panel__item small { max-width: 27ch; font-size: .76rem; }
   .desktop-panel__arrow { align-self: end; font-size: .85rem; }
   .mobile-panel { display: none; }
-  @media (max-width: 1100px) { .desktop-nav { gap: .7rem; } .header-cta { font-size: .62rem; } }
+  @media (max-width: 1100px) { .desktop-nav { gap: .7rem; } .header-cta { --cta-font-size: .62rem; } }
   @media (max-width: 900px) {
     .site-header__bar { grid-template-columns: 1fr max-content; padding-inline: 1.25rem; }
     .desktop-nav, .header-cta, .desktop-panel { display: none; }
@@ -205,8 +203,6 @@ const navGroups: NavGroup[] = [
     .mobile-group__items { display: grid; gap: .75rem; padding: 0 0 1.2rem; }
     .mobile-group__items a { font-size: .82rem; font-weight: 650; }
     .mobile-panel__direct { border-bottom: 1px solid var(--line); }
-    .mobile-panel__cta { justify-content: space-between; width: 100%; margin-top: 1.5rem; padding: 0; background: var(--leaf); }
-    .mobile-panel__cta > span:first-child { flex: 1; min-height: 3.2rem; padding-inline: 1.1rem; }
-    .mobile-panel__cta > span:last-child { width: 3.2rem; height: 3.2rem; }
+    .mobile-panel__cta { --cta-height: 3.2rem; --cta-padding: .72rem 1.1rem; width: 100%; margin-top: 1.5rem; }
   }
 </style>

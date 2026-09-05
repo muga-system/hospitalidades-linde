@@ -2,20 +2,21 @@
 type Props = {
   href: string;
   label: string;
-  variant?: 'default' | 'solid' | 'light' | 'hero';
+  variant?: 'default' | 'solid' | 'light' | 'hero' | 'nav';
   target?: string;
 };
 
 const { href, label, variant = 'default', target } = Astro.props;
 const external = href.startsWith('http');
+const hasWipe = variant === 'hero' || variant === 'nav';
 ---
 
-<a class:list={['action-link', `action-link--${variant}`]} href={href} target={target} rel={external ? 'noreferrer' : undefined}>
+<a class:list={['action-link', `action-link--${variant}`, { 'action-link--wipe': hasWipe }]} href={href} target={target} rel={external ? 'noreferrer' : undefined}>
   <span class="action-link__label">
     {label}
-    {variant === 'hero' && <span class="action-link__label-wipe" aria-hidden="true">{label}</span>}
+    {hasWipe && <span class="action-link__label-wipe" aria-hidden="true">{label}</span>}
   </span>
-  <span class="action-link__mark" aria-hidden="true">
+  {variant !== 'nav' && <span class="action-link__mark" aria-hidden="true">
     {variant === 'hero' ? (
       <span class="action-link__arrows">
         <svg class="action-link__arrow action-link__arrow--out" viewBox="0 0 26 26" fill="none" focusable="false">
@@ -26,5 +27,5 @@ const external = href.startsWith('http');
         </svg>
       </span>
     ) : '→'}
-  </span>
+  </span>}
 </a>

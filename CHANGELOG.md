@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- CTA de navegación sin flecha, con el mismo barrido del hero compartido
+  desde `ActionLink`, también en el menú móvil y al enfocar con teclado.
 - Refactor de datos por dominio (`media`, `site`, `models`, `projects`,
   `solutions` y `selectors`) con `content.ts` como fachada compatible.
 - Detalle de soluciones dividido en hero, decisiones, reel de proyectos y

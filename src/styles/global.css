@@ -99,8 +99,8 @@ ul, ol { margin: 0; padding: 0; }
 .action-link--light:hover .action-link__label { background: var(--white); }
 
 /* The two silhouettes stay still while the light fill sweeps across them. */
-.action-link--hero {
-  --cta-size: 3rem;
+.action-link--wipe {
+  --cta-size: var(--cta-height, 3rem);
   --cta-wipe: ellipse(105% 180% at -105% -80%);
   --cta-label-delay: 140ms;
   --cta-mark-delay: 0ms;
@@ -111,21 +111,21 @@ ul, ol { margin: 0; padding: 0; }
   gap: .125rem;
   max-width: 100%;
   border-radius: 999px;
-  color: var(--white);
-  font-size: .875rem;
-  font-weight: 650;
+  color: var(--cta-color, var(--white));
+  font-size: var(--cta-font-size, .875rem);
+  font-weight: var(--cta-font-weight, 650);
   letter-spacing: 0;
   text-transform: none;
 }
-.action-link--hero .action-link__label {
+.action-link--wipe .action-link__label {
   position: relative;
   display: grid;
   place-items: center;
   min-height: var(--cta-size);
-  padding: .875rem 2rem;
+  padding: var(--cta-padding, .875rem 2rem);
   overflow: hidden;
   border-radius: 999px;
-  background: var(--forest);
+  background: var(--cta-background, var(--forest));
   line-height: 1.25;
 }
 .action-link--hero .action-link__mark,
@@ -142,18 +142,18 @@ ul, ol { margin: 0; padding: 0; }
   transform: none;
   transition: none;
 }
-.action-link--hero .action-link__label-wipe,
+.action-link--wipe .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: var(--leaf);
-  color: var(--ink);
+  background: var(--cta-wipe-background, var(--leaf));
+  color: var(--cta-wipe-color, var(--ink));
   clip-path: var(--cta-wipe);
   transition: clip-path 380ms cubic-bezier(.4, 0, .2, 1);
   pointer-events: none;
 }
-.action-link--hero .action-link__label-wipe {
+.action-link--wipe .action-link__label-wipe {
   display: grid;
   place-items: center;
   padding: inherit;
@@ -175,7 +175,7 @@ ul, ol { margin: 0; padding: 0; }
   transform: var(--cta-arrow-in);
   transition: transform 280ms var(--ease) var(--cta-arrow-in-delay);
 }
-.action-link--hero:focus-visible {
+.action-link--wipe:focus-visible {
   --cta-wipe: ellipse(105% 180% at 50% 50%);
   --cta-label-delay: 0ms;
   --cta-mark-delay: 150ms;
@@ -183,10 +183,10 @@ ul, ol { margin: 0; padding: 0; }
   --cta-arrow-in: translate(0, 0);
   --cta-arrow-out-delay: 150ms;
   --cta-arrow-in-delay: 240ms;
-  outline-color: var(--white);
+  outline-color: var(--cta-focus-color, var(--white));
 }
 @media (hover: hover) and (pointer: fine) {
-  .action-link--hero:hover {
+  .action-link--wipe:hover {
     --cta-wipe: ellipse(105% 180% at 50% 50%);
     --cta-label-delay: 0ms;
     --cta-mark-delay: 150ms;
@@ -196,6 +196,18 @@ ul, ol { margin: 0; padding: 0; }
     --cta-arrow-in-delay: 240ms;
   }
 }
+
+.action-link--nav {
+  --cta-background: var(--leaf);
+  --cta-color: var(--ink);
+  --cta-wipe-background: var(--forest);
+  --cta-wipe-color: var(--white);
+  --cta-focus-color: var(--earth);
+  width: 100%;
+  gap: 0;
+}
+.action-link--nav .action-link__label { width: 100%; }
+.action-link--nav .action-link__label-wipe { transition-delay: 0ms; }
 
 .media { position: relative; overflow: hidden; background: var(--moss); }
 .media--rounded { border-radius: var(--radius-media); }
@@ -256,7 +268,7 @@ a:hover .media__image, .card-link:hover .media__image { transform: scale(1.025);
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
   ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
   .reveal { opacity: 1; transform: none; }
-  .action-link--hero .action-link__label-wipe,
+  .action-link--wipe .action-link__label-wipe,
   .action-link--hero .action-link__mark::before,
   .action-link--hero .action-link__arrow { transition: none !important; }
   .action-link--hero .action-link__arrow--out { transform: none; }
