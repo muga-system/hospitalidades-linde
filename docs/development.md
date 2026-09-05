@@ -37,7 +37,7 @@ módulos.
 
 ## Agregar una solución
 
-1. Agregar o editar el registro amplio en `content/solutions.json`.
+1. Agregar o editar el registro de categoría interna en `content/solutions.json`.
 2. Si la opción debe aparecer en la home, agregar su registro en
    `src/data/solutions.ts` con un slug de detalle único, título, resumen e
    ilustración propios.
@@ -48,7 +48,8 @@ módulos.
 5. Ejecutar `pnpm check` y `pnpm build`; revisar que la ruta estática aparezca
    en la salida.
 
-La página dinámica `src/pages/soluciones/[slug].astro` genera la ruta y compone
+La página dinámica `src/pages/soluciones/[slug].astro` genera solo las rutas de
+las ocho opciones visibles y compone
 `SolutionHero`, `SolutionDecisions`, `SolutionProjectReel` y
 `SolutionClosing`. Los componentes no deben leer JSON directamente.
 

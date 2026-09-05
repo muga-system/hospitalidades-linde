@@ -2,8 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ActionLink from '../../components/global/ActionLink.astro';
 import ModelCard from '../../components/catalog/ModelCard.astro';
-import ProjectCard from '../../components/projects/ProjectCard.astro';
-import { formatBedrooms, models, projects, relatedProjects } from '../../data/content';
+import { formatBedrooms, models } from '../../data/content';
 import type { Model } from '../../data/types';
 
 export function getStaticPaths() {
@@ -11,7 +10,6 @@ export function getStaticPaths() {
 }
 
 const { model } = Astro.props as { model: Model };
-const related = relatedProjects(projects.filter((project) => project.modelSlugs.includes(model.slug)).map((project) => project.slug));
 const otherModels = models.filter((item) => item.slug !== model.slug).slice(0, 3);
 const hero = model.images[0];
 ---
@@ -52,7 +50,6 @@ const hero = model.images[0];
       <div class="contained model-detail__gallery-sub"><figure class="media media--rounded"><img class="media__image" src={model.images[2].src} alt={model.images[2].alt} width="1536" height="1024" loading="lazy" style={`object-position:${model.images[2].position};`} /></figure><p class="body-large">La escala no define la intensidad de una experiencia. Una superficie contenida puede construir relaciones amplias con el exterior si las decisiones se coordinan desde el comienzo.</p></div>
     </section>
 
-    {related.length > 0 && <section class="section model-detail__related"><div class="contained"><div class="section-head"><div><p class="eyebrow">En territorio</p><h2 class="section-title">Proyectos que parten de una lógica cercana.</h2></div></div><div class="model-detail__related-projects">{related.map((project, index) => <ProjectCard project={project} index={index} />)}</div></div></section>}
     <section class="section--leaf model-detail__next"><div class="contained"><div class="section-head"><div><p class="eyebrow">Otros modelos</p><h2 class="section-title">Cada punto de partida se mueve con el sitio.</h2></div><ActionLink href="/modelos/" label="Ver catálogo" /></div><div class="model-detail__other-models">{otherModels.map((item, index) => <ModelCard model={item} index={index} />)}</div></div></section>
   </article>
 </BaseLayout>
@@ -86,8 +83,8 @@ const hero = model.images[0];
   .model-detail__gallery-sub { display: grid; grid-template-columns: .72fr .45fr; gap: clamp(2rem, 7vw, 9rem); align-items: center; padding-block: clamp(3rem, 7vw, 8rem); }
   .model-detail__gallery-sub figure { aspect-ratio: 3 / 2; background: var(--surface); }
   .model-detail__gallery .media__image { object-fit: contain; transform: none; }
-  .model-detail__related-projects, .model-detail__other-models { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2rem); }
+  .model-detail__other-models { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 2rem); }
   .model-detail__next { padding-block: clamp(4rem, 8vw, 8rem); }
-  @media (max-width: 900px) { .model-detail__overview-grid, .model-detail__plan-grid, .model-detail__gallery-sub { grid-template-columns: 1fr; } .model-detail__facts { grid-template-columns: repeat(2, 1fr); } .model-detail__related-projects, .model-detail__other-models { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .model-detail__facts { grid-template-columns: 1fr; } .model-detail__facts div, .model-detail__facts div + div { padding: 1rem 0; border-right: 0; border-bottom: 1px solid var(--line); } .model-detail__features li { grid-template-columns: 2rem 1fr; } .model-detail__features i { display: none; } .model-detail__related-projects, .model-detail__other-models { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .model-detail__overview-grid, .model-detail__plan-grid, .model-detail__gallery-sub { grid-template-columns: 1fr; } .model-detail__facts { grid-template-columns: repeat(2, 1fr); } .model-detail__other-models { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .model-detail__facts { grid-template-columns: 1fr; } .model-detail__facts div, .model-detail__facts div + div { padding: 1rem 0; border-right: 0; border-bottom: 1px solid var(--line); } .model-detail__features li { grid-template-columns: 2rem 1fr; } .model-detail__features i { display: none; } .model-detail__other-models { grid-template-columns: 1fr; } }
 </style>

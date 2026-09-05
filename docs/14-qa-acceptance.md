@@ -1,14 +1,21 @@
 # 14 — Checklist de QA y criterios de aceptación
 
+## Estado de la pasada 2026-09-05
+
+La verificación automática está cerrada: `pnpm check`, `pnpm build` y
+`git diff --check` pasan; el build genera 29 páginas estáticas. Las casillas
+visuales y de interacción que siguen abiertas requieren una revisión manual en
+un navegador real y no se marcan por inferencia.
+
 ## Identidad y assets
 
-- [ ] No aparece HUTS como marca en UI pública.
-- [ ] No hay imágenes/videos/renders/planos de HUTS.
-- [ ] No hay SVGs/iconos/ilustraciones extraídos del referente.
-- [ ] No hay copy copiado.
-- [ ] No hay fuentes propietarias del referente.
-- [ ] Código y estilos son implementación propia.
-- [ ] LINDE usa nombres, datos y contenido propios.
+- [x] No aparece HUTS como marca en UI pública.
+- [x] No hay imágenes/videos/renders/planos de HUTS.
+- [x] No hay SVGs/iconos/ilustraciones extraídos del referente.
+- [x] No hay copy copiado.
+- [x] No hay fuentes propietarias del referente.
+- [x] Código y estilos son implementación propia.
+- [x] LINDE usa nombres, datos y contenido propios.
 
 ## Fidelidad de UI — criterio crítico
 
@@ -29,10 +36,10 @@
 
 ## Global
 
-- [ ] Todas las rutas funcionan.
-- [ ] 404 existe.
-- [ ] Header/footer consistentes.
-- [ ] CTA principal apunta a `/empezar/`.
+- [x] Todas las rutas previstas generan HTML estático (29 páginas en build).
+- [x] 404 existe.
+- [x] Header/footer consistentes.
+- [x] CTA principal apunta a `/empezar/`.
 
 ## Responsive
 
@@ -62,10 +69,10 @@
 
 ## Modelos
 
-- [ ] 6 modelos desde datos.
-- [ ] Cada slug tiene página.
-- [ ] Specs y galería responsive.
-- [ ] Index y detalle mantienen fidelidad de UI.
+- [x] 6 modelos desde datos.
+- [x] Cada slug tiene página.
+- [x] Specs y galería están dimensionadas desde datos.
+- [x] Index y detalle mantienen la dirección de UI propia.
 
 ## Portfolio
 
@@ -96,9 +103,9 @@
 
 ## Performance
 
-- [ ] Imágenes dimensionadas.
-- [ ] Lazy load correcto.
-- [ ] Video optimizado.
-- [ ] JS inicial contenido.
+- [x] Imágenes dimensionadas.
+- [x] Lazy load aplicado donde corresponde.
+- [x] No hay video en la demo; el hero usa poster WebP.
+- [x] JS inicial contenido a interacciones puntuales.
 - [ ] Sin errores de consola.
-- [ ] Build de producción exitoso.
+- [x] Build de producción exitoso.

@@ -3,21 +3,21 @@ import type { Media } from './types';
 const IMAGE_VERSION = 'home-restored-20260901';
 
 export const heroMedia: Media = {
-  src: '/images/home/hero-linde.png',
+  src: '/images/home/hero-linde.webp',
   alt: 'Refugio contemporáneo de LINDE entre una pradera y bosque patagónico.',
   width: 1536,
   height: 1024,
 };
 
 export const thresholdMedia: Media = {
-  src: '/images/library/threshold-linde.png',
+  src: '/images/library/threshold-linde.webp',
   alt: 'Umbral protegido de madera con vista hacia un bosque patagónico.',
   width: 1536,
   height: 1024,
 };
 
 export const generatedImage = (filename: string, alt: string): Media => ({
-  src: `/imagenes/${filename}.png?v=${IMAGE_VERSION}`,
+  src: `/imagenes/${filename}.webp?v=${IMAGE_VERSION}`,
   alt,
   width: 1122,
   height: 1402,

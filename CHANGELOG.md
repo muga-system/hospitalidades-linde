@@ -9,6 +9,16 @@
 - Modificadores locales para conservar los estilos compactos al usar CSS scoped
   en los nuevos componentes.
 - Documentación operativa, decisiones de diseño y roles de assets actualizados.
+- Home simplificada: se eliminaron bloques editoriales repetidos sin tocar los
+  carruseles horizontales aprobados.
+- Detalles de proyectos con condiciones específicas del sitio, navegación
+  anterior/siguiente y sin galería hero repetida ni grilla relacionada.
+- Proceso reducido a seis pasos y una imagen; Servicios separado por alcance
+  contratables; Modelos con una sola introducción y un único cierre.
+- Las cuatro soluciones amplias quedaron como categorías internas sin rutas
+  públicas duplicadas.
+- Imágenes públicas convertidas a WebP; los PNG fuente se conservan fuera de
+  `public/`.
 
 ## [0.1.0] — 2026-09-01
 

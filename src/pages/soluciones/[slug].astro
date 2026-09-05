@@ -9,20 +9,11 @@ import {
   homeSolutionDetails,
   relatedModels,
   relatedProjects,
-  solutions,
 } from "../../data/content";
 import type { Media, Solution } from "../../data/types";
 
 export function getStaticPaths() {
-  const solutionPages = [
-    ...homeSolutionDetails,
-    ...solutions.filter(
-      (solution) =>
-        !homeSolutionDetails.some((detail) => detail.slug === solution.slug),
-    ),
-  ];
-
-  return solutionPages.map((solution) => ({
+  return homeSolutionDetails.map((solution) => ({
     params: { slug: solution.slug },
     props: { solution },
   }));
@@ -40,13 +31,9 @@ const projectSequence = [
 const homeOrderIndex = homeSolutionDetails.findIndex(
   (detail) => detail.slug === solution.slug,
 );
-const broadOrderIndex = solutions.findIndex(
-  (entry) => entry.slug === solution.slug,
-);
-const solutionNumber =
-  homeOrderIndex >= 0 ? homeOrderIndex + 1 : broadOrderIndex + 1;
+const solutionNumber = homeOrderIndex + 1;
 const fallbackMedia: Media = {
-  src: "/images/library/threshold-linde.png",
+  src: "/images/library/threshold-linde.webp",
   alt: "Galería protegida de LINDE en relación con el paisaje.",
   width: 1536,
   height: 1024,

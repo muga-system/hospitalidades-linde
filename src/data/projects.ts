@@ -45,21 +45,21 @@ const projectMediaOverrides: Record<string, {
 }> = {
   'casa-cauce': {
     hero: {
-      src: '/images/projects/casa-cauce-hero.png',
+      src: '/images/projects/casa-cauce-hero.webp',
       alt: 'Casa Cauce, vivienda lineal con galería profunda en un lote arbolado de Lago Puelo.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     detail: {
-      src: '/images/projects/casa-cauce-gallery.png',
+      src: '/images/projects/casa-cauce-gallery.webp',
       alt: 'Interior de Casa Cauce con galería profunda y vistas al paisaje de Lago Puelo.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     response: {
-      src: '/images/projects/casa-cauce-umbral-galeria.png',
+      src: '/images/projects/casa-cauce-umbral-galeria.webp',
       alt: 'Umbral de la galería de Casa Cauce con vistas al paisaje de Lago Puelo.',
       width: 1536,
       height: 1024,
@@ -68,21 +68,21 @@ const projectMediaOverrides: Record<string, {
   },
   'refugio-lenga': {
     hero: {
-      src: '/images/projects/refugio-lenga-hero.png',
+      src: '/images/projects/refugio-lenga-hero.webp',
       alt: 'Refugio Lenga, vivienda de dos alas con estar central en un bosque de El Bolsón.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     detail: {
-      src: '/images/projects/refugio-lenga-estar-central.png',
+      src: '/images/projects/refugio-lenga-estar-central.webp',
       alt: 'Estar central de Refugio Lenga con estructura de madera, piedra y vistas al bosque.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     response: {
-      src: '/images/projects/refugio-lenga-expansion-exterior.png',
+      src: '/images/projects/refugio-lenga-expansion-exterior.webp',
       alt: 'Expansión exterior protegida de Refugio Lenga entre sus dos alas y el paisaje.',
       width: 1536,
       height: 1024,
@@ -91,21 +91,21 @@ const projectMediaOverrides: Record<string, {
   },
   'patio-del-nire': {
     hero: {
-      src: '/images/projects/patio-del-nire-hero.png',
+      src: '/images/projects/patio-del-nire-hero.webp',
       alt: 'Patio del Ñire, vivienda en forma de L alrededor de un patio protegido en Trevelin.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     detail: {
-      src: '/images/projects/patio-del-nire-estar-patio.png',
+      src: '/images/projects/patio-del-nire-estar-patio.webp',
       alt: 'Estar de Patio del Ñire abierto hacia el patio protegido y el paisaje de Trevelin.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     response: {
-      src: '/images/projects/patio-del-nire-patio-protegido.png',
+      src: '/images/projects/patio-del-nire-patio-protegido.webp',
       alt: 'Patio protegido de Patio del Ñire entre las dos alas de la vivienda.',
       width: 1536,
       height: 1024,
@@ -114,21 +114,21 @@ const projectMediaOverrides: Record<string, {
   },
   'base-arrayan': {
     hero: {
-      src: '/images/projects/base-arrayan-hero.png',
+      src: '/images/projects/base-arrayan-hero.webp',
       alt: 'Base Arrayán, unidad compacta para huéspedes y trabajo entre árboles en Villa La Angostura.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     detail: {
-      src: '/images/projects/base-arrayan-interior-flexible.png',
+      src: '/images/projects/base-arrayan-interior-flexible.webp',
       alt: 'Interior flexible de Base Arrayán con cama, guardado, kitchenette y escritorio hacia el bosque.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     response: {
-      src: '/images/projects/base-arrayan-borde-vegetal.png',
+      src: '/images/projects/base-arrayan-borde-vegetal.webp',
       alt: 'Borde vegetal de Base Arrayán con sendero, unidad compacta y vivienda existente entre los árboles.',
       width: 1536,
       height: 1024,
@@ -137,21 +137,21 @@ const projectMediaOverrides: Record<string, {
   },
   'galpon-lacar': {
     hero: {
-      src: '/images/projects/galpon-lacar-hero.png',
+      src: '/images/projects/galpon-lacar-hero.webp',
       alt: 'Galpón Lácar, conjunto de hospitalidad con volumen central alto y piezas laterales en San Martín de los Andes.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     detail: {
-      src: '/images/projects/galpon-lacar-estar-central.png',
+      src: '/images/projects/galpon-lacar-estar-central.webp',
       alt: 'Estar central de Galpón Lácar con doble altura, comedor común y circulaciones laterales.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     response: {
-      src: '/images/projects/galpon-lacar-piezas-laterales.png',
+      src: '/images/projects/galpon-lacar-piezas-laterales.webp',
       alt: 'Circulación central de Galpón Lácar entre sus piezas laterales de escala doméstica.',
       width: 1536,
       height: 1024,
@@ -160,21 +160,21 @@ const projectMediaOverrides: Record<string, {
   },
   'abra-manso': {
     hero: {
-      src: '/images/projects/abra-manso-hero.png',
+      src: '/images/projects/abra-manso-hero.webp',
       alt: 'Abra Manso, vivienda con pieza de trabajo semi-independiente en un bosque de Bariloche.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     detail: {
-      src: '/images/projects/abra-manso-interior-flexible.png',
+      src: '/images/projects/abra-manso-interior-flexible.webp',
       alt: 'Interior flexible de Abra Manso con estar, comedor y espacio de trabajo conectado.',
       width: 1536,
       height: 1024,
       position: 'center center',
     },
     response: {
-      src: '/images/projects/abra-manso-acceso-semi-independiente.png',
+      src: '/images/projects/abra-manso-acceso-semi-independiente.webp',
       alt: 'Acceso semi-independiente de Abra Manso entre la pieza de trabajo, la vivienda y el paisaje boscoso.',
       width: 1536,
       height: 1024,

@@ -3,19 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ActionLink from '../components/global/ActionLink.astro';
 
 const services = [
-  ['Lectura y viabilidad', 'Para saber qué conviene hacer antes de comprometer una arquitectura.', 'Lectura inicial del sitio', 'Programa y superficies', 'Etapas y criterio de inversión'],
-  ['Proyecto de arquitectura', 'Para llevar una idea ordenada a una propuesta espacial, técnica y sensible al lugar.', 'Implantación y anteproyecto', 'Proyecto ejecutivo', 'Coordinación con especialistas'],
-  ['Hospitalidad de pequeña escala', 'Para pensar unidades, recorridos y operación como una experiencia completa.', 'Masterplan de baja escala', 'Unidades y espacios comunes', 'Lógica operativa y etapas'],
-  ['Acompañamiento de obra', 'Para sostener la relación entre la intención del proyecto y las decisiones de ejecución.', 'Documentación de decisiones', 'Coordinación de equipos', 'Ajustes de detalle en obra'],
+  ['Lectura y viabilidad', 'Un alcance inicial para entender el sitio, ordenar el programa y decidir si vale la pena avanzar.', 'Lectura inicial del sitio', 'Programa y superficies', 'Etapas y criterio de inversión'],
+  ['Proyecto de arquitectura', 'El desarrollo completo de una propuesta espacial y técnica lista para coordinar con especialistas.', 'Implantación y anteproyecto', 'Proyecto ejecutivo', 'Coordinación con especialistas'],
+  ['Hospitalidad de pequeña escala', 'Un paquete para diseñar unidades, espacios comunes y una lógica operativa coherente.', 'Masterplan de baja escala', 'Unidades y espacios comunes', 'Lógica operativa y etapas'],
+  ['Acompañamiento de obra', 'Un acompañamiento específico para sostener las decisiones del proyecto durante la ejecución.', 'Documentación de decisiones', 'Coordinación de equipos', 'Ajustes de detalle en obra'],
 ];
 ---
 
 <BaseLayout title="Servicios — LINDE" description="Alcances de LINDE para arquitectura, territorio y hospitalidad de pequeña escala.">
   <div class="page services-page">
-    <header class="article-head"><div class="contained article-head__grid"><div><p class="eyebrow">Servicios</p><h1 class="page-title">Alcances que se ajustan a la pregunta, no al revés.</h1></div><div class="article-head__intro"><p class="body-copy">No todas las situaciones piden el mismo acompañamiento. A veces hace falta leer un lote; otras, coordinar una obra. El alcance se construye según el momento del proyecto.</p></div></div></header>
-    <section class="services-page__image"><figure class="media"><img class="media__image" src="/images/library/threshold-linde.png" alt="Terraza de madera de un refugio LINDE frente a un bosque." width="1536" height="1024" fetchpriority="high" /></figure></section>
+    <header class="article-head"><div class="contained article-head__grid"><div><p class="eyebrow">Qué podés contratar</p><h1 class="page-title">Alcances que se ajustan a la pregunta, no al revés.</h1></div><div class="article-head__intro"><p class="body-copy">Servicios concretos para incorporar cuando hace falta una lectura, un proyecto, una estrategia de hospitalidad o coordinación de obra. El proceso explica cómo trabajamos; acá definimos qué entregamos.</p></div></div></header>
+    <section class="services-page__image"><figure class="media"><img class="media__image" src="/images/library/threshold-linde.webp" alt="Terraza de madera de un refugio LINDE frente a un bosque." width="1536" height="1024" fetchpriority="high" /></figure></section>
     <section class="section"><div class="contained services-page__list">{services.map(([title, summary, ...items], index) => <article><div class="services-page__index">{String(index + 1).padStart(2, '0')}</div><div><h2>{title}</h2><p>{summary}</p></div><ul>{items.map((item) => <li>{item}<span aria-hidden="true">↗</span></li>)}</ul></article>)}</div></section>
-    <section class="services-page__callout section--leaf"><div class="contained services-page__callout-grid"><div><p class="eyebrow">Un alcance posible</p><h2 class="section-title">Empezar por definir el problema también es parte del servicio.</h2></div><div><p class="body-copy">Si todavía no sabés qué servicio corresponde, el formulario guiado está pensado justamente para llegar a una primera conversación con más contexto.</p><ActionLink href="/empezar/" label="Contanos la situación" /></div></div></section>
+    <section class="services-page__callout section--leaf"><div class="contained services-page__callout-grid"><div><p class="eyebrow">Elegir alcance</p><h2 class="section-title">Si todavía no sabés qué contratar, podemos ordenar esa primera decisión.</h2></div><div><p class="body-copy">El formulario guiado reúne el contexto necesario para recomendar un alcance inicial sin convertir la consulta en una lista de requisitos.</p><ActionLink href="/empezar/" label="Contanos la situación" /></div></div></section>
   </div>
 </BaseLayout>
 

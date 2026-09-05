@@ -10,12 +10,9 @@ import { models } from '../../data/content';
     <header class="article-head">
       <div class="contained article-head__grid">
         <div><p class="eyebrow">Modelos LINDE · 06 configuraciones</p><h1 class="page-title">Puntos de partida para hacer mejores preguntas.</h1></div>
-        <div class="article-head__intro"><p class="body-copy">No son productos cerrados. Son arquitecturas base que permiten hablar de programa, metros, orientación y posibilidades del terreno con algo concreto sobre la mesa.</p><div style="margin-top:1.45rem"><ActionLink href="/empezar/" label="Contanos tu idea" /></div></div>
+        <div class="article-head__intro"><p class="body-copy">No son productos cerrados. Son arquitecturas base que permiten hablar de programa, metros, orientación y posibilidades del terreno con algo concreto sobre la mesa.</p><p class="body-copy models-index__intro-copy">Cada modelo admite transformaciones: cambia su implantación, sus aberturas, el modo de crecer o el vínculo con otras piezas del conjunto.</p><div style="margin-top:1.45rem"><ActionLink href="/empezar/" label="Contanos tu idea" /></div><p class="meta models-index__note">Contenido demostrativo · no corresponde a un producto constructivo real.</p></div>
       </div>
     </header>
-    <section class="models-index__intro section--leaf">
-      <div class="contained models-index__intro-grid"><p class="body-large">Cada modelo admite transformaciones: cambia su implantación, sus aberturas, el modo de crecer o el vínculo con otras piezas del conjunto.</p><p class="meta">Contenido demostrativo<br />No corresponde a un producto constructivo real.</p></div>
-    </section>
     <section class="section">
       <div class="contained">
         <div class="models-index__bar"><p class="eyebrow">Todos los modelos</p><p class="meta">06 modelos · superficies entre 38 y 156 m²</p></div>
@@ -26,10 +23,8 @@ import { models } from '../../data/content';
 </BaseLayout>
 
 <style>
-  .models-index__intro { padding-block: clamp(3.5rem, 7vw, 7rem); }
-  .models-index__intro-grid { display: grid; grid-template-columns: .9fr .35fr; gap: 2rem; align-items: end; }
-  .models-index__intro-grid .body-large { max-width: 25ch; }
+  .models-index__intro-copy { margin-top: 1rem; max-width: 42ch; }
+  .models-index__note { margin-top: 1.2rem; }
   .models-index__bar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--line); }
-  @media (max-width: 800px) { .models-index__intro-grid { grid-template-columns: 1fr; } }
   @media (max-width: 560px) { .models-index__bar { align-items: flex-start; flex-direction: column; gap: .5rem; } }
 </style>

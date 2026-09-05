@@ -22,12 +22,30 @@ tipos, normalización, media y consultas. La fachada `content.ts` mantiene una
 API estable para las páginas y permite reorganizar módulos sin una migración
 masiva.
 
-## Ocho opciones de la home y cuatro soluciones amplias
+## Ocho opciones de la home y cuatro categorías internas
 
 La home y la navegación muestran ocho opciones en un orden editorial propio.
 Cada opción tiene un slug de detalle único, aunque hereda principios, modelos
-y proyectos de la solución amplia que le corresponde. Las cuatro rutas amplias
-siguen disponibles como agrupaciones de contenido.
+y proyectos de la categoría interna que le corresponde. Las cuatro categorías
+siguen en los datos para mantener relaciones y facilitar futuras ediciones,
+pero no generan rutas públicas independientes ni duplican contenido.
+
+## Recorrido compacto
+
+La home conserva el carrusel horizontal de soluciones y modelos, pero elimina
+bloques que repetían territorio, selección, principios y métricas demo. Cada
+detalle de proyecto conserva anterior/siguiente y reemplaza el mapa genérico
+por condiciones específicas del sitio. Los detalles de modelo cierran con una
+sola sección de otros modelos.
+
+Proceso explica cómo se trabaja en seis pasos y una imagen editorial. Servicios
+explica qué se puede contratar, con alcances y entregables concretos.
+
+## Assets de despliegue
+
+Las imágenes públicas se sirven en WebP. Los PNG originales se conservan en
+`assets/source-images/` como material fuente y no forman parte del paquete
+estático que se publica.
 
 ## Roles de ilustraciones
 

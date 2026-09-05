@@ -6,7 +6,7 @@ import ActionLink from './ActionLink.astro';
 <footer class="site-footer">
   <section class="site-footer__cta">
     <div class="contained site-footer__cta-grid">
-      <img class="site-footer__cta-art" src="/imagenes/casa-dos-generaciones-transparente.png?v=home-restored-20260901" alt="Ilustración LINDE de una casa vinculada al paisaje." width="1122" height="1402" loading="lazy" />
+      <img class="site-footer__cta-art" src="/imagenes/casa-dos-generaciones-transparente.webp?v=home-restored-20260901" alt="Ilustración LINDE de una casa vinculada al paisaje." width="1122" height="1402" loading="lazy" />
       <div>
         <p class="eyebrow">¿Estás pensando un lugar?</p>
         <h2 class="display-l">Empecemos por lo que el terreno ya está diciendo.</h2>
@@ -38,7 +38,7 @@ import ActionLink from './ActionLink.astro';
         <ul><li><a href={`mailto:${site.email}`}>{site.email}</a></li>{site.social.map((item) => <li><a href={item.href} target="_blank" rel="noreferrer">{item.label}</a></li>)}</ul>
       </div>
     </div>
-    <div class="contained site-footer__bottom"><span>© {new Date().getFullYear()} LINDE</span><span>Patagonia, Argentina · Demo</span><nav aria-label="Redes sociales">{site.social.map((item) => <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>)}</nav></div>
+    <div class="contained site-footer__bottom"><span>© {new Date().getFullYear()} LINDE</span><span>Patagonia, Argentina · Demo</span></div>
   </div>
 </footer>
 
@@ -61,8 +61,6 @@ import ActionLink from './ActionLink.astro';
   .site-footer a { transition: color var(--motion-fast) var(--ease); }
   .site-footer a:hover { color: var(--leaf); }
   .site-footer__bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.2rem; border-top: 1px solid rgba(248,245,236,.18); color: rgba(248,245,236,.55); font-size: .66rem; letter-spacing: .035em; text-transform: uppercase; }
-  .site-footer__bottom nav { display: flex; gap: 1rem; }
-  .site-footer__bottom nav a { color: var(--white); }
   @media (max-width: 900px) { .site-footer__cta-grid { min-height: 25rem; grid-template-columns: minmax(7rem, .35fr) 1fr; gap: 1.4rem; } .site-footer__cta-grid .action-link { grid-column: 2; justify-self: start; } .site-footer__cta-art { width: 9rem; height: 14rem; } .site-footer__grid { grid-template-columns: repeat(2, 1fr); } .site-footer__brand { grid-column: span 2; } }
   @media (max-width: 560px) { .site-footer__cta { border-radius: 1.5rem 1.5rem 0 0; } .site-footer__cta-grid { min-height: 31rem; grid-template-columns: 1fr; gap: 1.2rem; padding-block: 3.5rem; } .site-footer__cta-art { width: 9rem; height: 10rem; justify-self: center; } .site-footer__cta-grid .action-link { grid-column: auto; justify-self: start; } .site-footer__grid { gap: 2.2rem 1rem; } .site-footer__bottom { align-items: start; display: grid; gap: .5rem; } }
 </style>

@@ -2,6 +2,13 @@
 
 Este documento evita que la implementación se desvíe hacia una web de arquitectura genérica.
 
+## Estado de la pasada 2026-09-05
+
+La simplificación de contenido y la conversión de assets ya están verificadas
+con `pnpm check` y `pnpm build`. Las preguntas de comparación visual, crops,
+breakpoints y tempo quedan abiertas para la revisión manual final en navegador;
+no se dan por aprobadas solo porque el build compile.
+
 ## Regla de comparación
 
 Para cada pantalla importante, comparar en paralelo LINDE y la página equivalente de HUTS cuando exista acceso web.
