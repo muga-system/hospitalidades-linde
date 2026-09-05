@@ -21,8 +21,9 @@
   `public/`.
 - Integración de `hero-motion.mp4` optimizado para web en el hero, con poster
   WebP, fallback y salida para `prefers-reduced-motion`.
-- Hero con un único CTA abierto de texto y flecha circular, con hover de
-  desplazamiento y cambio de color; se retiró el CTA redundante de proyectos.
+- Hero con un único CTA de pastilla verde y círculo independiente: barrido
+  claro secuencial y relevo de flecha horizontal por diagonal al hacer hover
+  o enfocar con teclado; adaptación sin movimiento y sin CTA de proyectos.
 
 ## [0.1.0] — 2026-09-01
 
