@@ -86,8 +86,8 @@ Las relaciones entre soluciones, modelos y proyectos se resuelven en
 - `public/images/library/threshold-linde.webp`: umbral fotográfico de apoyo y
   fallback.
 - `public/imagenes/*.webp`: ilustraciones LINDE. Las variantes opacas se reservan
-  para tarjetas de la home y navegación; las variantes `-transparente` se usan
-  en los detalles de solución.
+  para tarjetas de la home; las variantes `-transparente` se usan en la
+  navegación y en los detalles de solución.
 - `public/graphics/plans/`: planos conceptuales de la demo.
 
 Los PNG originales se conservan en `assets/source-images/` y el MP4 original en

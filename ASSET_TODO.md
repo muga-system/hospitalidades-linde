@@ -12,10 +12,10 @@ componentes.
 - `public/video/hero-motion.mp4`: video de fondo del hero principal optimizado
   para web (1280×854, 30 fps, aproximadamente 4 MB), con poster WebP y
   fallback visual.
-- `public/imagenes/{slug}.webp`: ilustraciones opacas para tarjetas de la home,
-  navegación y footer.
+- `public/imagenes/{slug}.webp`: ilustraciones opacas para tarjetas de la home
+  y footer.
 - `public/imagenes/{slug}-transparente.webp`: ilustraciones transparentes para
-  hero de detalle de cada opción de solución.
+  la navegación y el hero de detalle de cada opción de solución.
 - `public/graphics/plans/*.svg`: planos conceptuales propios de los seis
   modelos demo.
 

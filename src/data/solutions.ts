@@ -185,6 +185,14 @@ export const homeSolutions: HomeSolutionCard[] = [
   },
 ];
 
+const transparentIllustration = (solution: HomeSolutionCard) =>
+  generatedImage(`${solution.slug}-transparente`, solution.image.alt);
+
+export const navigationSolutions: HomeSolutionCard[] = homeSolutions.map((solution) => ({
+  ...solution,
+  image: transparentIllustration(solution),
+}));
+
 const parentSolutionByHomeSlug: Record<string, string> = {
   'vivienda-permanente': 'vivienda-territorio',
   'refugio-de-temporada': 'refugio',
@@ -211,6 +219,6 @@ export const homeSolutionDetails: Solution[] = homeSolutions.map((entry) => {
     title: entry.title,
     shortTitle: entry.title,
     summary: entry.summary,
-    image: generatedImage(`${entry.slug}-transparente`, entry.image.alt),
+    image: transparentIllustration(entry),
   };
 });

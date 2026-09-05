@@ -8,6 +8,7 @@ export {
 export {
   solutions,
   homeSolutions,
+  navigationSolutions,
   homeSolutionDetails,
 } from './solutions';
 export {

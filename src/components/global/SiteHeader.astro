@@ -1,21 +1,28 @@
 ---
-import { homeSolutions, models, projects, site } from '../../data/content';
+import { models, navigationSolutions, projects, site } from '../../data/content';
 import ActionLink from './ActionLink.astro';
 
 type Props = { mode?: 'default' | 'overlay' };
 const { mode = 'default' } = Astro.props;
-type NavItem = { label: string; href: string; description: string; image?: (typeof homeSolutions)[number]['image'] };
-type NavGroup = { key: string; label: string; items: NavItem[] };
+type NavItem = { label: string; href: string; description: string; image?: (typeof navigationSolutions)[number]['image'] };
+type NavGroup = { key: string; label: string; activePaths: string[]; items: NavItem[] };
 
 const navGroups: NavGroup[] = [
-  { key: 'soluciones', label: 'Soluciones', items: homeSolutions.map((item) => ({ label: item.title, href: item.href, description: item.summary, image: item.image })) },
-  { key: 'modelos', label: 'Modelos', items: [{ label: 'Ver todos los modelos', href: '/modelos/', description: 'Puntos de partida que se adaptan a cada sitio.' }, ...models.map((item) => ({ label: item.name, href: `/modelos/${item.slug}/`, description: `${item.areaM2} m² · ${item.tagline}` }))] },
-  { key: 'proyectos', label: 'Proyectos', items: [{ label: 'Ver todos los proyectos', href: '/proyectos/', description: 'Seis escenarios para leer arquitectura en territorio.' }, ...projects.map((item) => ({ label: item.name, href: `/proyectos/${item.slug}/`, description: `${item.city}, ${item.province} · ${item.areaM2} m²` }))] },
-  { key: 'trabajamos', label: 'Cómo trabajamos', items: [
+  { key: 'soluciones', label: 'Soluciones', activePaths: ['/soluciones'], items: navigationSolutions.map((item) => ({ label: item.title, href: item.href, description: item.summary, image: item.image })) },
+  { key: 'modelos', label: 'Modelos', activePaths: ['/modelos'], items: [{ label: 'Ver todos los modelos', href: '/modelos/', description: 'Puntos de partida que se adaptan a cada sitio.' }, ...models.map((item) => ({ label: item.name, href: `/modelos/${item.slug}/`, description: `${item.areaM2} m² · ${item.tagline}` }))] },
+  { key: 'proyectos', label: 'Proyectos', activePaths: ['/proyectos'], items: [{ label: 'Ver todos los proyectos', href: '/proyectos/', description: 'Seis escenarios para leer arquitectura en territorio.' }, ...projects.map((item) => ({ label: item.name, href: `/proyectos/${item.slug}/`, description: `${item.city}, ${item.province} · ${item.areaM2} m²` }))] },
+  { key: 'trabajamos', label: 'Cómo trabajamos', activePaths: ['/proceso', '/servicios'], items: [
     { label: 'Proceso', href: '/proceso/', description: 'Del terreno a la obra, con un recorrido claro.' },
     { label: 'Servicios', href: '/servicios/', description: 'Alcances que acompañan decisiones y ejecución.' },
   ] },
 ];
+
+const normalizedCurrentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const matchesCurrentPath = (path: string) => {
+  const normalizedPath = path.replace(/\/+$/, '') || '/';
+  return normalizedCurrentPath === normalizedPath || normalizedCurrentPath.startsWith(`${normalizedPath}/`);
+};
+const isCurrentGroup = (group: NavGroup) => group.activePaths.some(matchesCurrentPath);
 ---
 
 <header class:list={['site-header', { 'site-header--overlay': mode === 'overlay' }]} data-site-header>
@@ -27,7 +34,7 @@ const navGroups: NavGroup[] = [
 
     <nav class="desktop-nav" aria-label="Navegación principal">
       {navGroups.map((group) => (
-        <button class="desktop-nav__trigger" type="button" data-nav-trigger={group.key} aria-expanded="false" aria-controls={`nav-panel-${group.key}`}>
+        <button class:list={['desktop-nav__trigger', { 'is-current-section': isCurrentGroup(group) }]} type="button" data-nav-trigger={group.key} aria-expanded="false" aria-controls={`nav-panel-${group.key}`}>
           {group.label}<span aria-hidden="true">+</span>
         </button>
       ))}
@@ -46,7 +53,7 @@ const navGroups: NavGroup[] = [
           <p class="sr-only">{group.label}</p>
           <div class:list={['desktop-panel__grid', `desktop-panel__grid--${group.key}`]}>
             {group.items.map((item, index) => (
-              <a class="desktop-panel__item" href={item.href}>
+              <a class="desktop-panel__item" href={item.href} aria-current={matchesCurrentPath(item.href) ? 'page' : undefined}>
                 {item.image ? (
                   <span class="desktop-panel__thumb"><img src={item.image.src} alt="" width={item.image.width} height={item.image.height} loading="lazy" decoding="async" /></span>
                 ) : <span class="desktop-panel__index">{String(index + 1).padStart(2, '0')}</span>}
@@ -70,10 +77,10 @@ const navGroups: NavGroup[] = [
     </div>
     <nav aria-label="Navegación móvil">
       {navGroups.map((group) => (
-        <details class="mobile-group">
+        <details class:list={['mobile-group', { 'is-current-section': isCurrentGroup(group) }]}>
           <summary>{group.label}<span aria-hidden="true">+</span></summary>
           <div class="mobile-group__items">
-            {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+            {group.items.map((item) => <a href={item.href} aria-current={matchesCurrentPath(item.href) ? 'page' : undefined}>{item.label}</a>)}
           </div>
         </details>
       ))}
@@ -158,7 +165,9 @@ const navGroups: NavGroup[] = [
   .brand__descriptor { font-size: .52rem; font-weight: 700; letter-spacing: .04em; line-height: 1.08; text-transform: uppercase; }
   .desktop-nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(.75rem, 1.4vw, 1.45rem); font-size: .7rem; font-weight: 700; letter-spacing: .025em; }
   .desktop-nav a, .desktop-nav__trigger { white-space: nowrap; }
-  .desktop-nav__trigger { display: inline-flex; gap: .3rem; border: 0; padding: 0; color: inherit; background: transparent; font: inherit; }
+  .desktop-nav__trigger { display: inline-flex; gap: .3rem; border: 0; padding: 0; color: inherit; background: transparent; font: inherit; transition: color var(--motion-fast) var(--ease); }
+  .desktop-nav__trigger.is-current-section { color: var(--forest); }
+  .site-header--overlay:not(.is-scrolled):not(.is-menu-open) .desktop-nav__trigger.is-current-section { color: var(--leaf); }
   .desktop-nav__trigger span { transition: transform var(--motion-base) var(--ease); }
   .desktop-nav__trigger[aria-expanded="true"] span { transform: rotate(45deg); }
   .header-cta, .mobile-panel__cta { --cta-height: 2.75rem; --cta-padding: .72rem 1.3rem; --cta-font-size: .68rem; --cta-font-weight: 750; display: flex; align-items: center; white-space: nowrap; }
@@ -173,10 +182,14 @@ const navGroups: NavGroup[] = [
   .desktop-panel__grid--proyectos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .desktop-panel__item { min-height: 7.7rem; display: grid; grid-template-columns: 2rem 1fr 1.3rem; gap: .6rem; padding: 1.15rem; background: var(--surface); transition: background var(--motion-base) var(--ease), transform var(--motion-base) var(--ease); }
   .desktop-panel__item:hover { background: var(--leaf); }
-  .desktop-panel__grid--soluciones .desktop-panel__item { grid-template-columns: 7.2rem minmax(0, 1fr); gap: 1.15rem; min-height: 7.2rem; padding: 0; background: transparent; transition: opacity var(--motion-base) var(--ease); }
-  .desktop-panel__grid--soluciones .desktop-panel__item:hover { background: transparent; opacity: .68; transform: none; }
-  .desktop-panel__thumb { display: block; width: 7.2rem; height: 7.2rem; overflow: hidden; border: 1px solid rgba(25,32,23,.2); border-radius: 1.05rem; background: var(--surface); }
-  .desktop-panel__thumb img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+  .desktop-panel__grid--soluciones .desktop-panel__item { grid-template-columns: 7.2rem minmax(0, 1fr); gap: 1.15rem; min-height: 7.2rem; padding: 0; color: var(--ink); background: transparent; transition: color var(--motion-base) var(--ease); }
+  .desktop-panel__grid--soluciones .desktop-panel__item:is(:hover, :focus-visible) { color: var(--forest); background: transparent; transform: none; }
+  .desktop-panel__grid--soluciones .desktop-panel__item:is(:hover, :focus-visible) .desktop-panel__thumb { border-color: var(--forest); background: var(--leaf); }
+  .desktop-panel__grid--soluciones .desktop-panel__item:is(:hover, :focus-visible) small { color: var(--ink); }
+  .desktop-panel__grid--soluciones:has(.desktop-panel__item:is(:hover, :focus-visible)) .desktop-panel__item:not(:is(:hover, :focus-visible)) { color: color-mix(in srgb, var(--ink) 56%, var(--paper)); }
+  .desktop-panel__grid--soluciones:has(.desktop-panel__item:is(:hover, :focus-visible)) .desktop-panel__item:not(:is(:hover, :focus-visible)) .desktop-panel__thumb img { opacity: .55; }
+  .desktop-panel__thumb { display: block; width: 7.2rem; height: 7.2rem; overflow: hidden; border: 1px solid rgba(25,32,23,.2); border-radius: 1.05rem; background: var(--surface); transition: border-color var(--motion-base) var(--ease), background-color var(--motion-base) var(--ease); }
+  .desktop-panel__thumb img { width: 100%; height: 100%; object-fit: contain; object-position: center; transition: opacity var(--motion-base) var(--ease); }
   .desktop-panel__grid--soluciones .desktop-panel__item > span:last-child { align-self: center; }
   .desktop-panel__index { font-size: .64rem; font-weight: 700; color: var(--forest); }
   .desktop-panel__item strong { display: block; margin-bottom: .45rem; font-family: var(--display); font-size: 1.45rem; font-weight: 500; line-height: 1; letter-spacing: -.045em; }
@@ -198,6 +211,7 @@ const navGroups: NavGroup[] = [
     .mobile-group:last-of-type { border-bottom: 1px solid var(--line); }
     .mobile-group summary, .mobile-panel__direct { display: flex; align-items: center; justify-content: space-between; min-height: 4.1rem; font-family: var(--display); font-size: clamp(1.8rem, 8vw, 2.55rem); letter-spacing: -.05em; list-style: none; }
     .mobile-group summary::-webkit-details-marker { display: none; }
+    .mobile-group.is-current-section summary, .mobile-group__items a[aria-current='page'] { color: var(--forest); }
     .mobile-group summary span { font-family: var(--ui); font-size: 1.3rem; }
     .mobile-group[open] summary span { transform: rotate(45deg); }
     .mobile-group__items { display: grid; gap: .75rem; padding: 0 0 1.2rem; }

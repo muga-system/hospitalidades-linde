@@ -49,10 +49,10 @@ estático que se publica.
 
 ## Roles de ilustraciones
 
-Las ilustraciones opacas se mantienen en las tarjetas de la home y navegación:
-su fondo está integrado al tratamiento de esa superficie. Las variantes
-transparentes se reservan para los hero de detalle, donde deben leerse sobre
-`var(--paper)` sin duplicar la imagen en una tarjeta verde.
+Las ilustraciones opacas se mantienen en las tarjetas de la home: su fondo está
+integrado al tratamiento de esa superficie. Las variantes transparentes se usan
+en la navegación y en los hero de detalle, donde deben leerse sobre la superficie
+sin duplicar el fondo integrado de la ilustración.
 
 ## Reel de proyectos
 
