@@ -81,6 +81,7 @@ Las relaciones entre soluciones, modelos y proyectos se resuelven en
 `src/data/selectors.ts`.
 
 - `public/images/home/hero-linde.webp`: poster/hero principal.
+- `public/video/hero-motion.mp4`: video de fondo del hero con poster/fallback.
 - `public/images/library/threshold-linde.webp`: umbral fotográfico de apoyo y
   fallback.
 - `public/imagenes/*.webp`: ilustraciones LINDE. Las variantes opacas se reservan

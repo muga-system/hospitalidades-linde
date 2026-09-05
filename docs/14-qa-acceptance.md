@@ -105,7 +105,8 @@ un navegador real y no se marcan por inferencia.
 
 - [x] Imágenes dimensionadas.
 - [x] Lazy load aplicado donde corresponde.
-- [x] No hay video en la demo; el hero usa poster WebP.
+- [ ] Video del hero optimizado para producción (la integración actual es una
+  prueba de 10 MB con poster/fallback).
 - [x] JS inicial contenido a interacciones puntuales.
 - [ ] Sin errores de consola.
 - [x] Build de producción exitoso.

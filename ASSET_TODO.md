@@ -9,6 +9,8 @@ componentes.
 - `public/images/home/hero-linde.webp`: poster del hero principal.
 - `public/images/library/threshold-linde.webp`: fotografía de umbral usada como
   apoyo y fallback editorial.
+- `public/video/hero-motion.mp4`: video de fondo del hero principal, con poster
+  WebP y fallback visual.
 - `public/imagenes/{slug}.webp`: ilustraciones opacas para tarjetas de la home,
   navegación y footer.
 - `public/imagenes/{slug}-transparente.webp`: ilustraciones transparentes para
