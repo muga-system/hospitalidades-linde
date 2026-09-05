@@ -14,8 +14,8 @@ Fecha de revisión: 2026-09-05.
   públicas duplicadas.
 - Las 54 imágenes públicas se sirven como WebP; los PNG fuente se conservan
   en `assets/source-images/` fuera del paquete estático.
-- El hero incorpora `hero-motion.mp4` como prueba de video de fondo, con poster
-  WebP, fallback y respeto de `prefers-reduced-motion`.
+- El hero incorpora `hero-motion.mp4` optimizado para web (1280×854, 30 fps,
+  ~4 MB), con poster WebP, fallback y respeto de `prefers-reduced-motion`.
 
 ## Cobertura funcional
 
@@ -54,7 +54,5 @@ motion y una colección de proyectos usable sin mapa propietario.
 - Confirmar foco, Escape y reduced motion en navegación y wizard en un navegador
   real.
 - Probar el formulario demo publicado y completar dominio, SEO final y redes.
-- Comprimir o generar una variante de producción del video del hero si el
-  rendimiento de Hostinger lo requiere; la prueba actual pesa 10 MB.
 - La sustitución de las dos fotografías de apoyo reutilizadas por una biblioteca
   final sigue documentada en `ASSET_TODO.md`.

@@ -9,8 +9,9 @@ componentes.
 - `public/images/home/hero-linde.webp`: poster del hero principal.
 - `public/images/library/threshold-linde.webp`: fotografía de umbral usada como
   apoyo y fallback editorial.
-- `public/video/hero-motion.mp4`: video de fondo del hero principal, con poster
-  WebP y fallback visual.
+- `public/video/hero-motion.mp4`: video de fondo del hero principal optimizado
+  para web (1280×854, 30 fps, aproximadamente 4 MB), con poster WebP y
+  fallback visual.
 - `public/imagenes/{slug}.webp`: ilustraciones opacas para tarjetas de la home,
   navegación y footer.
 - `public/imagenes/{slug}-transparente.webp`: ilustraciones transparentes para
@@ -31,5 +32,6 @@ componentes.
 No descargar, hotlinkear ni incorporar assets del sitio de referencia. Todo
 recambio debe conservar `alt`, dimensiones y rol visual.
 
-Los PNG originales se conservan en `assets/source-images/` para edición o
-reexportación; no se publican en el paquete estático.
+Los PNG originales se conservan en `assets/source-images/` y el MP4 original en
+`assets/source-video/` para edición o reexportación; no se publican en el
+paquete estático.

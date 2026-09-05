@@ -19,8 +19,8 @@
   públicas duplicadas.
 - Imágenes públicas convertidas a WebP; los PNG fuente se conservan fuera de
   `public/`.
-- Integración de prueba de `hero-motion.mp4` en el hero con poster WebP,
-  fallback y salida para `prefers-reduced-motion`.
+- Integración de `hero-motion.mp4` optimizado para web en el hero, con poster
+  WebP, fallback y salida para `prefers-reduced-motion`.
 
 ## [0.1.0] — 2026-09-01
 

@@ -105,8 +105,8 @@ un navegador real y no se marcan por inferencia.
 
 - [x] Imágenes dimensionadas.
 - [x] Lazy load aplicado donde corresponde.
-- [ ] Video del hero optimizado para producción (la integración actual es una
-  prueba de 10 MB con poster/fallback).
+- [x] Video del hero optimizado para producción (1280×854, 30 fps, ~4 MB, con
+  poster/fallback).
 - [x] JS inicial contenido a interacciones puntuales.
 - [ ] Sin errores de consola.
 - [x] Build de producción exitoso.

@@ -81,7 +81,8 @@ Las relaciones entre soluciones, modelos y proyectos se resuelven en
 `src/data/selectors.ts`.
 
 - `public/images/home/hero-linde.webp`: poster/hero principal.
-- `public/video/hero-motion.mp4`: video de fondo del hero con poster/fallback.
+- `public/video/hero-motion.mp4`: video de fondo del hero optimizado para web,
+  con poster/fallback.
 - `public/images/library/threshold-linde.webp`: umbral fotográfico de apoyo y
   fallback.
 - `public/imagenes/*.webp`: ilustraciones LINDE. Las variantes opacas se reservan
@@ -89,8 +90,9 @@ Las relaciones entre soluciones, modelos y proyectos se resuelven en
   en los detalles de solución.
 - `public/graphics/plans/`: planos conceptuales de la demo.
 
-Los PNG originales se conservan en `assets/source-images/` para edición o
-reexportación y no se publican en el paquete estático.
+Los PNG originales se conservan en `assets/source-images/` y el MP4 original en
+`assets/source-video/` para edición o reexportación; no se publican en el
+paquete estático.
 
 Mantener siempre `alt`, dimensiones, ratio y punto focal al reemplazar una
 imagen. El inventario de recambios está en `ASSET_TODO.md`.
