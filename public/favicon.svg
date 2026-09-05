@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>LINDE</title>
+  <rect width="64" height="64" rx="16" fill="#4d673b"/>
+  <path d="M18 14v31h28" fill="none" stroke="#f8f5ec" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+  <path d="M18 49h28" fill="none" stroke="#dceaa0" stroke-linecap="round" stroke-width="4"/>
+</svg>
