@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Recorte único del CTA de navegación para evitar el halo claro en el borde
+  durante el barrido del hover.
 - CTA de navegación sin flecha, con el mismo barrido del hero compartido
   desde `ActionLink`, también en el menú móvil y al enfocar con teclado.
 - Refactor de datos por dominio (`media`, `site`, `models`, `projects`,

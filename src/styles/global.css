@@ -206,8 +206,13 @@ ul, ol { margin: 0; padding: 0; }
   width: 100%;
   gap: 0;
 }
-.action-link--nav .action-link__label { width: 100%; }
-.action-link--nav .action-link__label-wipe { transition-delay: 0ms; }
+/* Clip the composed layers once so the light base cannot fringe the hover fill. */
+.action-link--nav .action-link__label {
+  width: 100%;
+  border-radius: 0;
+  clip-path: inset(0 round 999px);
+}
+.action-link--nav .action-link__label-wipe { border-radius: 0; transition-delay: 0ms; }
 
 .media { position: relative; overflow: hidden; background: var(--moss); }
 .media--rounded { border-radius: var(--radius-media); }
