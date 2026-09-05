@@ -10,7 +10,7 @@ sin reutilizar su código, identidad ni assets.
 - Astro 7 + TypeScript estricto.
 - Salida estática preparada para hosting simple.
 - Contenido local en JSON, validado y transformado por módulos de dominio.
-- 32 páginas estáticas: home, soluciones, modelos, proyectos, proceso,
+- 29 páginas estáticas: home, soluciones, modelos, proyectos, proceso,
   servicios, formulario y confirmación.
 - La demo no incluye las secciones Estudio ni Guías; se quitaron para mantener
   un recorrido más claro y concentrado.
@@ -57,7 +57,7 @@ página no dependa de cómo se organizan internamente los datos.
 
 Las ocho opciones de la home tienen rutas de detalle propias, en el mismo orden
 en que aparecen en la navegación. Las cuatro soluciones amplias se mantienen
-como rutas de contenido relacionadas.
+como categorías internas relacionadas y no generan rutas públicas duplicadas.
 
 ## Desarrollo local
 
@@ -80,13 +80,16 @@ Editar primero los JSON de `content/` y respetar los tipos de `src/data/types.ts
 Las relaciones entre soluciones, modelos y proyectos se resuelven en
 `src/data/selectors.ts`.
 
-- `public/images/home/hero-linde.png`: poster/hero principal.
-- `public/images/library/threshold-linde.png`: umbral fotográfico de apoyo y
+- `public/images/home/hero-linde.webp`: poster/hero principal.
+- `public/images/library/threshold-linde.webp`: umbral fotográfico de apoyo y
   fallback.
-- `public/imagenes/*`: ilustraciones LINDE. Las variantes opacas se reservan
+- `public/imagenes/*.webp`: ilustraciones LINDE. Las variantes opacas se reservan
   para tarjetas de la home y navegación; las variantes `-transparente` se usan
   en los detalles de solución.
 - `public/graphics/plans/`: planos conceptuales de la demo.
+
+Los PNG originales se conservan en `assets/source-images/` para edición o
+reexportación y no se publican en el paquete estático.
 
 Mantener siempre `alt`, dimensiones, ratio y punto focal al reemplazar una
 imagen. El inventario de recambios está en `ASSET_TODO.md`.
