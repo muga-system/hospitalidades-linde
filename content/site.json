@@ -5,6 +5,5 @@
   "heroSummary": "Viviendas, refugios y pequeñas hospitalidades pensadas desde el lugar hasta la obra.",
   "email": "hola@linde.demo",
   "primaryCta": { "label": "Contanos tu proyecto", "href": "/empezar/" },
-  "secondaryCta": { "label": "Ver proyectos", "href": "/proyectos/" },
   "demo": true
 }

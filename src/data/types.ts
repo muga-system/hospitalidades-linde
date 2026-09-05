@@ -14,7 +14,6 @@ export type SiteConfig = {
   heroSummary: string;
   email: string;
   primaryCta: { label: string; href: string };
-  secondaryCta: { label: string; href: string };
   demo: true;
   social: { label: string; href: string }[];
 };

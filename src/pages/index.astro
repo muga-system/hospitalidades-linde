@@ -22,8 +22,7 @@ const featureProject = projects[1];
         <h1 id="hero-title" class="display-xl">{site.heroTitle}</h1>
         <p class="home-hero__summary">{site.heroSummary}</p>
         <div class="home-hero__actions">
-          <ActionLink href={site.primaryCta.href} label={site.primaryCta.label} variant="solid" />
-          <a class="hero-secondary" href={site.secondaryCta.href}>Ver proyectos <span aria-hidden="true">↗</span></a>
+          <ActionLink href={site.primaryCta.href} label={site.primaryCta.label} />
         </div>
       </div>
       <p class="home-hero__location meta">Patagonia, Argentina <span>·</span> Demo comercial</p>
@@ -104,8 +103,6 @@ const featureProject = projects[1];
   .home-hero__content h1 { max-width: 12ch; margin-inline: auto; }
   .home-hero__summary { max-width: 38rem; margin: 1.9rem auto 0; font-size: clamp(1rem, 1.45vw, 1.3rem); line-height: 1.45; }
   .home-hero__actions { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; }
-  .hero-secondary { display: inline-flex; align-items: center; gap: .7rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; }
-  .hero-secondary span { display: grid; place-items: center; width: 2.35rem; height: 2.35rem; border: 1px solid var(--white); border-radius: 50%; }
   .home-hero__location { position: absolute; left: var(--gutter); bottom: 1.7rem; }
   .home-hero__location span { padding-inline: .4rem; color: var(--leaf); }
   .home-solutions { overflow: visible; }
