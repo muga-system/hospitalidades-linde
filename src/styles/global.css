@@ -86,16 +86,12 @@ ul, ol { margin: 0; padding: 0; }
 .section-head--center { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .section-head__side { justify-self: end; }
 
-.action-link { --cta-border-color: rgba(25, 32, 23, .18); display: inline-flex; width: fit-content; align-items: center; gap: .75rem; font-size: .79rem; font-weight: 700; line-height: 1; letter-spacing: .015em; text-transform: uppercase; }
-@supports (color: color-mix(in srgb, currentColor 20%, transparent)) {
-  .action-link { --cta-border-color: color-mix(in srgb, currentColor 22%, transparent); }
-}
-.action-link__mark { display: inline-grid; place-items: center; width: 2.35rem; height: 2.35rem; border: 1px solid var(--cta-border-color); border-radius: 50%; transition: transform var(--motion-base) var(--ease), background-color var(--motion-base) var(--ease), color var(--motion-base) var(--ease); }
+.action-link { display: inline-flex; width: fit-content; align-items: center; gap: .75rem; font-size: .79rem; font-weight: 700; line-height: 1; letter-spacing: .015em; text-transform: uppercase; }
+.action-link__mark { display: inline-grid; place-items: center; width: 2.35rem; height: 2.35rem; border: 1px solid currentColor; border-radius: 50%; transition: transform var(--motion-base) var(--ease), background-color var(--motion-base) var(--ease), color var(--motion-base) var(--ease); }
 .action-link:hover .action-link__mark { transform: translateX(.26rem); background: var(--leaf); color: var(--ink); }
 .action-link--solid, .action-link--light { gap: 0; border-radius: 999px; color: var(--ink); text-transform: none; }
 .action-link--solid .action-link__label, .action-link--light .action-link__label { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .78rem 1.25rem .78rem 1.35rem; border-radius: 999px 0 0 999px; }
 .action-link--solid .action-link__mark, .action-link--light .action-link__mark { width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%; }
-.action-link--solid .action-link__label, .action-link--light .action-link__label, .action-link--solid .action-link__mark, .action-link--light .action-link__mark, .action-link--wipe .action-link__label, .action-link--hero .action-link__mark { box-shadow: inset 0 0 0 1px var(--cta-border-color); }
 .action-link--solid .action-link__label, .action-link--solid .action-link__mark { color: var(--ink); background: var(--leaf); }
 .action-link--light .action-link__label, .action-link--light .action-link__mark { color: var(--ink); background: var(--white); }
 .action-link--solid:hover .action-link__mark, .action-link--light:hover .action-link__mark { transform: none; background: var(--forest); color: var(--white); }
