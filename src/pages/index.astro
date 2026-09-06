@@ -97,7 +97,7 @@ const featureProjectModel = models.find((model) => model.slug === featureProject
         <h2 id="destacado-title" class="display-l">{featureProject.name}</h2>
         <p>{featureProject.intro}</p>
         <div class="tag-row"><span class="tag tag--light">{featureProject.areaM2} m²</span><span class="tag tag--light">{featureProjectModel?.name ?? 'Modelo asociado'}</span><span class="tag tag--light">{featureProject.status} · demo</span></div>
-        <ActionLink href={`/proyectos/${featureProject.slug}/`} label="Ver proyecto" variant="light" />
+        <ActionLink href={`/proyectos/${featureProject.slug}/`} label="Ver proyecto" variant="hero" />
       </div>
     </section>
 
@@ -162,7 +162,7 @@ const featureProjectModel = models.find((model) => model.slug === featureProject
   .feature-project__content .eyebrow { margin-bottom: .8rem; }
   .feature-project__content .display-l { max-width: 8ch; }
   .feature-project__content > p:not(.eyebrow) { max-width: 37rem; margin: 1.3rem 0; font-size: 1.02rem; line-height: 1.55; }
-  .feature-project__content .action-link { margin-top: 1.65rem; }
+  .feature-project__content .action-link--hero { --cta-background: var(--white); --cta-color: var(--ink); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); margin-top: clamp(2rem, 3vw, 2.75rem); }
   @media (min-width: 901px) { .horizontal-scroll-scene.is-enhanced .horizontal-scroll-scene__sticky { position: sticky; top: var(--header-height); height: calc(100svh - var(--header-height)); overflow: hidden; } .horizontal-scroll-scene.is-enhanced .horizontal-scroll-scene__viewport { overflow: hidden; scroll-snap-type: none; } .horizontal-scroll-scene.is-enhanced [data-horizontal-rail] { will-change: transform; } }
   @media (max-width: 900px) { .home-solutions__rail { grid-auto-columns: minmax(17rem, 62vw); } .process-strip__head { grid-template-columns: 1fr; gap: 1.2rem; } .process-strip__steps { grid-template-columns: repeat(2, 1fr); } .process-strip__steps li:nth-child(2) { border-right: 0; } .models-home__rail { grid-auto-columns: minmax(22rem, 72vw); } .feature-project { min-height: 48rem; } }
   @media (max-width: 560px) { .home-hero { min-height: 92svh; } .home-hero__image, .home-hero__video { object-position: 66% center; } .home-hero__content { width: min(100% - 2.5rem, 35rem); } .home-hero__summary { font-size: .94rem; } .home-hero__actions { flex-direction: column; } .home-hero__location { left: 1.25rem; bottom: 1.25rem; } .home-solutions__rail { grid-auto-columns: minmax(17rem, 82vw); padding-left: 1.25rem; } .process-strip__steps { grid-template-columns: 1fr; } .process-strip__steps li, .process-strip__steps li + li { min-height: 12.5rem; padding: 1rem .2rem; border-right: 0; border-bottom: 1px solid rgba(248,245,236,.28); } .process-strip__steps li:last-child { border-bottom: 0; } .process-strip__step-body p { max-width: 32ch; margin-top: .6rem; } .models-home__rail { grid-auto-columns: 82vw; padding-left: 1.25rem; } .feature-project { min-height: 42rem; } .feature-project__content { width: calc(100% - 2.5rem); } }
