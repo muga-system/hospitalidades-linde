@@ -1,4 +1,6 @@
 ---
+import CtaArrow from './CtaArrow.astro';
+
 type Props = {
   href: string;
   label: string;
@@ -17,15 +19,6 @@ const hasWipe = variant === 'hero' || variant === 'nav';
     {hasWipe && <span class="action-link__label-wipe" aria-hidden="true">{label}</span>}
   </span>
   {variant !== 'nav' && <span class="action-link__mark" aria-hidden="true">
-    {variant === 'hero' ? (
-      <span class="action-link__arrows">
-        <svg class="action-link__arrow action-link__arrow--out" viewBox="0 0 26 26" fill="none" focusable="false">
-          <path d="M4 13h18M15 4c0 4.5 3 9 7 9M15 22c0-4.5 3-9 7-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <svg class="action-link__arrow action-link__arrow--in" viewBox="0 0 26 26" fill="none" focusable="false">
-          <path d="M4 13h18M15 4c0 4.5 3 9 7 9M15 22c0-4.5 3-9 7-9" transform="rotate(-45 13 13)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </span>
-    ) : '→'}
+    {variant === 'hero' ? <CtaArrow /> : '→'}
   </span>}
 </a>

@@ -1,4 +1,5 @@
 ---
+import CtaArrow from '../global/CtaArrow.astro';
 import type { HomeSolutionCard } from '../../data/types';
 
 type Props = { solution: HomeSolutionCard; index: number };
@@ -14,7 +15,9 @@ const { solution, index } = Astro.props;
     </figure>
     <div class="solution-entry__text">
       <p>{solution.summary}</p>
-      <span class="solution-entry__action">Explorar <b aria-hidden="true">↗</b></span>
+      <span class="solution-entry__action action-link action-link--hero action-link--wipe" aria-hidden="true">
+        <span class="action-link__mark"><CtaArrow /></span>
+      </span>
     </div>
   </a>
 </article>
@@ -28,8 +31,7 @@ const { solution, index } = Astro.props;
   .solution-entry__title { position: absolute; z-index: 1; top: 3.6rem; left: 1.8rem; right: 1.8rem; max-width: 12ch; color: var(--ink); font-family: var(--display); font-size: clamp(2rem, 3.2vw, 3.4rem); font-weight: 400; line-height: .96; letter-spacing: -.06em; }
   .solution-entry__text { position: relative; z-index: 1; width: 100%; max-width: 30rem; padding: 0 1.8rem 1.7rem; }
   .solution-entry__text p { margin-top: .9rem; font-size: .82rem; line-height: 1.5; }
-  .solution-entry__action { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.25rem; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-  .solution-entry__action b { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border: 1px solid currentColor; border-radius: 50%; font-weight: 400; transition: transform var(--motion-base) var(--ease); }
+  .solution-entry__action { --cta-height: 3rem; --cta-color: var(--white); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--earth); margin-top: 1.25rem; }
   .solution-entry a:hover .solution-entry__media .media__image { transform: none; }
-  .solution-entry a:hover .solution-entry__action b { transform: translateX(.2rem); }
+  .solution-entry a:is(:hover, :focus-visible) .solution-entry__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
 </style>
