@@ -33,5 +33,6 @@ const { solution, index } = Astro.props;
   .solution-entry__text p { margin-top: .9rem; font-size: .82rem; line-height: 1.5; }
   .solution-entry__action { --cta-height: 3rem; --cta-color: var(--white); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--earth); margin-top: 1.25rem; }
   .solution-entry a:hover .solution-entry__media .media__image { transform: none; }
-  .solution-entry a:is(:hover, :focus-visible) .solution-entry__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
+  .solution-entry:hover .solution-entry__action,
+  .solution-entry:focus-within .solution-entry__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
 </style>
