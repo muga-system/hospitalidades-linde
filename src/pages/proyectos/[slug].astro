@@ -91,14 +91,14 @@ const siteConditions = project.technicalNotes.filter((note) => note.label !== 'E
   .project-detail__site-facts dt { color: var(--forest); font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .project-detail__site-facts dd { margin: 0; font-family: var(--display); font-size: 1.45rem; line-height: 1.05; letter-spacing: -.045em; }
   .project-detail__pager { padding-block: clamp(2.5rem, 5vw, 5rem); }
-  .project-detail__pager-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; }
-  .project-detail__pager-link { display: grid; gap: .55rem; max-width: 18rem; color: rgba(25,32,23,.58); transition: color var(--motion-fast) var(--ease); }
+  .project-detail__pager-grid { display: flex; justify-content: space-between; gap: 2rem; align-items: end; }
+  .project-detail__pager-link { display: grid; flex: 0 1 18rem; gap: .55rem; max-width: 18rem; color: rgba(25,32,23,.58); transition: color var(--motion-fast) var(--ease); }
   .project-detail__pager-link:hover, .project-detail__pager-link:focus-visible { color: var(--ink); }
   .project-detail__pager-link .eyebrow { color: rgba(77,103,59,.62); transition: color var(--motion-fast) var(--ease); }
   .project-detail__pager-link:hover .eyebrow, .project-detail__pager-link:focus-visible .eyebrow { color: var(--ink); }
   .project-detail__pager-link strong { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 3.15rem); font-weight: 400; line-height: .95; letter-spacing: -.055em; }
   .project-detail__pager-link > span:last-child { font-size: .68rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
-  .project-detail__pager-link--next { justify-self: end; text-align: right; }
-  @media (max-width: 900px) { .project-detail__intro-grid, .project-detail__story-row, .project-detail__site-grid { grid-template-columns: 1fr; } .project-detail__story-row--reverse > :first-child { order: 2; } .project-detail__pager-link--next { justify-self: end; } }
+  .project-detail__pager-link--next { margin-left: auto; text-align: right; }
+  @media (max-width: 900px) { .project-detail__intro-grid, .project-detail__story-row, .project-detail__site-grid { grid-template-columns: 1fr; } .project-detail__story-row--reverse > :first-child { order: 2; } .project-detail__pager-grid { display: grid; grid-template-columns: 1fr 1fr; } .project-detail__pager-link--next { margin-left: 0; justify-self: end; } }
   @media (max-width: 560px) { .project-detail__site-facts div { grid-template-columns: 1fr; gap: .4rem; } }
 </style>
