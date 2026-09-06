@@ -134,16 +134,34 @@ ul, ol { margin: 0; padding: 0; }
   flex: 0 0 var(--cta-size);
   width: var(--cta-size);
   height: var(--cta-size);
-  overflow: hidden;
-  isolation: isolate;
   border: 0;
-  background: var(--cta-wipe-background, var(--leaf));
   color: var(--cta-color, var(--white));
   transform: none;
   transition: none;
 }
 .action-link--hero { --cta-wipe: polygon(-2px -2px, calc(100% + 2px) -2px, calc(100% + 2px) calc(100% + 2px), -2px calc(100% + 2px)); }
-.action-link--hero .action-link__label { background: var(--cta-wipe-background, var(--leaf)); color: var(--cta-wipe-color, var(--ink)); }
+/* Composite rectangular fills first, then round the whole group once.
+   A rounded background under a separately clipped fill leaves a color fringe. */
+.action-link--hero .action-link__label,
+.action-link--hero .action-link__mark,
+.action-link--hero:hover .action-link__mark {
+  overflow: visible;
+  isolation: isolate;
+  border-radius: 0;
+  background: transparent;
+  clip-path: inset(0 round 999px);
+}
+.action-link--hero .action-link__label { color: var(--cta-wipe-color, var(--ink)); }
+.action-link--hero .action-link__label::before,
+.action-link--hero .action-link__mark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cta-wipe-background, var(--leaf));
+  pointer-events: none;
+}
+.action-link--hero .action-link__label::before { z-index: -1; }
+.action-link--hero .action-link__mark::after { z-index: -2; }
 .action-link--wipe .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
   position: absolute;
@@ -159,7 +177,6 @@ ul, ol { margin: 0; padding: 0; }
 .action-link--hero .action-link__mark::before { background: var(--cta-mark-background, var(--forest)); }
 .action-link--hero .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
-  inset: -1px;
   border-radius: 0;
 }
 .action-link--wipe .action-link__label-wipe {
