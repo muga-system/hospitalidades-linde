@@ -11,7 +11,7 @@ import ActionLink from './ActionLink.astro';
         <p class="eyebrow">¿Estás pensando un lugar?</p>
         <h2 class="display-l">Empecemos por lo que el terreno ya está diciendo.</h2>
       </div>
-      <ActionLink href="/empezar/" label="Contanos tu proyecto" variant="light" />
+      <ActionLink href="/empezar/" label="Contanos tu proyecto" variant="hero" />
     </div>
   </section>
   <div class="site-footer__body">
@@ -50,7 +50,7 @@ import ActionLink from './ActionLink.astro';
   .site-footer__cta-grid .display-l { max-width: 12ch; }
   .site-footer__cta-grid .eyebrow { margin-bottom: .75rem; }
   .site-footer__cta-grid .action-link { justify-self: end; }
-  .site-footer__cta .action-link--solid .action-link__label, .site-footer__cta .action-link--solid .action-link__mark { background: var(--white); }
+  .site-footer__cta-grid .action-link--hero { --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); --cta-focus-color: var(--ink); }
   .site-footer__body { padding-top: clamp(4rem, 8vw, 8rem); }
   .site-footer__grid { display: grid; grid-template-columns: 1.9fr repeat(4, 1fr); gap: 2rem; padding-bottom: clamp(4rem, 7vw, 7rem); }
   .site-footer__name { margin-bottom: .7rem; font-family: var(--display); font-size: clamp(5rem, 11vw, 10rem); letter-spacing: -.09em; line-height: .72; }
