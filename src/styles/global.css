@@ -84,6 +84,13 @@ ul, ol { margin: 0; padding: 0; }
 .section--surface { background: var(--surface); }
 .section--ink { color: var(--white); background: var(--ink); }
 .rule { height: 1px; border: 0; margin: 0; background: var(--line); }
+/* The final content block meets the footer with the same rounded language as the cards. */
+main#contenido > .page > :last-child,
+main#contenido > section:last-child {
+  border-bottom-right-radius: var(--radius-media);
+  border-bottom-left-radius: var(--radius-media);
+  overflow: clip;
+}
 .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, .7fr); align-items: end; gap: 2rem; margin-bottom: clamp(2.8rem, 6vw, 6rem); }
 .section-head--center { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .section-head__side { justify-self: end; }
