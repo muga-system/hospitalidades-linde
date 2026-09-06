@@ -261,7 +261,7 @@ a:hover .media__image, .card-link:hover .media__image { transform: scale(1.025);
 .tag-row { display: flex; gap: .45rem; flex-wrap: wrap; }
 .tag { border: 1px solid currentColor; border-radius: 999px; padding: .43rem .65rem; font-size: .69rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
 .tag--soft { border-color: rgba(25,32,23,.15); background: rgba(220,234,160,.55); }
-.tag--light { border-color: rgba(248,245,236,.42); color: var(--white); background: rgba(18,26,16,.36); box-shadow: inset 0 1px 0 rgba(248,245,236,.16); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.tag--light { border-color: rgba(248,245,236,.5); color: var(--white); background: rgba(18,26,16,.36); box-shadow: inset 0 1px 0 rgba(248,245,236,.16); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 
 .project-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1.25rem, 2.5vw, 3rem); }
 .project-grid > :nth-child(1) { grid-column: span 7; }
