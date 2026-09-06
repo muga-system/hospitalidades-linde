@@ -147,7 +147,7 @@ main#contenido > section:last-child {
   width: var(--cta-size);
   height: var(--cta-size);
   border: 0;
-  color: var(--cta-color, var(--white));
+  color: var(--cta-base-color, var(--cta-color, var(--white)));
   transform: none;
 }
 .action-link--hero {
@@ -170,7 +170,7 @@ main#contenido > section:last-child {
   transition: background-position 380ms cubic-bezier(.4, 0, .2, 1);
 }
 .action-link--hero .action-link__label {
-  color: var(--cta-wipe-color, var(--ink));
+  color: var(--cta-base-color, var(--cta-color, var(--white)));
   transition-delay: var(--cta-label-delay);
 }
 .action-link--hero .action-link__mark,
@@ -194,7 +194,7 @@ main#contenido > section:last-child {
 .action-link--hero .action-link__label-wipe {
   border-radius: 0;
   background: none;
-  color: var(--cta-color, var(--white));
+  color: var(--cta-wipe-color, var(--ink));
   clip-path: none;
   /* The text mask follows the exact same geometry and timing as the fill. */
   mask-image: linear-gradient(var(--cta-fill-angle), transparent 50%, #000 50%);
@@ -285,7 +285,7 @@ a:hover .media__image, .card-link:hover .media__image { transform: scale(1.025);
 .page-hero__image img { width: 100%; height: 100%; object-fit: cover; }
 .page-hero__veil { position: absolute; z-index: -1; inset: 0; background: rgba(8, 16, 8, .4); }
 .page-hero__content { width: min(100% - (var(--gutter) * 2), 1730px); margin: 0 auto; padding-block: calc(var(--header-height) + 2rem) clamp(3.25rem, 7vw, 6.7rem); }
-.page-hero__footer { --cta-background: var(--white); --cta-color: var(--ink); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-top: 2rem; }
+.page-hero__footer { --cta-background: var(--forest); --cta-color: var(--white); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-top: 2rem; }
 .page-hero__lead { max-width: 33rem; font-size: 1.1rem; line-height: 1.5; }
 
 .article-head { padding-top: calc(var(--header-height) + clamp(4rem, 8vw, 9rem)); padding-bottom: clamp(3rem, 7vw, 7rem); }
