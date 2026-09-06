@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ActionLink from '../../components/global/ActionLink.astro';
+import CtaArrow from '../../components/global/CtaArrow.astro';
 import { homeSolutionDetails } from '../../data/content';
 ---
 
@@ -10,7 +11,7 @@ import { homeSolutionDetails } from '../../data/content';
       <div class="contained article-head__grid"><div><p class="eyebrow">Soluciones LINDE</p><h1 class="page-title">No todos los proyectos empiezan de la misma pregunta.</h1></div><p class="article-head__intro body-copy">En lugar de entrar por una disciplina, podés entrar por la situación que tenés delante. Después vamos encontrando alcance, modelos, lugares y decisiones.</p></div>
     </header>
     <section class="solutions-index__list">
-      {homeSolutionDetails.map((solution, index) => <article class="solutions-index__entry"><a href={`/soluciones/${solution.slug}/`}><div class="solutions-index__number">{String(index + 1).padStart(2, '0')}</div><figure class="media media--rounded"><img class="media__image" src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} loading={index > 0 ? 'lazy' : 'eager'} style={`object-position:${solution.image.position};`} /></figure><div class="solutions-index__text"><p class="eyebrow">Situación {String(index + 1).padStart(2, '0')}</p><h2>{solution.title}</h2><p>{solution.summary}</p><span>Explorar solución <b aria-hidden="true">↗</b></span></div></a></article>)}
+      {homeSolutionDetails.map((solution, index) => <article class="solutions-index__entry"><a href={`/soluciones/${solution.slug}/`}><div class="solutions-index__number">{String(index + 1).padStart(2, '0')}</div><figure class="media media--rounded"><img class="media__image" src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} loading={index > 0 ? 'lazy' : 'eager'} style={`object-position:${solution.image.position};`} /></figure><div class="solutions-index__text"><p class="eyebrow">Situación {String(index + 1).padStart(2, '0')}</p><h2>{solution.title}</h2><p>{solution.summary}</p><span class="solutions-index__action action-link action-link--hero action-link--wipe" aria-hidden="true"><span class="action-link__mark"><CtaArrow /></span></span></div></a></article>)}
     </section>
     <section class="solutions-index__end section--forest"><div class="contained"><p class="eyebrow">No sabés dónde encaja tu proyecto</p><h2 class="display-l">No hace falta tener todas las respuestas para empezar.</h2><ActionLink href="/empezar/" label="Contanos tu situación" variant="light" /></div></section>
   </div>
@@ -26,10 +27,10 @@ import { homeSolutionDetails } from '../../data/content';
   .solutions-index__text .eyebrow { color: var(--forest); margin-bottom: .9rem; }
   .solutions-index__text h2 { max-width: 10ch; font-family: var(--display); font-size: clamp(2.7rem, 5.4vw, 5.7rem); font-weight: 400; line-height: .9; letter-spacing: -.065em; }
   .solutions-index__text > p:not(.eyebrow) { max-width: 35rem; margin-top: 1.1rem; font-size: .88rem; line-height: 1.55; }
-  .solutions-index__text span { display: inline-flex; gap: .6rem; align-items: center; margin-top: 1.4rem; font-size: .67rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-  .solutions-index__text b { display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border: 1px solid currentColor; border-radius: 50%; font-weight: 400; transition: transform var(--motion-base) var(--ease); }
+  .solutions-index__action { --cta-height: 3rem; --cta-color: var(--white); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--earth); margin-top: 1.4rem; }
   .solutions-index__entry a:hover figure .media__image { transform: none; }
-  .solutions-index__entry a:hover b { transform: translateX(.25rem); }
+  .solutions-index__entry:hover .solutions-index__action,
+  .solutions-index__entry:focus-within .solutions-index__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
   .solutions-index__end { color: var(--white); background: var(--forest); padding-block: clamp(5rem, 10vw, 11rem); }
   .solutions-index__end .eyebrow { color: var(--moss); margin-bottom: 1rem; }
   .solutions-index__end .display-l { max-width: 13ch; }
