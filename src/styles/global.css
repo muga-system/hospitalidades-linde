@@ -49,6 +49,8 @@ html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
 ::view-transition-old(root) { animation: linde-page-out 260ms var(--ease) both; }
 ::view-transition-new(root) { animation: linde-page-in 420ms var(--ease) both; }
 body { margin: 0; overflow-x: hidden; background: var(--paper); font-family: var(--ui); font-size: 16px; font-weight: 420; line-height: 1.45; }
+main#contenido { position: relative; isolation: isolate; }
+main#contenido::after { content: ''; position: absolute; z-index: -1; right: 0; bottom: 0; left: 0; height: var(--radius-media); pointer-events: none; background: var(--ink); }
 img, svg, video { display: block; max-width: 100%; }
 img { height: auto; }
 button, input, textarea, select { font: inherit; }
