@@ -130,6 +130,7 @@ ul, ol { margin: 0; padding: 0; }
 }
 .action-link--hero .action-link__mark,
 .action-link--hero:hover .action-link__mark {
+  --cta-surface-base: var(--cta-mark-background, var(--forest));
   position: relative;
   flex: 0 0 var(--cta-size);
   width: var(--cta-size);
@@ -137,33 +138,33 @@ ul, ol { margin: 0; padding: 0; }
   border: 0;
   color: var(--cta-color, var(--white));
   transform: none;
-  transition: none;
 }
-.action-link--hero { --cta-wipe: polygon(-2px -2px, calc(100% + 2px) -2px, calc(100% + 2px) calc(100% + 2px), -2px calc(100% + 2px)); }
-/* Composite rectangular fills first, then round the whole group once.
-   A rounded background under a separately clipped fill leaves a color fringe. */
+.action-link--hero {
+  --cta-fill-position: 100% 50%;
+  --cta-fill-angle: 70deg;
+}
+/* One opaque image paints both flat colors. Moving its hard stop preserves
+   the wipe without stacking differently colored fills at the rounded edge. */
 .action-link--hero .action-link__label,
 .action-link--hero .action-link__mark,
 .action-link--hero:hover .action-link__mark {
-  overflow: visible;
-  isolation: isolate;
-  border-radius: 0;
-  background: transparent;
-  clip-path: inset(0 round 999px);
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: transparent;
+  background-image: linear-gradient(var(--cta-fill-angle), var(--cta-wipe-background, var(--leaf)) 50%, var(--cta-surface-base, var(--cta-background, var(--forest))) 50%);
+  background-size: 300% 100%;
+  background-position: var(--cta-fill-position);
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  transition: background-position 380ms cubic-bezier(.4, 0, .2, 1);
 }
-.action-link--hero .action-link__label { color: var(--cta-wipe-color, var(--ink)); }
-.action-link--hero .action-link__label::before,
-.action-link--hero .action-link__mark::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--cta-wipe-background, var(--leaf));
-  pointer-events: none;
+.action-link--hero .action-link__label {
+  color: var(--cta-wipe-color, var(--ink));
+  transition-delay: var(--cta-label-delay);
 }
-.action-link--hero .action-link__label::before { z-index: -1; }
-.action-link--hero .action-link__mark::after { z-index: -2; }
-.action-link--wipe .action-link__label-wipe,
-.action-link--hero .action-link__mark::before {
+.action-link--hero .action-link__mark,
+.action-link--hero:hover .action-link__mark { transition-delay: var(--cta-mark-delay); }
+.action-link--wipe .action-link__label-wipe {
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -173,22 +174,24 @@ ul, ol { margin: 0; padding: 0; }
   transition: clip-path 380ms cubic-bezier(.4, 0, .2, 1);
   pointer-events: none;
 }
-.action-link--hero .action-link__label-wipe { background: var(--cta-background, var(--forest)); color: var(--cta-color, var(--white)); }
-.action-link--hero .action-link__mark::before { background: var(--cta-mark-background, var(--forest)); }
-.action-link--hero .action-link__label-wipe,
-.action-link--hero .action-link__mark::before {
-  border-radius: 0;
-}
 .action-link--wipe .action-link__label-wipe {
   display: grid;
   place-items: center;
   padding: inherit;
   transition-delay: var(--cta-label-delay);
 }
-.action-link--hero .action-link__mark::before {
-  content: '';
-  z-index: -1;
-  transition-delay: var(--cta-mark-delay);
+.action-link--hero .action-link__label-wipe {
+  border-radius: 0;
+  background: none;
+  color: var(--cta-color, var(--white));
+  clip-path: none;
+  /* The text mask follows the exact same geometry and timing as the fill. */
+  mask-image: linear-gradient(var(--cta-fill-angle), transparent 50%, #000 50%);
+  mask-size: 300% 100%;
+  mask-position: var(--cta-fill-position);
+  mask-origin: border-box;
+  mask-repeat: no-repeat;
+  transition: mask-position 380ms cubic-bezier(.4, 0, .2, 1) var(--cta-label-delay);
 }
 .action-link__arrows { position: relative; width: 1.75rem; height: 1.75rem; }
 .action-link__arrow { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -222,9 +225,9 @@ ul, ol { margin: 0; padding: 0; }
     --cta-arrow-in-delay: 240ms;
   }
 }
-.action-link--hero:focus-visible { --cta-wipe: polygon(calc(100% + 2px) -2px, calc(100% + 2px) -2px, calc(120% + 2px) calc(100% + 2px), calc(120% + 2px) calc(100% + 2px)); }
+.action-link--hero:focus-visible { --cta-fill-position: 0% 50%; }
 @media (hover: hover) and (pointer: fine) {
-  .action-link--hero:hover { --cta-wipe: polygon(calc(100% + 2px) -2px, calc(100% + 2px) -2px, calc(120% + 2px) calc(100% + 2px), calc(120% + 2px) calc(100% + 2px)); }
+  .action-link--hero:hover { --cta-fill-position: 0% 50%; }
 }
 
 .action-link--nav {
@@ -304,7 +307,8 @@ a:hover .media__image, .card-link:hover .media__image { transform: scale(1.025);
   ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
   .reveal { opacity: 1; transform: none; }
   .action-link--wipe .action-link__label-wipe,
-  .action-link--hero .action-link__mark::before,
+  .action-link--hero .action-link__label,
+  .action-link--hero .action-link__mark,
   .action-link--hero .action-link__arrow { transition: none !important; }
   .action-link--hero .action-link__arrow--out { transform: none; }
   .action-link--hero .action-link__arrow--in { display: none; }
