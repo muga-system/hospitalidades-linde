@@ -197,7 +197,7 @@ main#contenido > section:last-child {
   color: var(--cta-wipe-color, var(--ink));
   clip-path: none;
   /* The text mask follows the exact same geometry and timing as the fill. */
-  mask-image: linear-gradient(var(--cta-fill-angle), transparent 50%, #000 50%);
+  mask-image: linear-gradient(var(--cta-fill-angle), #000 50%, transparent 50%);
   mask-size: 300% 100%;
   mask-position: var(--cta-fill-position);
   mask-origin: border-box;
