@@ -16,7 +16,7 @@ const { linkedModels } = Astro.props;
   aria-labelledby="compact-models-title"
 >
   <div class="contained solution-detail__compact-end-grid">
-    <div>
+    <div class="solution-detail__compact-models">
       <p class="eyebrow">Modelos relacionados</p>
       <h2 id="compact-models-title" class="section-title">
         Puntos de partida, sin cerrar la conversación.
@@ -53,33 +53,37 @@ const { linkedModels } = Astro.props;
 
 <style>
   .solution-detail__compact-end {
-    padding-block: clamp(4.5rem, 8vw, 7rem);
+    padding-block: clamp(5rem, 9vw, 8rem);
     background: var(--surface);
   }
   .solution-detail__compact-end-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.72fr);
-    gap: clamp(3rem, 8vw, 9rem);
-    align-items: start;
+    grid-template-columns: minmax(0, 1.06fr) minmax(25rem, 0.8fr);
+    gap: clamp(3rem, 7vw, 8rem);
+    align-items: center;
   }
-  .solution-detail__compact-end-grid > div > .eyebrow {
+  .solution-detail__compact-models > .eyebrow {
     margin-bottom: 1rem;
     color: var(--forest);
   }
-  .solution-detail__compact-end-grid .section-title {
+  .solution-detail__compact-models .section-title {
     max-width: 12ch;
+    font-size: clamp(2.9rem, 4.35vw, 4.65rem);
+    line-height: 0.91;
     color: var(--forest);
   }
   .solution-detail__compact-model-links {
-    margin-top: 2rem;
+    max-width: 58rem;
+    margin-top: clamp(3rem, 4.5vw, 4.5rem);
     border-top: 1px solid var(--line);
   }
   .solution-detail__compact-model-links a {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
-    padding-block: 1.1rem;
+    min-height: 6.6rem;
+    padding-block: 1.15rem;
     border-bottom: 1px solid var(--line);
     color: var(--ink);
     transition: color var(--motion-fast) var(--ease);
@@ -99,15 +103,16 @@ const { linkedModels } = Astro.props;
   .solution-detail__compact-model-meta {
     display: flex;
     align-items: center;
-    gap: .8rem;
-    align-self: center;
+    justify-self: end;
+    gap: 1.1rem;
     font-size: 0.72rem;
     font-weight: 650;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
   .solution-detail__compact-model-action {
-    --cta-height: 2.6rem;
+    --cta-height: 3rem;
     --cta-color: var(--white);
     --cta-wipe-background: var(--leaf);
     --cta-wipe-color: var(--ink);
@@ -130,6 +135,10 @@ const { linkedModels } = Astro.props;
     --cta-wipe-background: var(--forest);
     --cta-wipe-color: var(--white);
     --cta-focus-color: var(--forest);
+    min-height: clamp(30rem, 32vw, 34rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: clamp(2rem, 4vw, 3.5rem);
     border-radius: var(--radius-media);
     background: var(--leaf);
@@ -139,6 +148,7 @@ const { linkedModels } = Astro.props;
     color: var(--forest);
   }
   .solution-detail__compact-cta h2 {
+    max-width: 11ch;
     color: var(--forest);
     font-family: var(--display);
     font-size: clamp(2.3rem, 3.7vw, 4rem);
@@ -148,18 +158,18 @@ const { linkedModels } = Astro.props;
   }
   .solution-detail__compact-cta > p:not(.eyebrow) {
     max-width: 34ch;
-    margin-top: 1.3rem;
+    margin-top: 1.55rem;
     line-height: 1.5;
   }
-  .solution-detail__compact-cta .action-link {
-    margin-top: 2rem;
-  }
+  .solution-detail__compact-cta .action-link { margin-top: 2.3rem; }
 
   @media (max-width: 900px) {
     .solution-detail__compact-end-grid {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 3.5rem;
+      align-items: start;
     }
+    .solution-detail__compact-cta { min-height: 0; }
   }
 
   @media (max-width: 560px) {
@@ -168,6 +178,11 @@ const { linkedModels } = Astro.props;
       flex-direction: column;
       gap: 0.55rem;
     }
-    .solution-detail__compact-model-meta { width: 100%; justify-content: space-between; }
+    .solution-detail__compact-model-links a { display: flex; }
+    .solution-detail__compact-model-meta {
+      width: 100%;
+      justify-content: space-between;
+      white-space: normal;
+    }
   }
 </style>
