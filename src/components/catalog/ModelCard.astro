@@ -10,7 +10,7 @@ const cover = model.images[0];
 <article class:list={['model-card', `model-card--${size}`]}>
   <a class="model-card__link" href={`/modelos/${model.slug}/`}>
     <figure class="model-card__media media media--rounded">
-      <img class="media__image" src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} loading={size === 'featured' || index <= 1 ? 'eager' : 'lazy'} style={`object-position:${cover.position ?? 'center'};`} />
+      <img class="media__image" src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} loading={index <= 1 ? 'eager' : 'lazy'} style={`object-position:${cover.position ?? 'center'};`} />
       <span class="model-card__number">{String(index + 1).padStart(2, '0')}</span>
       {model.isFeatured && <span class="model-card__badge">Elegido para empezar</span>}
     </figure>

@@ -4,7 +4,7 @@ import ActionLink from '../components/global/ActionLink.astro';
 import ModelCard from '../components/catalog/ModelCard.astro';
 import SolutionEntry from '../components/home/SolutionEntry.astro';
 import SectionIntro from '../components/global/SectionIntro.astro';
-import { featuredModels, homeSolutions, projects, site } from '../data/content';
+import { homeSolutions, models, projects, site } from '../data/content';
 import { homeProcessSteps } from '../data/process';
 
 const featureProject = projects[1];
@@ -78,9 +78,9 @@ const featureProject = projects[1];
       </div>
       <div class="horizontal-scroll-scene" data-horizontal-scene>
         <div class="horizontal-scroll-scene__sticky">
-          <div class="horizontal-scroll-scene__viewport" data-horizontal-viewport role="region" aria-label="Modelos destacados de LINDE">
+          <div class="horizontal-scroll-scene__viewport" data-horizontal-viewport role="region" aria-label="Modelos de LINDE">
             <div class="models-home__rail" data-horizontal-rail>
-              {featuredModels.map((model, index) => <div class="models-home__item"><ModelCard model={model} index={index} size="featured" /></div>)}
+              {models.map((model, index) => <div class="models-home__item"><ModelCard model={model} index={index} size="featured" /></div>)}
             </div>
           </div>
         </div>
