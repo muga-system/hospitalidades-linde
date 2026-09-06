@@ -1,5 +1,6 @@
 ---
 import ActionLink from "../global/ActionLink.astro";
+import CtaArrow from "../global/CtaArrow.astro";
 import { formatBedrooms } from "../../data/selectors";
 import type { Model } from "../../data/types";
 
@@ -24,8 +25,11 @@ const { linkedModels } = Astro.props;
         {linkedModels.map((model) => (
           <a href={`/modelos/${model.slug}/`}>
             <strong>{model.name}</strong>
-            <span>
-              {model.areaM2} m² · {formatBedrooms(model.bedrooms)} ↗
+            <span class="solution-detail__compact-model-meta">
+              <span>{model.areaM2} m² · {formatBedrooms(model.bedrooms)}</span>
+              <span class="solution-detail__compact-model-action action-link action-link--hero action-link--wipe" aria-hidden="true">
+                <span class="action-link__mark"><CtaArrow /></span>
+              </span>
             </span>
           </a>
         ))}
@@ -72,28 +76,53 @@ const { linkedModels } = Astro.props;
   }
   .solution-detail__compact-model-links a {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 2rem;
     padding-block: 1.1rem;
     border-bottom: 1px solid var(--line);
-    transition: opacity var(--motion-fast) var(--ease);
+    color: var(--ink);
+    transition: color var(--motion-fast) var(--ease);
   }
-  .solution-detail__compact-model-links a:hover {
-    opacity: 0.62;
-  }
+  .solution-detail__compact-model-links a:hover,
+  .solution-detail__compact-model-links a:focus-visible { color: var(--ink); }
   .solution-detail__compact-model-links strong {
     color: var(--forest);
     font-family: var(--display);
     font-size: clamp(1.5rem, 2.2vw, 2.2rem);
     font-weight: 400;
     line-height: 1;
+    transition: color var(--motion-fast) var(--ease);
   }
-  .solution-detail__compact-model-links span {
+  .solution-detail__compact-model-links a:hover strong,
+  .solution-detail__compact-model-links a:focus-visible strong { color: var(--ink); }
+  .solution-detail__compact-model-meta {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
     align-self: center;
     font-size: 0.72rem;
     font-weight: 650;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+  }
+  .solution-detail__compact-model-action {
+    --cta-height: 2.6rem;
+    --cta-color: var(--white);
+    --cta-wipe-background: var(--leaf);
+    --cta-wipe-color: var(--ink);
+    --cta-focus-color: var(--earth);
+    flex: 0 0 auto;
+  }
+  .solution-detail__compact-model-links a:hover .solution-detail__compact-model-action,
+  .solution-detail__compact-model-links a:focus-visible .solution-detail__compact-model-action {
+    --cta-fill-position: 0% 50%;
+    --cta-label-delay: 0ms;
+    --cta-mark-delay: 150ms;
+    --cta-arrow-out: translateX(145%);
+    --cta-arrow-in: translate(0, 0);
+    --cta-arrow-out-delay: 150ms;
+    --cta-arrow-in-delay: 240ms;
   }
   .solution-detail__compact-cta {
     --cta-background: var(--white);
@@ -139,5 +168,6 @@ const { linkedModels } = Astro.props;
       flex-direction: column;
       gap: 0.55rem;
     }
+    .solution-detail__compact-model-meta { width: 100%; justify-content: space-between; }
   }
 </style>
