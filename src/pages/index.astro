@@ -156,7 +156,7 @@ const featureProjectModel = models.find((model) => model.slug === featureProject
   .process-strip__step-foot i { color: var(--leaf); font-size: 1.35rem; font-style: normal; transition: transform var(--motion-base) var(--ease); }
   .process-strip__steps li:is(:hover, :focus-within) .process-strip__step-foot i { transform: translate(.18rem, .18rem); }
   .models-home { overflow: visible; }
-  .models-home__rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(24rem, 39vw); gap: clamp(1rem, 2.3vw, 2.7rem); width: max-content; padding: 0 max(var(--gutter), calc((100vw - 1730px) / 2)); }
+  .models-home__rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(24rem, 39vw); gap: clamp(1rem, 2.3vw, 2.7rem); width: max-content; padding: 0 max(var(--gutter), calc((100vw - 1730px) / 2)); padding-bottom: clamp(2rem, 3.5vw, 3.25rem); }
   .feature-project { position: relative; min-height: 57rem; display: flex; align-items: end; isolation: isolate; color: var(--white); }
   .feature-project__media { position: absolute; z-index: -2; inset: 0; }
   .feature-project__media img { width: 100%; height: 100%; object-fit: cover; object-position: 28% center; }

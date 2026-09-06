@@ -46,6 +46,7 @@ const cover = model.images[0];
   .model-card__action { --cta-height: 3rem; --cta-color: var(--white); --cta-wipe-background: var(--leaf); --cta-wipe-color: var(--ink); --cta-focus-color: var(--earth); position: absolute; right: 0; bottom: 0; }
   .model-card__arrow { position: absolute; right: 0; bottom: 0; display: grid; place-items: center; width: 2.1rem; height: 2.1rem; border: 1px solid var(--ink); border-radius: 50%; transition: transform var(--motion-base) var(--ease), background var(--motion-base) var(--ease); }
   .model-card__link:hover .model-card__arrow { transform: translate(.2rem, -.2rem); background: var(--leaf); }
-  .model-card__link:is(:hover, :focus-visible) .model-card__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
+  .model-card:hover .model-card__action,
+  .model-card:focus-within .model-card__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
   @media (max-width: 560px) { .model-card__media { aspect-ratio: 1.25 / 1; } }
 </style>
