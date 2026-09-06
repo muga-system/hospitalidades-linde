@@ -142,7 +142,7 @@ ul, ol { margin: 0; padding: 0; }
   transform: none;
   transition: none;
 }
-.action-link--hero { --cta-wipe: ellipse(150% 220% at 50% 50%); }
+.action-link--hero { --cta-wipe: polygon(-2px -2px, calc(100% + 2px) -2px, calc(100% + 2px) calc(100% + 2px), -2px calc(100% + 2px)); }
 .action-link--hero .action-link__label { background: var(--cta-wipe-background, var(--leaf)); color: var(--cta-wipe-color, var(--ink)); }
 .action-link--wipe .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
@@ -205,9 +205,9 @@ ul, ol { margin: 0; padding: 0; }
     --cta-arrow-in-delay: 240ms;
   }
 }
-.action-link--hero:focus-visible { --cta-wipe: ellipse(150% 220% at 260% 260%); }
+.action-link--hero:focus-visible { --cta-wipe: polygon(calc(100% + 2px) -2px, calc(100% + 2px) -2px, calc(120% + 2px) calc(100% + 2px), calc(120% + 2px) calc(100% + 2px)); }
 @media (hover: hover) and (pointer: fine) {
-  .action-link--hero:hover { --cta-wipe: ellipse(150% 220% at 260% 260%); }
+  .action-link--hero:hover { --cta-wipe: polygon(calc(100% + 2px) -2px, calc(100% + 2px) -2px, calc(120% + 2px) calc(100% + 2px), calc(120% + 2px) calc(100% + 2px)); }
 }
 
 .action-link--nav {
