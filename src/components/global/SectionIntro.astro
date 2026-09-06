@@ -1,8 +1,8 @@
 ---
 import ActionLink from './ActionLink.astro';
 
-type Props = { eyebrow?: string; title: string; copy?: string; href?: string; action?: string; centered?: boolean };
-const { eyebrow, title, copy, href, action, centered = false } = Astro.props;
+type Props = { eyebrow?: string; title: string; copy?: string; href?: string; action?: string; centered?: boolean; actionVariant?: 'default' | 'solid' | 'light' | 'hero' | 'nav' };
+const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'default' } = Astro.props;
 ---
 
 <div class:list={['section-head', { 'section-head--center': centered }]} data-reveal>
@@ -12,6 +12,6 @@ const { eyebrow, title, copy, href, action, centered = false } = Astro.props;
   </div>
   <div class="section-head__side">
     {copy && <p class="body-copy">{copy}</p>}
-    {href && action && <div style="margin-top:1.4rem"><ActionLink href={href} label={action} /></div>}
+    {href && action && <div style="margin-top:1.4rem"><ActionLink href={href} label={action} variant={actionVariant} /></div>}
   </div>
 </div>
