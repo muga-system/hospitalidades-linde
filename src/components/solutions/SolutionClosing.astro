@@ -69,7 +69,8 @@ const { linkedModels } = Astro.props;
   .solution-detail__compact-model-links {
     max-width: 58rem;
     margin-top: clamp(2.5rem, 3.5vw, 3.5rem);
-    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.35rem;
   }
   .solution-detail__compact-model-links a {
     display: grid;
@@ -78,7 +79,6 @@ const { linkedModels } = Astro.props;
     gap: 2rem;
     min-height: 5.25rem;
     padding-block: 0.85rem;
-    border-bottom: 1px solid var(--line);
     color: var(--ink);
     transition: color var(--motion-fast) var(--ease);
   }
