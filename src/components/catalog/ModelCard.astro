@@ -12,7 +12,7 @@ const cover = model.images[0];
   <a class="model-card__link" href={`/modelos/${model.slug}/`}>
     <figure class="model-card__media media media--rounded">
       <img class="media__image" src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} loading={index <= 1 ? 'eager' : 'lazy'} style={`object-position:${cover.position ?? 'center'};`} />
-      <span class="model-card__number">{String(index + 1).padStart(2, '0')}</span>
+      <span class="model-card__number" style={size === 'featured' ? 'color: var(--ink);' : undefined}>{String(index + 1).padStart(2, '0')}</span>
       {model.isFeatured && size !== 'featured' && <span class="model-card__badge">Elegido para empezar</span>}
     </figure>
     <div class="model-card__body">
@@ -36,7 +36,6 @@ const cover = model.images[0];
   .model-card--featured .model-card__media { aspect-ratio: 1.38 / 1; }
   .model-card__number, .model-card__badge { position: absolute; z-index: 1; top: 1rem; color: var(--white); font-size: .67rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
   .model-card__number { left: 1rem; }
-  .model-card--featured .model-card__number { color: var(--ink); }
   .model-card__badge { right: 1rem; max-width: 11rem; color: var(--ink); background: var(--leaf); border-radius: 999px; padding: .48rem .58rem; letter-spacing: .025em; }
   .model-card__body { position: relative; display: grid; grid-template-columns: 1fr auto; gap: .7rem; padding: 1rem .1rem 0; }
   .model-card__body .eyebrow { color: var(--forest); margin-bottom: .35rem; }
