@@ -142,6 +142,10 @@ ul, ol { margin: 0; padding: 0; }
   transform: none;
   transition: none;
 }
+.action-link--hero .action-link__label,
+.action-link--hero .action-link__mark {
+  clip-path: inset(0 round 999px);
+}
 .action-link--wipe .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
   position: absolute;
@@ -152,6 +156,10 @@ ul, ol { margin: 0; padding: 0; }
   clip-path: var(--cta-wipe);
   transition: clip-path 380ms cubic-bezier(.4, 0, .2, 1);
   pointer-events: none;
+}
+.action-link--hero .action-link__label-wipe,
+.action-link--hero .action-link__mark::before {
+  border-radius: 0;
 }
 .action-link--wipe .action-link__label-wipe {
   display: grid;
