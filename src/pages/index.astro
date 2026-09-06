@@ -49,7 +49,7 @@ const featureProject = projects[1];
         <div class="process-strip__head">
           <p class="eyebrow">02 · Cómo trabajamos</p>
           <h2 id="proceso-title" class="section-title">Una secuencia clara para decisiones que no se resuelven de una vez.</h2>
-          <ActionLink href="/proceso/" label="Conocer el proceso" variant="light" />
+          <ActionLink href="/proceso/" label="Conocer el proceso" variant="nav" />
         </div>
         <ol class="process-strip__steps">
           {homeProcessSteps.map((step) => (
@@ -133,6 +133,7 @@ const featureProject = projects[1];
   .process-strip { padding-block: clamp(4rem, 7vw, 7.5rem); }
   .process-strip__head { display: grid; grid-template-columns: .3fr 1fr auto; gap: 2rem; align-items: end; }
   .process-strip__head .eyebrow { color: var(--moss); }
+  .process-strip__head .action-link--nav { --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); width: fit-content; }
   .process-strip__steps { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(3rem, 6vw, 6rem); list-style: none; border-top: 1px solid rgba(248,245,236,.35); border-bottom: 1px solid rgba(248,245,236,.28); }
   .process-strip__steps li { position: relative; min-height: 18rem; display: grid; grid-template-rows: auto 1fr auto; gap: 1.5rem; padding: 1rem clamp(1rem, 1.5vw, 1.5rem) 1.1rem; border-right: 1px solid rgba(248,245,236,.28); transition: background-color var(--motion-base) var(--ease); }
   .process-strip__steps li:last-child { border-right: 0; }
