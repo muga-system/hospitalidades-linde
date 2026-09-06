@@ -14,10 +14,10 @@ const steps = [
 
 <BaseLayout title="Proceso — LINDE" description="Una secuencia clara desde una primera idea hasta la coordinación de obra.">
   <div class="page process-page">
-    <header class="article-head process-page__head"><div class="contained article-head__grid"><div><p class="eyebrow">Cómo trabajamos</p><h1 class="page-title">Un proceso para bajar incertidumbre, no para agregar pasos.</h1></div><div class="article-head__intro"><p class="body-copy">Diseñar en territorio implica tomar decisiones en un orden que permita aprender del lugar. El proceso es una herramienta para no decidir todo demasiado pronto.</p><div style="margin-top:1.4rem"><ActionLink href="/empezar/" label="Contanos tu proyecto" /></div></div></div></header>
+    <header class="article-head process-page__head"><div class="contained article-head__grid"><div><p class="eyebrow">Cómo trabajamos</p><h1 class="page-title">Un proceso para bajar incertidumbre, no para agregar pasos.</h1></div><div class="article-head__intro"><p class="body-copy">Diseñar en territorio implica tomar decisiones en un orden que permita aprender del lugar. El proceso es una herramienta para no decidir todo demasiado pronto.</p><div style="margin-top:1.4rem"><ActionLink href="/empezar/" label="Contanos tu proyecto" variant="hero" /></div></div></div></header>
     <section class="process-page__opening section--leaf"><div class="contained process-page__opening-grid"><div><p class="display-l">La forma llega después de mirar bien.</p><p class="body-copy">No hay dos terrenos iguales ni dos maneras iguales de habitar. Por eso las etapas no son un paquete fijo: son un marco para sostener las conversaciones correctas en el momento correcto.</p></div><figure class="process-page__opening-media media media--rounded"><img class="media__image" src="/images/library/threshold-linde.webp" alt="Galería protegida de LINDE en relación con el paisaje." width="1536" height="1024" fetchpriority="high" /></figure></div></section>
     <section class="process-page__steps section"><div class="contained"><ol>{steps.map(([number, title, copy]) => <li><div class="process-page__step-number">{number}</div><h2>{title}</h2><p>{copy}</p></li>)}</ol></div></section>
-    <section class="process-page__close section--dark"><div class="contained process-page__close-grid"><div><p class="eyebrow">Una conversación bien empezada</p><h2 class="display-l">No necesitás llegar con un proyecto resuelto.</h2></div><div><p class="body-large">Podés empezar con un terreno, una necesidad o una intuición. El primer paso es saber qué información falta para elegir una dirección con criterio.</p><ActionLink href="/empezar/" label="Empezar el recorrido" variant="light" /></div></div></section>
+    <section class="process-page__close section--dark"><div class="contained process-page__close-grid"><div><p class="eyebrow">Una conversación bien empezada</p><h2 class="display-l">No necesitás llegar con un proyecto resuelto.</h2></div><div><p class="body-large">Podés empezar con un terreno, una necesidad o una intuición. El primer paso es saber qué información falta para elegir una dirección con criterio.</p><ActionLink href="/empezar/" label="Empezar el recorrido" variant="hero" /></div></div></section>
   </div>
 </BaseLayout>
 
@@ -33,7 +33,7 @@ const steps = [
   .process-page__step-number { align-self: start; color: var(--forest); font-size: .7rem; font-weight: 750; }
   .process-page__steps h2 { font-family: var(--display); font-size: clamp(2.2rem, 4.2vw, 4.5rem); font-weight: 400; line-height: .91; letter-spacing: -.06em; }
   .process-page__steps p { font-size: .8rem; line-height: 1.55; }
-  .process-page__close { padding-block: clamp(5rem, 10vw, 11rem); }
+  .process-page__close { --cta-background: var(--leaf); --cta-color: var(--ink); --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); padding-block: clamp(5rem, 10vw, 11rem); }
   .process-page__close-grid { display: grid; grid-template-columns: 1fr .7fr; gap: clamp(2rem, 8vw, 9rem); align-items: end; }
   .process-page__close .eyebrow { color: var(--moss); margin-bottom: 1rem; }
   .process-page__close .action-link { margin-top: 2rem; }

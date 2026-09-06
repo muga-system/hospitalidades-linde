@@ -47,14 +47,16 @@ import { projects } from '../../data/content';
   .project-explorer__bar .eyebrow { margin-bottom: .9rem; color: var(--forest); }
   .project-explorer__intro { display: grid; gap: 1.5rem; justify-items: start; }
   .project-explorer__intro .body-copy { max-width: 33ch; }
-  .filter-button { border: 1px solid var(--ink); padding: .67rem .88rem; border-radius: 999px; color: var(--ink); background: transparent; font-size: .67rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; }
+  .filter-button { border: 1px solid var(--line); padding: .67rem .88rem; border-radius: 999px; color: var(--ink); background: transparent; font-size: .67rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; transition: border-color var(--motion-fast) var(--ease), background-color var(--motion-fast) var(--ease); }
+  .filter-button:hover, .filter-button:focus-visible { border-color: var(--forest); background: rgba(220,234,160,.42); }
   .filter-button span { padding-left: .35rem; }
   .filter-button[aria-expanded="true"] span { display: inline-block; transform: rotate(45deg); }
   .project-explorer__filter { padding-bottom: clamp(1.8rem, 3vw, 3rem); }
   .project-explorer__filter[hidden] { display: none; }
   .project-explorer__filter .meta { margin-bottom: .75rem; color: var(--forest); }
   .project-explorer__filter-row { display: flex; flex-wrap: wrap; gap: .55rem; }
-  .project-explorer__filter-row button { border: 1px solid var(--line); padding: .57rem .7rem; border-radius: 999px; color: var(--ink); background: transparent; font-size: .67rem; font-weight: 700; }
+  .project-explorer__filter-row button { border: 1px solid var(--line); padding: .57rem .7rem; border-radius: 999px; color: var(--ink); background: transparent; font-size: .67rem; font-weight: 700; transition: border-color var(--motion-fast) var(--ease), background-color var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease); }
+  .project-explorer__filter-row button:not(.is-active):hover, .project-explorer__filter-row button:not(.is-active):focus-visible { border-color: var(--forest); background: rgba(220,234,160,.42); }
   .project-explorer__filter-row button.is-active { border-color: var(--forest); color: var(--white); background: var(--forest); }
   .project-explorer__filter-row span { margin-left: .25rem; opacity: .7; }
   .project-explorer__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.5rem, 5vw, 6rem) clamp(1rem, 2.4vw, 2.6rem); padding-bottom: clamp(5rem, 10vw, 11rem); }

@@ -41,7 +41,7 @@ const { linkedModels } = Astro.props;
       <ActionLink
         href="/empezar/"
         label="Contanos tu proyecto"
-        variant="solid"
+        variant="hero"
       />
     </aside>
   </div>
@@ -96,6 +96,11 @@ const { linkedModels } = Astro.props;
     text-transform: uppercase;
   }
   .solution-detail__compact-cta {
+    --cta-background: var(--white);
+    --cta-color: var(--ink);
+    --cta-wipe-background: var(--forest);
+    --cta-wipe-color: var(--white);
+    --cta-focus-color: var(--forest);
     padding: clamp(2rem, 4vw, 3.5rem);
     border-radius: var(--radius-media);
     background: var(--leaf);

@@ -6,12 +6,12 @@ import ActionLink from '../components/global/ActionLink.astro';
 <BaseLayout title="Gracias — LINDE" description="Confirmación de la consulta demo LINDE." noHeader noFooter>
   <main class="thanks-page">
     <a class="thanks-page__brand" href="/">LINDE</a>
-    <div class="thanks-page__content"><p class="eyebrow">Consulta demo completada</p><h1 class="display-xl">Gracias por contar un poco de tu proyecto.</h1><p class="body-large">En esta demo no se envió ni se guardó información. En una versión real, este sería el paso de confirmación y próxima conversación.</p><div><ActionLink href="/" label="Volver al inicio" variant="solid" /><ActionLink href="/proyectos/" label="Explorar proyectos" /></div></div>
+    <div class="thanks-page__content"><p class="eyebrow">Consulta demo completada</p><h1 class="display-xl">Gracias por contar un poco de tu proyecto.</h1><p class="body-large">En esta demo no se envió ni se guardó información. En una versión real, este sería el paso de confirmación y próxima conversación.</p><div><ActionLink href="/" label="Volver al inicio" variant="hero" /><ActionLink href="/proyectos/" label="Explorar proyectos" variant="hero" /></div></div>
   </main>
 </BaseLayout>
 
 <style>
-  .thanks-page { position: relative; min-height: 100svh; display: flex; flex-direction: column; padding: clamp(1.3rem, 3vw, 3.2rem) var(--gutter); overflow: hidden; color: var(--white); background: var(--forest); }
+  .thanks-page { --cta-background: var(--leaf); --cta-color: var(--ink); --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); position: relative; min-height: 100svh; display: flex; flex-direction: column; padding: clamp(1.3rem, 3vw, 3.2rem) var(--gutter); overflow: hidden; color: var(--white); background: var(--forest); }
   .thanks-page__brand { font-family: var(--display); font-size: 2rem; line-height: 1; letter-spacing: -.08em; }
   .thanks-page__content { max-width: 72rem; margin: auto 0; }
   .thanks-page__content .eyebrow { color: var(--leaf); margin-bottom: 1rem; }

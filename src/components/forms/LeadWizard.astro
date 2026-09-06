@@ -139,7 +139,8 @@ import { solutions } from '../../data/content';
   .lead-wizard__privacy { margin-top: 1.4rem; font-size: .68rem; line-height: 1.45; color: rgba(25,32,23,.68); }
   .lead-wizard__footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 3.4rem; }
   .lead-wizard__back { border: 0; padding: .55rem 0; color: var(--ink); background: transparent; font-size: .72rem; font-weight: 750; text-transform: uppercase; }
-  .lead-wizard__next, .lead-wizard__submit { border: 0; border-radius: 999px; padding: .9rem 1.1rem; color: var(--ink); background: var(--leaf); font-size: .7rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+  .lead-wizard__next, .lead-wizard__submit { border: 1px solid rgba(25,32,23,.18); border-radius: 999px; padding: .9rem 1.1rem; color: var(--ink); background: var(--leaf); font-size: .7rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; transition: border-color var(--motion-fast) var(--ease), background-color var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease); }
+  .lead-wizard__next:hover, .lead-wizard__next:focus-visible, .lead-wizard__submit:hover, .lead-wizard__submit:focus-visible { border-color: var(--forest); color: var(--white); background: var(--forest); }
   .lead-wizard__next span, .lead-wizard__submit span { padding-left: .6rem; }
   @media (max-width: 560px) { .lead-wizard__header { min-height: 4.6rem; padding-inline: 1.25rem; } .lead-wizard__form { width: calc(100% - 2.5rem); padding-top: 3.3rem; } .lead-wizard__cards, .lead-wizard__cards--compact { grid-template-columns: 1fr; } .lead-wizard__cards label span { min-height: 7rem; } .lead-wizard__footer { padding-top: 2.4rem; } }
 </style>

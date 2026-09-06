@@ -22,7 +22,7 @@ const hero = model.images[0];
       <div class="page-hero__content">
         <p class="eyebrow">Modelo base · {model.areaM2} m²</p>
         <h1 class="display-xl">{model.name}</h1>
-        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{formatBedrooms(model.bedrooms)}</span><span class="tag tag--light">{model.bathrooms} baño{model.bathrooms > 1 ? 's' : ''}</span>{model.flexibleSpace && <span class="tag tag--light">Espacio flexible</span>}</div><ActionLink href="/empezar/" label="Contanos tu proyecto" variant="light" /></div>
+        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{formatBedrooms(model.bedrooms)}</span><span class="tag tag--light">{model.bathrooms} baño{model.bathrooms > 1 ? 's' : ''}</span>{model.flexibleSpace && <span class="tag tag--light">Espacio flexible</span>}</div><ActionLink href="/empezar/" label="Contanos tu proyecto" variant="hero" /></div>
       </div>
     </header>
 
@@ -50,7 +50,7 @@ const hero = model.images[0];
       <div class="contained model-detail__gallery-sub"><figure class="media media--rounded"><img class="media__image" src={model.images[2].src} alt={model.images[2].alt} width="1536" height="1024" loading="lazy" style={`object-position:${model.images[2].position};`} /></figure><p class="body-large">La escala no define la intensidad de una experiencia. Una superficie contenida puede construir relaciones amplias con el exterior si las decisiones se coordinan desde el comienzo.</p></div>
     </section>
 
-    <section class="section--leaf model-detail__next"><div class="contained"><div class="section-head"><div><p class="eyebrow">Otros modelos</p><h2 class="section-title">Cada punto de partida se mueve con el sitio.</h2></div><ActionLink href="/modelos/" label="Ver catálogo" /></div><div class="model-detail__other-models">{otherModels.map((item, index) => <ModelCard model={item} index={index} />)}</div></div></section>
+    <section class="section--leaf model-detail__next"><div class="contained"><div class="section-head"><div><p class="eyebrow">Otros modelos</p><h2 class="section-title">Cada punto de partida se mueve con el sitio.</h2></div><ActionLink href="/modelos/" label="Ver catálogo" variant="hero" /></div><div class="model-detail__other-models">{otherModels.map((item, index) => <ModelCard model={item} index={index} />)}</div></div></section>
   </article>
 </BaseLayout>
 

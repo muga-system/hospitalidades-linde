@@ -13,7 +13,7 @@ import { homeSolutionDetails } from '../../data/content';
     <section class="solutions-index__list">
       {homeSolutionDetails.map((solution, index) => <article class="solutions-index__entry"><a href={`/soluciones/${solution.slug}/`}><div class="solutions-index__number">{String(index + 1).padStart(2, '0')}</div><figure class="media media--rounded"><img class="media__image" src={solution.image.src} alt={solution.image.alt} width={solution.image.width} height={solution.image.height} loading={index > 0 ? 'lazy' : 'eager'} style={`object-position:${solution.image.position};`} /></figure><div class="solutions-index__text"><p class="eyebrow">Situación {String(index + 1).padStart(2, '0')}</p><h2>{solution.title}</h2><p>{solution.summary}</p><span class="solutions-index__action action-link action-link--hero action-link--wipe" aria-hidden="true"><span class="action-link__mark"><CtaArrow /></span></span></div></a></article>)}
     </section>
-    <section class="solutions-index__end section--forest"><div class="contained"><p class="eyebrow">No sabés dónde encaja tu proyecto</p><h2 class="display-l">No hace falta tener todas las respuestas para empezar.</h2><ActionLink href="/empezar/" label="Contanos tu situación" variant="light" /></div></section>
+    <section class="solutions-index__end section--forest"><div class="contained"><p class="eyebrow">No sabés dónde encaja tu proyecto</p><h2 class="display-l">No hace falta tener todas las respuestas para empezar.</h2><ActionLink href="/empezar/" label="Contanos tu situación" variant="hero" /></div></section>
   </div>
 </BaseLayout>
 
@@ -31,7 +31,7 @@ import { homeSolutionDetails } from '../../data/content';
   .solutions-index__entry a:hover figure .media__image { transform: none; }
   .solutions-index__entry:hover .solutions-index__action,
   .solutions-index__entry:focus-within .solutions-index__action { --cta-fill-position: 0% 50%; --cta-label-delay: 0ms; --cta-mark-delay: 150ms; --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
-  .solutions-index__end { color: var(--white); background: var(--forest); padding-block: clamp(5rem, 10vw, 11rem); }
+  .solutions-index__end { --cta-background: var(--leaf); --cta-color: var(--ink); --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); color: var(--white); background: var(--forest); padding-block: clamp(5rem, 10vw, 11rem); }
   .solutions-index__end .eyebrow { color: var(--moss); margin-bottom: 1rem; }
   .solutions-index__end .display-l { max-width: 13ch; }
   .solutions-index__end .action-link { margin-top: 2rem; }

@@ -25,7 +25,7 @@ const siteConditions = project.technicalNotes.filter((note) => note.label !== 'E
       <div class="page-hero__content">
         <p class="eyebrow">Proyecto demo · {project.city}, {project.province}</p>
         <h1 class="display-xl">{project.name}</h1>
-        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{project.areaM2} m²</span><span class="tag tag--light">{statusLabel[project.status]}</span><span class="tag tag--light">{projectModel?.name ?? 'Modelo asociado'}</span></div><ActionLink href="/empezar/" label="Consultar un proyecto" variant="light" /></div>
+        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{project.areaM2} m²</span><span class="tag tag--light">{statusLabel[project.status]}</span><span class="tag tag--light">{projectModel?.name ?? 'Modelo asociado'}</span></div><ActionLink href="/empezar/" label="Consultar un proyecto" variant="hero" /></div>
       </div>
     </header>
 

@@ -12,7 +12,7 @@ type Props = {
   titleSpacing?: 'default' | 'roomy';
 };
 
-const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'default', titleSpacing = 'default' } = Astro.props;
+const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'hero', titleSpacing = 'default' } = Astro.props;
 ---
 
 <div class:list={['section-head', { 'section-head--center': centered }]} data-reveal>
@@ -27,5 +27,6 @@ const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'd
 </div>
 
 <style>
-  .section-head__title--roomy { display: grid; gap: clamp(1.75rem, 2.4vw, 2.25rem); }
+  .section-head__title { display: grid; gap: clamp(1rem, 1.5vw, 1.35rem); }
+  .section-head__title--roomy { gap: clamp(1.75rem, 2.4vw, 2.25rem); }
 </style>
