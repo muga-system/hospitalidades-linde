@@ -141,7 +141,7 @@ main#contenido > section:last-child {
 }
 .action-link--hero .action-link__mark,
 .action-link--hero:hover .action-link__mark {
-  --cta-surface-base: var(--cta-mark-background, var(--forest));
+  --cta-surface-base: var(--cta-mark-background, var(--cta-background, var(--forest)));
   position: relative;
   flex: 0 0 var(--cta-size);
   width: var(--cta-size);
