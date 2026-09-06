@@ -1,12 +1,22 @@
 ---
 import ActionLink from './ActionLink.astro';
 
-type Props = { eyebrow?: string; title: string; copy?: string; href?: string; action?: string; centered?: boolean; actionVariant?: 'default' | 'solid' | 'light' | 'hero' | 'nav' };
-const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'default' } = Astro.props;
+type Props = {
+  eyebrow?: string;
+  title: string;
+  copy?: string;
+  href?: string;
+  action?: string;
+  centered?: boolean;
+  actionVariant?: 'default' | 'solid' | 'light' | 'hero' | 'nav';
+  titleSpacing?: 'default' | 'roomy';
+};
+
+const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'default', titleSpacing = 'default' } = Astro.props;
 ---
 
 <div class:list={['section-head', { 'section-head--center': centered }]} data-reveal>
-  <div>
+  <div class:list={['section-head__title', { 'section-head__title--roomy': titleSpacing === 'roomy' }]}>
     {eyebrow && <p class="eyebrow">{eyebrow}</p>}
     <h2 class="section-title">{title}</h2>
   </div>
@@ -15,3 +25,7 @@ const { eyebrow, title, copy, href, action, centered = false, actionVariant = 'd
     {href && action && <div style="margin-top:1.4rem"><ActionLink href={href} label={action} variant={actionVariant} /></div>}
   </div>
 </div>
+
+<style>
+  .section-head__title--roomy { display: grid; gap: clamp(1.75rem, 2.4vw, 2.25rem); }
+</style>
