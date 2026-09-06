@@ -98,7 +98,7 @@ ul, ol { margin: 0; padding: 0; }
 .action-link--solid:hover .action-link__label { background: var(--leaf); }
 .action-link--light:hover .action-link__label { background: var(--white); }
 
-/* The two silhouettes stay still while the light fill sweeps across them. */
+/* The two silhouettes stay still while the fill moves through them. */
 .action-link--wipe {
   --cta-size: var(--cta-height, 3rem);
   --cta-wipe: ellipse(105% 180% at -105% -80%);
@@ -137,11 +137,13 @@ ul, ol { margin: 0; padding: 0; }
   overflow: hidden;
   isolation: isolate;
   border: 0;
-  background: var(--forest);
-  color: var(--white);
+  background: var(--cta-wipe-background, var(--leaf));
+  color: var(--cta-color, var(--white));
   transform: none;
   transition: none;
 }
+.action-link--hero { --cta-wipe: ellipse(150% 220% at 50% 50%); }
+.action-link--hero .action-link__label { background: var(--cta-wipe-background, var(--leaf)); color: var(--cta-wipe-color, var(--ink)); }
 .action-link--wipe .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
   position: absolute;
@@ -153,6 +155,8 @@ ul, ol { margin: 0; padding: 0; }
   transition: clip-path 380ms cubic-bezier(.4, 0, .2, 1);
   pointer-events: none;
 }
+.action-link--hero .action-link__label-wipe { background: var(--cta-background, var(--forest)); color: var(--cta-color, var(--white)); }
+.action-link--hero .action-link__mark::before { background: var(--cta-mark-background, var(--forest)); }
 .action-link--hero .action-link__label-wipe,
 .action-link--hero .action-link__mark::before {
   inset: -1px;
@@ -176,7 +180,7 @@ ul, ol { margin: 0; padding: 0; }
   transition: transform 200ms var(--ease) var(--cta-arrow-out-delay);
 }
 .action-link__arrow--in {
-  color: var(--ink);
+  color: var(--cta-wipe-color, var(--ink));
   transform: var(--cta-arrow-in);
   transition: transform 280ms var(--ease) var(--cta-arrow-in-delay);
 }
@@ -200,6 +204,10 @@ ul, ol { margin: 0; padding: 0; }
     --cta-arrow-out-delay: 150ms;
     --cta-arrow-in-delay: 240ms;
   }
+}
+.action-link--hero:focus-visible { --cta-wipe: ellipse(150% 220% at 260% 260%); }
+@media (hover: hover) and (pointer: fine) {
+  .action-link--hero:hover { --cta-wipe: ellipse(150% 220% at 260% 260%); }
 }
 
 .action-link--nav {
