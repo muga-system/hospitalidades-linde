@@ -34,12 +34,12 @@ Estudio, casa de huéspedes, taller, unidad de renta o pieza adicional que se in
 
 Los modelos no son productos constructivos reales. Son contenido demostrativo para probar la UX.
 
-- **Nido 38** — estudio / 1 baño — 38 m².
-- **Cauce 62** — 1 dormitorio / 1 baño — 62 m².
-- **Lenga 84** — 2 dormitorios / 1 baño — 84 m².
-- **Abra 105** — 2 dormitorios + estudio / 2 baños — 105 m².
-- **Patio 128** — 3 dormitorios / 2 baños — 128 m².
-- **Galpón 156** — 3 dormitorios / 2 baños + espacio flexible — 156 m².
+- **Nido** — estudio / 1 baño — 38 m².
+- **Cauce** — 1 dormitorio / 1 baño — 62 m².
+- **Lenga** — 2 dormitorios / 1 baño — 84 m².
+- **Abra** — 2 dormitorios + estudio / 2 baños — 105 m².
+- **Patio** — 3 dormitorios / 2 baños — 128 m².
+- **Galpón** — 3 dormitorios / 2 baños + espacio flexible — 156 m².
 
 ## Diferenciadores narrativos
 

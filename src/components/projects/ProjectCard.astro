@@ -1,10 +1,11 @@
 ---
-import { formatBedrooms, statusLabel } from '../../data/content';
+import { formatBedrooms, models, statusLabel } from '../../data/content';
 import type { Project } from '../../data/types';
 
 type Props = { project: Project; index?: number; variant?: 'grid' | 'feature' | 'plain' };
 const { project, index = 0, variant = 'grid' } = Astro.props;
 const cover = project.images[0];
+const projectModel = models.find((model) => model.slug === project.modelSlugs[0]);
 ---
 
 <article class:list={['project-card', `project-card--${variant}`]}>
@@ -21,7 +22,7 @@ const cover = project.images[0];
       <div class="project-card__meta">
         <span>{project.areaM2} m²</span>
         {project.bedrooms !== undefined && <span>{formatBedrooms(project.bedrooms)}</span>}
-        <span>{project.modelSlugs[0].replace('-', ' ')}</span>
+        <span>{projectModel?.name ?? 'Modelo asociado'}</span>
       </div>
       <span class="project-card__arrow" aria-hidden="true">↗</span>
     </div>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ActionLink from '../../components/global/ActionLink.astro';
-import { projects, statusLabel } from '../../data/content';
+import { models, projects, statusLabel } from '../../data/content';
 import type { Project } from '../../data/types';
 
 export function getStaticPaths() {
@@ -10,6 +10,7 @@ export function getStaticPaths() {
 
 const { project } = Astro.props as { project: Project };
 const hero = project.images[0];
+const projectModel = models.find((model) => model.slug === project.modelSlugs[0]);
 const projectIndex = projects.findIndex((item) => item.slug === project.slug);
 const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 const nextProject = projects[(projectIndex + 1) % projects.length];
@@ -24,7 +25,7 @@ const siteConditions = project.technicalNotes.filter((note) => note.label !== 'E
       <div class="page-hero__content">
         <p class="eyebrow">Proyecto demo · {project.city}, {project.province}</p>
         <h1 class="display-xl">{project.name}</h1>
-        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{project.areaM2} m²</span><span class="tag tag--light">{statusLabel[project.status]}</span><span class="tag tag--light">{project.modelSlugs[0].replace('-', ' ')}</span></div><ActionLink href="/empezar/" label="Consultar un proyecto" variant="light" /></div>
+        <div class="page-hero__footer"><div class="tag-row"><span class="tag tag--light">{project.areaM2} m²</span><span class="tag tag--light">{statusLabel[project.status]}</span><span class="tag tag--light">{projectModel?.name ?? 'Modelo asociado'}</span></div><ActionLink href="/empezar/" label="Consultar un proyecto" variant="light" /></div>
       </div>
     </header>
 

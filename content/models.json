@@ -1,7 +1,7 @@
 [
   {
     "slug": "nido-38",
-    "name": "Nido 38",
+    "name": "Nido",
     "areaM2": 38,
     "bedrooms": "studio",
     "bathrooms": 1,
@@ -14,7 +14,7 @@
   },
   {
     "slug": "cauce-62",
-    "name": "Cauce 62",
+    "name": "Cauce",
     "areaM2": 62,
     "bedrooms": 1,
     "bathrooms": 1,
@@ -27,7 +27,7 @@
   },
   {
     "slug": "lenga-84",
-    "name": "Lenga 84",
+    "name": "Lenga",
     "areaM2": 84,
     "bedrooms": 2,
     "bathrooms": 1,
@@ -40,7 +40,7 @@
   },
   {
     "slug": "abra-105",
-    "name": "Abra 105",
+    "name": "Abra",
     "areaM2": 105,
     "bedrooms": 2,
     "bathrooms": 2,
@@ -54,7 +54,7 @@
   },
   {
     "slug": "patio-128",
-    "name": "Patio 128",
+    "name": "Patio",
     "areaM2": 128,
     "bedrooms": 3,
     "bathrooms": 2,
@@ -67,7 +67,7 @@
   },
   {
     "slug": "galpon-156",
-    "name": "Galpón 156",
+    "name": "Galpón",
     "areaM2": 156,
     "bedrooms": 3,
     "bathrooms": 2,

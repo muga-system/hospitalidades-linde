@@ -8,6 +8,7 @@ import { homeSolutions, models, projects, site } from '../data/content';
 import { homeProcessSteps } from '../data/process';
 
 const featureProject = projects[1];
+const featureProjectModel = models.find((model) => model.slug === featureProject.modelSlugs[0]);
 ---
 
 <BaseLayout headerMode="overlay">
@@ -93,7 +94,7 @@ const featureProject = projects[1];
         <p class="eyebrow">04 · Proyecto destacado · {featureProject.city}</p>
         <h2 id="destacado-title" class="display-l">{featureProject.name}</h2>
         <p>{featureProject.intro}</p>
-        <div class="tag-row"><span class="tag tag--light">{featureProject.areaM2} m²</span><span class="tag tag--light">{featureProject.modelSlugs[0].replace('-', ' ')}</span><span class="tag tag--light">{featureProject.status} · demo</span></div>
+        <div class="tag-row"><span class="tag tag--light">{featureProject.areaM2} m²</span><span class="tag tag--light">{featureProjectModel?.name ?? 'Modelo asociado'}</span><span class="tag tag--light">{featureProject.status} · demo</span></div>
         <ActionLink href={`/proyectos/${featureProject.slug}/`} label="Ver proyecto" variant="light" />
       </div>
     </section>
