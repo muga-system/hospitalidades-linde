@@ -7,7 +7,7 @@ const modelMediaOverrides: Record<string, {
   detail?: Media;
   response?: Media;
 }> = {
-  'nido-38': {
+  nido: {
     hero: {
       src: '/images/models/nido-38-maqueta-principal.webp',
       alt: 'Maqueta principal de Nido, pieza compacta con expansión semicubierta y abertura orientable.',
@@ -30,7 +30,7 @@ const modelMediaOverrides: Record<string, {
       position: 'center center',
     },
   },
-  'cauce-62': {
+  cauce: {
     hero: {
       src: '/images/models/cauce-62-maqueta-principal.webp',
       alt: 'Maqueta principal de Cauce, refugio lineal con galería longitudinal y dormitorio independiente.',
@@ -53,7 +53,7 @@ const modelMediaOverrides: Record<string, {
       position: 'center center',
     },
   },
-  'lenga-84': {
+  lenga: {
     hero: {
       src: '/images/models/lenga-84-maqueta-principal.webp',
       alt: 'Maqueta principal de Lenga, dos alas privadas vinculadas por un estar central abierto al paisaje.',
@@ -76,7 +76,7 @@ const modelMediaOverrides: Record<string, {
       position: 'center center',
     },
   },
-  'abra-105': {
+  abra: {
     hero: {
       src: '/images/models/abra-105-maqueta-principal.webp',
       alt: 'Maqueta principal de Abra, casa compacta con área social pasante y una pieza flexible.',
@@ -99,7 +99,7 @@ const modelMediaOverrides: Record<string, {
       position: 'center center',
     },
   },
-  'patio-128': {
+  patio: {
     hero: {
       src: '/images/models/patio-128-maqueta-principal.webp',
       alt: 'Maqueta principal de Patio, dos alas que construyen un patio central protegido.',
@@ -122,7 +122,7 @@ const modelMediaOverrides: Record<string, {
       position: 'center center',
     },
   },
-  'galpon-156': {
+  galpon: {
     hero: {
       src: '/images/models/galpon-156-maqueta-principal.webp',
       alt: 'Maqueta principal de Galpón, una nave central de gran escala con piezas laterales privadas.',
@@ -147,13 +147,22 @@ const modelMediaOverrides: Record<string, {
   },
 };
 
+const modelPlanAssets: Record<string, string> = {
+  nido: 'nido-38',
+  cauce: 'cauce-62',
+  lenga: 'lenga-84',
+  abra: 'abra-105',
+  patio: 'patio-128',
+  galpon: 'galpon-156',
+};
+
 export const models: Model[] = modelSeed.map((model, index) => ({
   ...model,
   bedrooms: model.bedrooms === 'studio' ? 'studio' : Number(model.bedrooms),
   isDemo: true,
   images: createModelMedia(model.name, index, modelMediaOverrides[model.slug]),
   planImage: {
-    src: `/graphics/plans/${model.slug}.svg`,
+    src: `/graphics/plans/${modelPlanAssets[model.slug] ?? model.slug}.svg`,
     alt: `Planta conceptual original del modelo ${model.name}.`,
     width: 1200,
     height: 780,

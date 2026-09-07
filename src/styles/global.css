@@ -32,7 +32,7 @@
 }
 
 * { box-sizing: border-box; }
-html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
+html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; scrollbar-gutter: stable; }
 ::selection { color: var(--ink); background: var(--leaf); }
 ::-moz-selection { color: var(--ink); background: var(--leaf); }
 

@@ -1,5 +1,20 @@
 ---
 import { solutions } from '../../data/content';
+import CtaArrow from '../global/CtaArrow.astro';
+
+const horizonOptions = [
+  { value: 'Quiero empezar este año', title: 'Ahora', summary: 'Quiero empezar este año.' },
+  { value: 'Estoy planificando el próximo año', title: 'Próximo', summary: 'Estoy planificando el próximo año.' },
+  { value: 'Estoy explorando posibilidades', title: 'Explorar', summary: 'Todavía estoy explorando posibilidades.' },
+];
+
+const budgetOptions = [
+  { value: '', label: 'Prefiero conversarlo' },
+  { value: 'Hasta USD 80.000', label: 'Hasta USD 80.000' },
+  { value: 'USD 80.000–150.000', label: 'USD 80.000–150.000' },
+  { value: 'USD 150.000–250.000', label: 'USD 150.000–250.000' },
+  { value: 'Más de USD 250.000', label: 'Más de USD 250.000' },
+];
 ---
 
 <section class="lead-wizard" data-lead-wizard aria-labelledby="wizard-title">
@@ -22,18 +37,18 @@ import { solutions } from '../../data/content';
     <fieldset class="lead-wizard__step" data-wizard-step="2" hidden>
       <legend>¿Qué tipo de situación estás pensando?</legend>
       <p class="lead-wizard__intro">Elegí la que se parezca más a tu punto de partida. Después se puede precisar.</p>
-      <div class="lead-wizard__cards">{solutions.map((solution) => <label><input type="radio" name="projectType" value={solution.title} required /><span><small>{solution.shortTitle}</small>{solution.title}<em>{solution.summary}</em></span></label>)}</div>
+      <div class="lead-wizard__cards">{solutions.map((solution, index) => <label><input type="radio" name="projectType" value={solution.title} required /><span class="lead-wizard__card-body"><small><span>{String(index + 1).padStart(2, '0')}</span>{solution.shortTitle}</small><strong>{solution.cardTitle}</strong><em>{solution.summary}</em></span></label>)}</div>
     </fieldset>
     <fieldset class="lead-wizard__step" data-wizard-step="3" hidden>
       <legend>¿Qué escala imaginás?</legend>
       <p class="lead-wizard__intro">No hace falta que sea un número exacto. Nos ayuda a ubicar la conversación.</p>
-      <div class="lead-wizard__cards lead-wizard__cards--compact">{['Hasta 50 m²', 'Entre 50 y 90 m²', 'Entre 90 y 140 m²', 'Más de 140 m²', 'Aún no lo sé'].map((area) => <label><input type="radio" name="area" value={area} required /><span>{area}</span></label>)}</div>
+      <div class="lead-wizard__cards lead-wizard__cards--compact">{['Hasta 50 m²', '50–90 m²', '90–140 m²', 'Más de 140 m²', 'Aún no lo sé'].map((area, index) => <label><input type="radio" name="area" value={area} required /><span class="lead-wizard__card-body"><small>{String(index + 1).padStart(2, '0')}</small><strong>{area}</strong></span></label>)}</div>
     </fieldset>
     <fieldset class="lead-wizard__step" data-wizard-step="4" hidden>
       <legend>¿En qué momento está la idea?</legend>
       <p class="lead-wizard__intro">El horizonte y un rango tentativo nos permiten sugerir un próximo paso más realista.</p>
-      <div class="lead-wizard__cards lead-wizard__cards--compact">{['Quiero empezar este año', 'Estoy planificando el próximo año', 'Estoy explorando posibilidades'].map((horizon) => <label><input type="radio" name="horizon" value={horizon} required /><span>{horizon}</span></label>)}</div>
-      <div class="lead-wizard__fields" style="margin-top:1.25rem"><label>Rango de inversión (opcional)<select name="budget"><option value="">Prefiero conversarlo</option><option>Hasta USD 80.000</option><option>USD 80.000–150.000</option><option>USD 150.000–250.000</option><option>Más de USD 250.000</option></select></label></div>
+      <div class="lead-wizard__cards lead-wizard__cards--compact lead-wizard__cards--horizon">{horizonOptions.map((horizon, index) => <label><input type="radio" name="horizon" value={horizon.value} required /><span class="lead-wizard__card-body"><small>{String(index + 1).padStart(2, '0')}</small><strong>{horizon.title}</strong><em>{horizon.summary}</em></span></label>)}</div>
+      <div class="lead-wizard__fields"><label>Rango de inversión (opcional)<span class="lead-wizard__select-menu" data-budget-menu data-budget-selection=""><input type="hidden" name="budget" value="" data-budget-value /><button class="lead-wizard__select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="budget-options"><span data-budget-label>Prefiero conversarlo</span></button><span class="lead-wizard__select-options" id="budget-options" role="listbox" hidden>{budgetOptions.map((budget, index) => <button type="button" role="option" data-budget-option data-value={budget.value} aria-selected={index === 0 ? 'true' : 'false'}>{budget.label}</button>)}</span></span></label></div>
     </fieldset>
     <fieldset class="lead-wizard__step" data-wizard-step="5" hidden>
       <legend>Una última idea antes de revisar.</legend>
@@ -42,7 +57,7 @@ import { solutions } from '../../data/content';
       <div class="lead-wizard__review" data-wizard-review aria-live="polite"></div>
       <p class="lead-wizard__privacy">Esta demo no envía, almacena ni comparte datos personales. En producción, este es el punto para conectar un endpoint seguro de contacto.</p>
     </fieldset>
-    <div class="lead-wizard__footer"><button class="lead-wizard__back" type="button" data-wizard-back hidden>Atrás</button><button class="lead-wizard__next" type="button" data-wizard-next>Siguiente <span aria-hidden="true">→</span></button><button class="lead-wizard__submit" type="submit" data-wizard-submit hidden>Enviar consulta demo <span aria-hidden="true">→</span></button></div>
+    <div class="lead-wizard__footer"><button class="lead-wizard__back" type="button" data-wizard-back hidden>Atrás</button><button class="lead-wizard__next" type="button" data-wizard-next><span class="lead-wizard__button-label"><span>Siguiente</span><span class="lead-wizard__button-label-wipe" aria-hidden="true">Siguiente</span></span><span class="lead-wizard__button-mark" aria-hidden="true"><CtaArrow /></span></button><button class="lead-wizard__submit" type="submit" data-wizard-submit hidden><span class="lead-wizard__button-label"><span>Enviar consulta demo</span><span class="lead-wizard__button-label-wipe" aria-hidden="true">Enviar consulta demo</span></span><span class="lead-wizard__button-mark" aria-hidden="true"><CtaArrow /></span></button></div>
   </form>
 </section>
 
@@ -61,9 +76,42 @@ import { solutions } from '../../data/content';
     const next = wizard.querySelector<HTMLButtonElement>('[data-wizard-next]');
     const submit = wizard.querySelector<HTMLButtonElement>('[data-wizard-submit]');
     const review = wizard.querySelector<HTMLElement>('[data-wizard-review]');
+    const budgetMenu = wizard.querySelector<HTMLElement>('[data-budget-menu]');
+    const budgetTrigger = budgetMenu?.querySelector<HTMLButtonElement>('.lead-wizard__select-trigger');
+    const budgetLabel = budgetMenu?.querySelector<HTMLElement>('[data-budget-label]');
+    const budgetOptionsElements = budgetMenu ? [...budgetMenu.querySelectorAll<HTMLButtonElement>('[data-budget-option]')] : [];
     const labels = ['Contacto', 'Lugar', 'Tipo', 'Programa', 'Horizonte', 'Revisión'];
     let current = 0;
     const fieldLabel = (field: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement) => field.closest('label')?.textContent?.trim().replace(/\s+/g, ' ') || 'Este campo';
+    const closeBudgetMenu = () => {
+      budgetTrigger?.setAttribute('aria-expanded', 'false');
+      const options = budgetMenu?.querySelector<HTMLElement>('.lead-wizard__select-options');
+      if (options) options.hidden = true;
+    };
+    const setBudget = (option: HTMLButtonElement) => {
+      const value = option.getAttribute('data-value') || '';
+      const valueField = budgetMenu?.querySelector<HTMLInputElement>('[data-budget-value]');
+      budgetMenu?.setAttribute('data-budget-selection', value);
+      if (valueField) {
+        valueField.value = value;
+        valueField.setAttribute('value', value);
+      }
+      if (budgetLabel) budgetLabel.textContent = option.textContent?.trim() || '';
+      budgetOptionsElements.forEach((item) => item.setAttribute('aria-selected', item === option ? 'true' : 'false'));
+      closeBudgetMenu();
+      budgetTrigger?.focus();
+    };
+    budgetTrigger?.addEventListener('click', () => {
+      const options = budgetMenu?.querySelector<HTMLElement>('.lead-wizard__select-options');
+      if (!options) return;
+      const isOpen = budgetTrigger.getAttribute('aria-expanded') === 'true';
+      budgetTrigger.setAttribute('aria-expanded', String(!isOpen));
+      options.hidden = isOpen;
+      if (!isOpen) budgetOptionsElements.find((option) => option.getAttribute('aria-selected') === 'true')?.focus();
+    });
+    budgetOptionsElements.forEach((option) => option.addEventListener('click', () => setBudget(option)));
+    budgetMenu?.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeBudgetMenu(); budgetTrigger?.focus(); } });
+    wizard.addEventListener('click', (event) => { if (budgetMenu && !budgetMenu.contains(event.target as Node)) closeBudgetMenu(); });
     const validate = () => {
       const fields = [...steps[current].querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[required]')];
       const radioNames = new Set(fields.filter((field) => field.type === 'radio').map((field) => field.name));
@@ -75,8 +123,10 @@ import { solutions } from '../../data/content';
     const renderReview = () => {
       if (!form || !review) return;
       const values = new FormData(form);
+      const budgetSelection = budgetMenu?.getAttribute('data-budget-selection') || '';
       const entries: [string, string][] = [['Nombre', 'name'], ['Contacto', 'contact'], ['Zona', 'location'], ['Terreno', 'land'], ['Proyecto', 'projectType'], ['Escala', 'area'], ['Horizonte', 'horizon'], ['Inversión', 'budget'], ['Nota', 'message']];
-      review.innerHTML = `<p class="meta">Resumen de consulta</p>${entries.filter(([, key]) => values.get(key)).map(([name, key]) => `<div><span>${name}</span><strong>${values.get(key)}</strong></div>`).join('')}`;
+      const reviewValue = (key: string) => key === 'budget' ? budgetSelection : values.get(key)?.toString() || '';
+      review.innerHTML = `<p class="meta">Resumen de consulta</p>${entries.filter(([, key]) => reviewValue(key)).map(([name, key]) => `<div><span>${name}</span><strong>${reviewValue(key)}</strong></div>`).join('')}`;
     };
     const render = () => {
       steps.forEach((step, index) => { step.hidden = index !== current; });
@@ -101,46 +151,162 @@ import { solutions } from '../../data/content';
 </script>
 
 <style>
-  .lead-wizard { min-height: 100svh; color: var(--ink); background: var(--paper); }
+  .lead-wizard { height: 100svh; min-height: 0; overflow: hidden; color: var(--ink); background: var(--paper); }
   .lead-wizard__header { min-height: 5.6rem; display: flex; align-items: center; justify-content: space-between; padding-inline: var(--gutter); }
   .lead-wizard__brand { font-family: var(--display); font-size: 2rem; line-height: 1; letter-spacing: -.08em; }
   .lead-wizard__progress-count { font-size: .68rem; font-weight: 750; letter-spacing: .08em; }
   .lead-wizard__bar { height: 2px; background: var(--surface); }
   .lead-wizard__bar span { display: block; height: 100%; width: 16.66%; background: var(--forest); transition: width var(--motion-slow) var(--ease); }
-  .lead-wizard__form { width: min(100% - var(--gutter) * 2, 770px); min-height: calc(100svh - 5.7rem); display: flex; flex-direction: column; margin-inline: auto; padding-block: clamp(4rem, 10vh, 7rem) 2rem; }
-  .lead-wizard__eyebrow { color: var(--forest); margin-bottom: 1.1rem; }
+  .lead-wizard__form { width: min(100% - var(--gutter) * 2, 1260px); height: calc(100% - 5.7rem); min-height: 0; display: flex; flex-direction: column; margin-inline: auto; padding-block: clamp(2rem, 10vh, 7rem) 1.25rem; overflow: hidden; }
+  .lead-wizard__eyebrow { width: fit-content; margin-bottom: 1.1rem; color: var(--forest); }
   .lead-wizard__error { min-height: 1.35rem; margin-bottom: .75rem; color: #9a3222; font-size: .75rem; font-weight: 650; }
-  .lead-wizard__step { border: 0; padding: 0; margin: 0; }
-  .lead-wizard__step legend { width: 100%; padding: 0; font-family: var(--display); font-size: clamp(3.2rem, 7vw, 6.4rem); font-weight: 400; line-height: .91; letter-spacing: -.065em; outline: 0; }
-  .lead-wizard__intro { max-width: 43rem; margin-top: 1.2rem; font-size: 1rem; line-height: 1.5; }
-  .lead-wizard__fields { display: grid; gap: 1rem; margin-top: 2.2rem; }
+  .lead-wizard__step { min-width: 0; border: 0; padding: 0; margin: 0; }
+  .lead-wizard__step[hidden] { display: none; }
+  .lead-wizard__step legend { display: block; min-width: 0; width: 100%; max-width: 100%; padding: 0; font-family: var(--display); font-size: clamp(3.4rem, 5.3vw, 6.4rem); font-weight: 400; line-height: .9; letter-spacing: -.065em; outline: 0; }
+  .lead-wizard__intro { min-width: 0; max-width: 36rem; margin-top: clamp(.75rem, 2vh, 1.2rem); font-size: 1rem; line-height: 1.5; }
+  .lead-wizard__fields { display: grid; gap: clamp(.65rem, 1.5vh, 1rem); margin-top: clamp(1.25rem, 3.5vh, 2.2rem); }
   .lead-wizard label { display: grid; gap: .55rem; font-size: .72rem; font-weight: 700; letter-spacing: .025em; }
-  .lead-wizard input[type="text"], .lead-wizard input:not([type]), .lead-wizard input[type="email"], .lead-wizard input[type="tel"], .lead-wizard input[name="name"], .lead-wizard input[name="contact"], .lead-wizard input[name="location"], .lead-wizard textarea, .lead-wizard select { width: 100%; appearance: none; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; outline: 0; padding: .7rem 0; color: var(--ink); background: transparent; font-size: clamp(1.2rem, 2vw, 1.7rem); font-weight: 420; letter-spacing: -.025em; }
+  .lead-wizard input[type="text"], .lead-wizard input:not([type]), .lead-wizard input[type="email"], .lead-wizard input[type="tel"], .lead-wizard input[name="name"], .lead-wizard input[name="contact"], .lead-wizard input[name="location"], .lead-wizard textarea, .lead-wizard select { width: 100%; appearance: none; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; outline: 0; padding: clamp(.45rem, 1.3vh, .7rem) 0; color: var(--ink); background: transparent; font-size: clamp(1.1rem, min(2vw, 3vh), 1.7rem); font-weight: 420; letter-spacing: -.025em; }
+  .lead-wizard input:-webkit-autofill, .lead-wizard input:-webkit-autofill:hover, .lead-wizard input:-webkit-autofill:focus { -webkit-text-fill-color: var(--ink); -webkit-box-shadow: 0 0 0 1000px var(--paper) inset; box-shadow: 0 0 0 1000px var(--paper) inset; caret-color: var(--ink); transition: background-color 9999s ease-out 0s; }
   .lead-wizard textarea { resize: vertical; }
   .lead-wizard select { background: var(--paper); }
-  .lead-wizard__choice { display: grid; gap: 1rem; margin-top: 2rem; font-size: .78rem; font-weight: 700; }
+  .lead-wizard__select-menu { position: relative; display: block; }
+  .lead-wizard__select-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: clamp(.45rem, 1.3vh, .7rem) 0; color: var(--ink); background: transparent; font: inherit; font-size: clamp(1.1rem, min(2vw, 3vh), 1.7rem); font-weight: 420; letter-spacing: -.025em; text-align: left; }
+  .lead-wizard__select-trigger::after { content: ''; width: .55rem; height: .55rem; margin: 0 .2rem .25rem 1rem; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); transition: transform var(--motion-fast) var(--ease); }
+  .lead-wizard__select-trigger[aria-expanded="true"]::after { margin-bottom: -.25rem; transform: rotate(225deg); }
+  .lead-wizard__select-trigger:focus-visible { outline: 2px solid var(--earth); outline-offset: 4px; }
+  .lead-wizard__select-options { position: absolute; z-index: 5; right: 0; bottom: calc(100% + .6rem); left: 0; display: grid; gap: .15rem; padding: .35rem; border: 1px solid rgba(25, 32, 23, .12); border-radius: var(--radius-media); background: var(--surface); box-shadow: 0 .8rem 1.8rem rgba(25, 32, 23, .08); }
+  .lead-wizard__select-options[hidden] { display: none; }
+  .lead-wizard__select-options button { width: 100%; border: 0; border-radius: .75rem; padding: .65rem .75rem; color: var(--ink); background: transparent; font: inherit; font-size: .78rem; font-weight: 500; text-align: left; cursor: pointer; transition: color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease); }
+  .lead-wizard__select-options button:hover, .lead-wizard__select-options button:focus-visible, .lead-wizard__select-options button[aria-selected="true"] { color: var(--ink); background: var(--leaf); }
+  .lead-wizard__select-options button:focus-visible { outline: 2px solid var(--earth); outline-offset: -2px; }
+  .lead-wizard__choice { display: grid; gap: clamp(.7rem, 1.7vh, 1rem); margin-top: clamp(1.25rem, 3.5vh, 2rem); font-size: .78rem; font-weight: 700; }
   .lead-wizard__choice > div { display: flex; flex-wrap: wrap; gap: .7rem; }
   .lead-wizard__choice label, .lead-wizard__cards label { display: inline-flex; cursor: pointer; }
   .lead-wizard__choice input, .lead-wizard__cards input { position: absolute; opacity: 0; pointer-events: none; }
   .lead-wizard__choice label { border: 1px solid var(--line); border-radius: 999px; padding: .65rem .8rem; }
   .lead-wizard__choice label:has(input:checked) { border-color: var(--forest); background: var(--leaf); }
-  .lead-wizard__cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; margin-top: 2rem; }
-  .lead-wizard__cards label span { min-height: 10rem; width: 100%; display: flex; flex-direction: column; justify-content: end; border: 1px solid var(--line); border-radius: .95rem; padding: 1rem; font-family: var(--display); font-size: clamp(1.65rem, 3vw, 2.5rem); font-weight: 400; line-height: .95; letter-spacing: -.05em; transition: color var(--motion-base) var(--ease), background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease); }
-  .lead-wizard__cards label small { margin-bottom: auto; font-family: var(--ui); font-size: .64rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
-  .lead-wizard__cards label em { margin-top: .7rem; font-family: var(--ui); font-size: .7rem; font-style: normal; font-weight: 450; line-height: 1.4; letter-spacing: 0; }
-  .lead-wizard__cards label:has(input:checked) span { border-color: var(--forest); background: var(--forest); color: var(--white); }
+  .lead-wizard__cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(.85rem, 1.5vw, 1.25rem); margin-top: clamp(1rem, 3vh, 2rem); }
+  .lead-wizard__cards label > .lead-wizard__card-body { min-height: clamp(9.5rem, 20vh, 13rem); width: 100%; display: grid; grid-template-rows: auto 1fr auto; gap: clamp(.8rem, 1.6vh, 1.1rem); border: 1px solid rgba(25, 32, 23, .12); border-radius: var(--radius-media); padding: clamp(1.2rem, 2.2vw, 1.6rem); background: var(--surface); font-family: var(--display); font-size: clamp(1.65rem, 2.5vw, 2.65rem); font-weight: 400; line-height: .95; letter-spacing: -.05em; transition: color var(--motion-base) var(--ease), background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease); }
+  .lead-wizard__cards label > .lead-wizard__card-body > small { display: flex; align-items: center; justify-content: space-between; margin: 0; color: var(--forest); font-family: var(--ui); font-size: .64rem; font-weight: 750; letter-spacing: .06em; line-height: 1.1; text-transform: uppercase; }
+  .lead-wizard__cards label > .lead-wizard__card-body > small > span { color: var(--earth); }
+  .lead-wizard__cards label > .lead-wizard__card-body > strong { display: block; align-self: center; min-height: 0; font: inherit; text-wrap: balance; }
+  .lead-wizard__cards label > .lead-wizard__card-body > em { margin: 0; font-family: var(--ui); font-size: clamp(.68rem, 1.05vw, .8rem); font-style: normal; font-weight: 450; line-height: 1.35; letter-spacing: 0; text-wrap: pretty; }
+  .lead-wizard__cards label:hover > .lead-wizard__card-body, .lead-wizard__cards label:has(input:focus-visible) > .lead-wizard__card-body { border-color: rgba(77, 103, 59, .3); background: var(--leaf); }
+  .lead-wizard__cards label:has(input:checked) > .lead-wizard__card-body { border-color: var(--forest); background: var(--forest); color: var(--white); }
+  .lead-wizard__cards label:has(input:checked) > .lead-wizard__card-body > small, .lead-wizard__cards label:has(input:checked) > .lead-wizard__card-body > small > span { color: var(--leaf); }
   .lead-wizard__cards--compact { grid-template-columns: repeat(3, 1fr); }
-  .lead-wizard__cards--compact label span { min-height: 7.5rem; }
-  .lead-wizard__review { display: grid; gap: 0; margin-top: 2rem; border-top: 1px solid var(--line); }
-  .lead-wizard__review .meta { padding: 1rem 0; color: var(--forest); }
-  .lead-wizard__review div { display: grid; grid-template-columns: .4fr 1fr; gap: 1rem; padding: .6rem 0; border-top: 1px solid var(--line); font-size: .75rem; }
-  .lead-wizard__review span { color: var(--forest); font-weight: 700; }
-  .lead-wizard__review strong { font-weight: 500; }
-  .lead-wizard__privacy { margin-top: 1.4rem; font-size: .68rem; line-height: 1.45; color: rgba(25,32,23,.68); }
-  .lead-wizard__footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 3.4rem; }
+  .lead-wizard__cards--compact label > .lead-wizard__card-body { min-height: clamp(6rem, 14vh, 8.5rem); }
+  .lead-wizard__cards--compact label > .lead-wizard__card-body > small { margin-bottom: 0; }
+  .lead-wizard__cards--compact label > .lead-wizard__card-body > strong { align-self: end; min-height: 0; font-size: clamp(1.55rem, 2.3vw, 2.45rem); }
+  .lead-wizard__review { display: grid; gap: 0; margin-top: clamp(1rem, 3vh, 2rem); padding: .45rem 1.2rem .65rem; border: 1px solid var(--line); border-radius: var(--radius-media); background: var(--surface); }
+  :global(.lead-wizard__review .meta) { padding: .35rem 0 .65rem; color: var(--forest); }
+  :global(.lead-wizard__review div) { display: grid; grid-template-columns: minmax(6rem, .42fr) 1fr; gap: 1rem; padding: .38rem 0; border-top: 1px solid var(--line); font-size: .75rem; }
+  :global(.lead-wizard__review span) { color: var(--forest); font-weight: 700; }
+  :global(.lead-wizard__review strong) { font-weight: 500; }
+  .lead-wizard__privacy { margin-top: clamp(.8rem, 2vh, 1.4rem); font-size: .68rem; line-height: 1.45; color: rgba(25,32,23,.68); }
+  .lead-wizard__footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: clamp(1rem, 4vh, 3.4rem); }
   .lead-wizard__back { border: 0; padding: .55rem 0; color: var(--ink); background: transparent; font-size: .72rem; font-weight: 750; text-transform: uppercase; }
-  .lead-wizard__next, .lead-wizard__submit { border: 1px solid rgba(25,32,23,.18); border-radius: 999px; padding: .9rem 1.1rem; color: var(--ink); background: var(--leaf); font-size: .7rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; transition: border-color var(--motion-fast) var(--ease), background-color var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease); }
-  .lead-wizard__next:hover, .lead-wizard__next:focus-visible, .lead-wizard__submit:hover, .lead-wizard__submit:focus-visible { border-color: var(--forest); color: var(--white); background: var(--forest); }
-  .lead-wizard__next span, .lead-wizard__submit span { padding-left: .6rem; }
-  @media (max-width: 560px) { .lead-wizard__header { min-height: 4.6rem; padding-inline: 1.25rem; } .lead-wizard__form { width: calc(100% - 2.5rem); padding-top: 3.3rem; } .lead-wizard__cards, .lead-wizard__cards--compact { grid-template-columns: 1fr; } .lead-wizard__cards label span { min-height: 7rem; } .lead-wizard__footer { padding-top: 2.4rem; } }
+  .lead-wizard__next, .lead-wizard__submit { --cta-arrow-out: translateX(0); --cta-arrow-in: translate(-145%, 145%); --cta-arrow-out-delay: 180ms; --cta-arrow-in-delay: 0ms; position: relative; display: inline-flex; align-items: center; gap: .125rem; appearance: none; margin-left: auto; border: 0; padding: 0; color: var(--white); background: transparent; font-size: .72rem; font-weight: 750; letter-spacing: .02em; text-transform: uppercase; }
+  .lead-wizard__next[hidden], .lead-wizard__submit[hidden], .lead-wizard__back[hidden] { display: none; }
+  .lead-wizard__button-label, .lead-wizard__button-mark { position: relative; overflow: hidden; background: var(--forest); }
+  .lead-wizard__button-label { display: grid; place-items: center; min-height: 3rem; min-width: 8.5rem; padding: .8rem 1.35rem; border-radius: 999px; }
+  .lead-wizard__button-mark { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; }
+  .lead-wizard__button-label::before, .lead-wizard__button-mark::before { content: ''; position: absolute; inset: 0; background: var(--leaf); clip-path: ellipse(105% 180% at -105% -80%); transition: clip-path 380ms cubic-bezier(.4, 0, .2, 1); }
+  .lead-wizard__button-label > span:first-child, .lead-wizard__button-mark > span { position: relative; z-index: 1; }
+  .lead-wizard__button-label > span:first-child { transition: color 200ms var(--ease) 180ms; }
+  .lead-wizard__button-label-wipe { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; color: var(--ink); clip-path: ellipse(105% 180% at -105% -80%); transition: clip-path 380ms cubic-bezier(.4, 0, .2, 1); pointer-events: none; }
+  .lead-wizard__button-mark .action-link__arrows { position: relative; z-index: 2; }
+  .lead-wizard__next:hover .lead-wizard__button-label::before, .lead-wizard__next:hover .lead-wizard__button-mark::before, .lead-wizard__submit:hover .lead-wizard__button-label::before, .lead-wizard__submit:hover .lead-wizard__button-mark::before, .lead-wizard__next:focus-visible .lead-wizard__button-label::before, .lead-wizard__next:focus-visible .lead-wizard__button-mark::before, .lead-wizard__submit:focus-visible .lead-wizard__button-label::before, .lead-wizard__submit:focus-visible .lead-wizard__button-mark::before { clip-path: ellipse(105% 180% at 50% 50%); }
+  .lead-wizard__next:hover .lead-wizard__button-label-wipe, .lead-wizard__submit:hover .lead-wizard__button-label-wipe, .lead-wizard__next:focus-visible .lead-wizard__button-label-wipe, .lead-wizard__submit:focus-visible .lead-wizard__button-label-wipe { clip-path: ellipse(105% 180% at 50% 50%); }
+  .lead-wizard__next:hover, .lead-wizard__submit:hover, .lead-wizard__next:focus-visible, .lead-wizard__submit:focus-visible { --cta-arrow-out: translateX(145%); --cta-arrow-in: translate(0, 0); --cta-arrow-out-delay: 150ms; --cta-arrow-in-delay: 240ms; }
+  .lead-wizard__next:focus-visible, .lead-wizard__submit:focus-visible { outline: 2px solid var(--earth); outline-offset: 4px; }
+  @media (min-width: 901px) {
+    .lead-wizard__step { display: grid; grid-template-columns: minmax(17rem, .78fr) minmax(0, 1.22fr); grid-template-rows: auto auto auto auto; column-gap: clamp(3rem, 7vw, 8rem); row-gap: clamp(1rem, 2vh, 1.6rem); align-items: start; }
+    .lead-wizard__step legend { grid-column: 1 / -1; grid-row: 1; max-width: 20ch; }
+    .lead-wizard__step > .lead-wizard__intro { grid-column: 1; grid-row: 2; margin-top: 0; }
+    .lead-wizard__step > .lead-wizard__fields { grid-column: 2; grid-row: 2; margin-top: 0; }
+    .lead-wizard__step > .lead-wizard__choice { grid-column: 2; grid-row: 3; margin-top: 0; }
+    .lead-wizard__step > .lead-wizard__cards { grid-column: 2; grid-row: 2; margin-top: 0; }
+    .lead-wizard__step[data-wizard-step="0"] > .lead-wizard__fields { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .lead-wizard__step[data-wizard-step="4"] > .lead-wizard__fields { grid-row: 3; margin-top: 0; }
+    .lead-wizard__step[data-wizard-step="5"] > .lead-wizard__review { grid-column: 2; grid-row: 3; margin-top: 0; }
+    .lead-wizard__step[data-wizard-step="5"] > .lead-wizard__privacy { grid-column: 2; grid-row: 4; margin-top: 0; }
+    .lead-wizard__step[data-wizard-step="5"] .lead-wizard__fields label { padding: 1rem 1.2rem 1.15rem; border: 1px solid var(--line); border-radius: var(--radius-media); background: var(--surface); }
+    .lead-wizard__step[data-wizard-step="5"] textarea { min-height: 7rem; border-bottom-color: var(--forest); }
+    .lead-wizard__step[data-wizard-step="3"] > .lead-wizard__cards--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lead-wizard__step[data-wizard-step="3"] > .lead-wizard__cards--compact label > .lead-wizard__card-body { min-height: clamp(6.75rem, 13vh, 8rem); padding: 1rem 1.2rem; }
+    .lead-wizard__step[data-wizard-step="3"] > .lead-wizard__cards--compact label > .lead-wizard__card-body > strong { font-size: clamp(1.4rem, 2vw, 2.1rem); }
+    .lead-wizard__step[data-wizard-step="4"] > .lead-wizard__cards--horizon { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lead-wizard__step[data-wizard-step="4"] > .lead-wizard__cards--horizon label > .lead-wizard__card-body { min-height: clamp(8rem, 15vh, 10rem); padding: 1.1rem 1.2rem; }
+    .lead-wizard__step[data-wizard-step="4"] > .lead-wizard__cards--horizon label > .lead-wizard__card-body > strong { align-self: center; font-size: clamp(1.7rem, 2.4vw, 2.6rem); }
+    .lead-wizard__step[data-wizard-step="4"] > .lead-wizard__cards--horizon label > .lead-wizard__card-body > em { font-size: clamp(.68rem, 1vw, .78rem); }
+    :global(.lead-wizard__step[data-wizard-step="5"] .lead-wizard__review) { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.5rem; }
+    :global(.lead-wizard__step[data-wizard-step="5"] .lead-wizard__review .meta) { grid-column: 1 / -1; }
+    :global(.lead-wizard__step[data-wizard-step="5"] .lead-wizard__review div) { display: grid; grid-template-columns: minmax(5rem, .5fr) 1fr; align-items: baseline; gap: .8rem; }
+    :global(.lead-wizard__step[data-wizard-step="5"] .lead-wizard__review span) { font-size: .6rem; letter-spacing: .06em; text-transform: uppercase; }
+  }
+  @media (max-height: 760px) and (min-width: 561px) {
+    .lead-wizard__form { height: calc(100% - 6.8rem); padding-block: 1.5rem .75rem; }
+    .lead-wizard__eyebrow { margin-bottom: .6rem; }
+    .lead-wizard__error { min-height: .9rem; margin-bottom: .25rem; }
+    .lead-wizard__step legend { font-size: clamp(3rem, min(5.3vw, 8vh), 5.4rem); }
+    .lead-wizard__intro { font-size: .88rem; }
+    .lead-wizard__cards { gap: .55rem; }
+    .lead-wizard__cards label > .lead-wizard__card-body { min-height: 7.5rem; gap: .6rem; padding: .8rem 1rem; font-size: clamp(1.45rem, 2.3vw, 2.25rem); }
+    .lead-wizard__cards label > .lead-wizard__card-body > small { font-size: .58rem; }
+    .lead-wizard__cards label > .lead-wizard__card-body > em { font-size: .67rem; line-height: 1.28; }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body { min-height: 5.5rem; }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body > strong { font-size: clamp(1.45rem, 2.3vw, 2.2rem); }
+    .lead-wizard__step[data-wizard-step="5"] textarea { height: 5.5rem; min-height: 5.5rem; }
+    .lead-wizard__review { margin-top: .75rem; padding-block: .3rem .45rem; }
+    .lead-wizard__review .meta { padding-block: .3rem .45rem; }
+    :global(.lead-wizard__review div) { gap: .8rem; padding-block: .23rem; font-size: .68rem; }
+    .lead-wizard__privacy { margin-top: .6rem; font-size: .6rem; }
+    .lead-wizard__footer { padding-top: .5rem; }
+    .lead-wizard__button-label { min-width: 7.5rem; min-height: 2.65rem; padding: .7rem 1.15rem; }
+    .lead-wizard__button-mark { width: 2.65rem; height: 2.65rem; }
+  }
+  @media (min-width: 561px) and (max-width: 900px) {
+    .lead-wizard { height: auto; min-height: 100svh; overflow: visible; }
+    .lead-wizard__header { min-height: 4.8rem; padding-inline: 1.5rem; }
+    .lead-wizard__form { width: calc(100% - 3rem); height: auto; min-height: calc(100svh - 4.9rem); padding-block: clamp(1.5rem, 6vh, 3.5rem) .9rem; overflow: visible; }
+    .lead-wizard__step legend { font-size: clamp(2.8rem, 7.5vw, 4.6rem); }
+    .lead-wizard__intro { font-size: .9rem; }
+    .lead-wizard__cards { gap: .6rem; }
+    .lead-wizard__cards label > .lead-wizard__card-body { min-height: 7.5rem; padding: .8rem; font-size: clamp(1.4rem, 3.4vw, 2.15rem); }
+    .lead-wizard__cards label > .lead-wizard__card-body > small { font-size: .58rem; line-height: 1.1; }
+    .lead-wizard__cards label > .lead-wizard__card-body > em { font-size: .66rem; line-height: 1.25; }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body { min-height: 5.5rem; }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body > strong { font-size: clamp(1.3rem, 3vw, 1.95rem); }
+    .lead-wizard__footer { padding-top: 1rem; }
+  }
+  @media (max-width: 560px) {
+    .lead-wizard__header { min-height: 4.6rem; padding-inline: 1.25rem; }
+    .lead-wizard { height: auto; min-height: 100svh; overflow: visible; }
+    .lead-wizard__form { width: calc(100% - 2.5rem); height: auto; min-height: calc(100svh - 4.7rem); padding-block: clamp(1.25rem, 5vh, 3.3rem) .75rem; overflow: visible; }
+    .lead-wizard__step legend { font-size: clamp(2.5rem, min(11vw, 6.5vh), 4.5rem); }
+    .lead-wizard__intro { font-size: .82rem; }
+    .lead-wizard__cards, .lead-wizard__cards--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+    .lead-wizard__cards label > .lead-wizard__card-body { min-height: clamp(6rem, 11vh, 8rem); padding: .7rem; font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    .lead-wizard__cards label > .lead-wizard__card-body > small { font-size: .52rem; }
+    .lead-wizard__cards label > .lead-wizard__card-body > em { font-size: .64rem; line-height: 1.28; }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body { min-height: clamp(4.75rem, 9vh, 6rem); }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body > strong { font-size: clamp(1.05rem, 4.5vw, 1.4rem); }
+    .lead-wizard__review { padding-inline: .8rem; }
+    .lead-wizard__review { grid-template-columns: 1fr; }
+    :global(.lead-wizard__review .meta) { grid-column: auto; }
+    :global(.lead-wizard__review div) { grid-template-columns: minmax(5rem, .5fr) 1fr; gap: .7rem; font-size: .68rem; }
+    .lead-wizard__button-label { min-width: 7rem; min-height: 2.65rem; padding: .7rem 1rem; }
+    .lead-wizard__button-mark { width: 2.65rem; height: 2.65rem; }
+    .lead-wizard__footer { padding-top: 1.25rem; }
+  }
+  @media (max-height: 700px) and (max-width: 560px) {
+    .lead-wizard__form { padding-block: 1rem .5rem; }
+    .lead-wizard__step legend { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+    .lead-wizard__cards label > .lead-wizard__card-body { min-height: 5.25rem; padding: .5rem; }
+    .lead-wizard__cards--compact label > .lead-wizard__card-body { min-height: 3.75rem; }
+    .lead-wizard__step[data-wizard-step="5"] textarea { height: 5rem; min-height: 5rem; }
+    .lead-wizard__footer { padding-top: .75rem; }
+  }
 </style>

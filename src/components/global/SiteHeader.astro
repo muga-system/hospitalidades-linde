@@ -235,7 +235,7 @@ const isCurrentGroup = (group: NavGroup) => group.activePaths.some(matchesCurren
     .mobile-panel { display: block; position: fixed; z-index: 3; top: 0; left: 0; width: 100%; height: 100svh; padding: 1.25rem 1.25rem 1.4rem; color: var(--ink); background: var(--paper); border-radius: 0 0 2.25rem 2.25rem; overflow: auto; }
     .mobile-panel[hidden] { display: none; }
     .mobile-panel__top { display: flex; min-height: 3.2rem; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
-    .mobile-toggle--close { display: grid; font-size: 1.8rem; line-height: 1; }
+    .mobile-toggle--close { position: absolute; top: calc((var(--header-height) - 2.65rem) / 2); right: 1.25rem; display: grid; font-size: 1.8rem; line-height: 1; }
     .mobile-group { border-top: 1px solid var(--line); }
     .mobile-group:last-of-type { border-bottom: 1px solid var(--line); }
     .mobile-group summary, .mobile-panel__direct { display: flex; align-items: center; justify-content: space-between; min-height: 4.1rem; font-family: var(--display); font-size: clamp(1.8rem, 8vw, 2.55rem); letter-spacing: -.05em; list-style: none; }

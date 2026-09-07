@@ -11,11 +11,19 @@ import ActionLink from '../components/global/ActionLink.astro';
 </BaseLayout>
 
 <style>
-  .thanks-page { --cta-background: var(--leaf); --cta-color: var(--ink); --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); position: relative; min-height: 100svh; display: flex; flex-direction: column; padding: clamp(1.3rem, 3vw, 3.2rem) var(--gutter); overflow: hidden; color: var(--white); background: var(--forest); }
-  .thanks-page__brand { font-family: var(--display); font-size: 2rem; line-height: 1; letter-spacing: -.08em; }
+  .thanks-page { --cta-background: var(--leaf); --cta-color: var(--ink); --cta-wipe-background: var(--white); --cta-wipe-color: var(--ink); --cta-focus-color: var(--leaf); position: relative; height: 100svh; min-height: 0; display: flex; flex-direction: column; box-sizing: border-box; padding: clamp(1.15rem, 2.8vw, 2.8rem) var(--gutter); overflow: hidden; color: var(--white); background: var(--forest); }
+  .thanks-page__brand { font-family: var(--display); font-size: clamp(1.8rem, 2.2vw, 2.3rem); line-height: 1; letter-spacing: -.08em; }
   .thanks-page__content { max-width: 72rem; margin: auto 0; }
-  .thanks-page__content .eyebrow { color: var(--leaf); margin-bottom: 1rem; }
-  .thanks-page__content h1 { max-width: 12ch; }
-  .thanks-page__content .body-large { margin-top: 2rem; }
-  .thanks-page__content > div { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+  .thanks-page__content .eyebrow { color: var(--leaf); margin-bottom: clamp(.7rem, 1.2vh, 1rem); }
+  .thanks-page__content h1 { max-width: 13ch; font-size: clamp(4.2rem, 7.6vw, 8rem); line-height: .84; }
+  .thanks-page__content .body-large { max-width: 38ch; margin-top: clamp(1.25rem, 2.4vh, 2rem); font-size: clamp(1.05rem, 1.25vw, 1.35rem); line-height: 1.4; }
+  .thanks-page__content > div { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: clamp(1.25rem, 2.4vh, 2rem); }
+
+  @media (max-width: 560px) {
+    .thanks-page { height: auto; min-height: 100svh; padding-block: 1.25rem 1.5rem; overflow: visible; }
+    .thanks-page__content { margin-block: clamp(4rem, 12vh, 7rem) 0; }
+    .thanks-page__content h1 { max-width: 10ch; font-size: clamp(4rem, 17vw, 6.5rem); }
+    .thanks-page__content .body-large { font-size: 1.05rem; }
+    .thanks-page__content > div { gap: .65rem; }
+  }
 </style>

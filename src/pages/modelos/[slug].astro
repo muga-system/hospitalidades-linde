@@ -12,6 +12,7 @@ export function getStaticPaths() {
 const { model } = Astro.props as { model: Model };
 const otherModels = models.filter((item) => item.slug !== model.slug).slice(0, 3);
 const hero = model.images[0];
+const planSectionMedia = model.images[0];
 ---
 
 <BaseLayout title={`${model.name} — Modelos LINDE`} description={model.summary} image={hero.src} headerMode="overlay">
@@ -40,8 +41,8 @@ const hero = model.images[0];
 
     <section class="model-detail__plan section">
       <div class="contained model-detail__plan-grid">
-        <figure class="model-detail__plan-media"><img src={model.planImage.src} alt={model.planImage.alt} width={model.planImage.width} height={model.planImage.height} loading="lazy" /></figure>
-        <div><p class="eyebrow">Planta conceptual</p><h2 class="section-title">Una organización que deja lugar para adaptarse.</h2><p class="body-copy">Las plantas representan relaciones de uso y no documentación de obra. Permiten ver cómo se concentran servicios, expansiones y piezas privadas antes de definir una arquitectura específica.</p><div class="model-detail__recommended"><p class="meta">Puede servir como base para</p>{model.recommendedFor.map((item) => <span class="tag tag--soft">{item.replace('-', ' ')}</span>)}</div></div>
+        <figure class="model-detail__plan-media"><img src={planSectionMedia.src} alt={`Maqueta principal del modelo ${model.name}.`} width={planSectionMedia.width} height={planSectionMedia.height} loading="lazy" style={`object-position:${planSectionMedia.position ?? 'center'};`} /></figure>
+        <div><p class="eyebrow">Maqueta conceptual</p><h2 class="section-title">Una organización que deja lugar para adaptarse.</h2><p class="body-copy">La maqueta permite leer cómo se relacionan los ambientes, las expansiones y el exterior antes de definir una arquitectura específica.</p><div class="model-detail__recommended"><p class="meta">Puede servir como base para</p>{model.recommendedFor.map((item) => <span class="tag tag--soft">{item.replace('-', ' ')}</span>)}</div></div>
       </div>
     </section>
 
@@ -73,8 +74,8 @@ const hero = model.images[0];
   .model-detail__features i { font-size: 1.5rem; font-style: normal; }
   .model-detail__plan { padding-block: clamp(4.8rem, 9vw, 10rem); }
   .model-detail__plan-grid { display: grid; grid-template-columns: 1.1fr .72fr; gap: clamp(2rem, 6vw, 8rem); align-items: center; }
-  .model-detail__plan-media { background: var(--surface); }
-  .model-detail__plan-media img { width: 100%; height: auto; }
+  .model-detail__plan-media { aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--radius-media); background: var(--surface); }
+  .model-detail__plan-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .model-detail__plan-grid .eyebrow { margin-bottom: 1rem; }
   .model-detail__plan-grid .body-copy { margin-top: 1.5rem; }
   .model-detail__recommended { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem; margin-top: 1.8rem; }

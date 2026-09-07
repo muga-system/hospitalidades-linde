@@ -22,6 +22,7 @@ export type Solution = {
   slug: string;
   title: string;
   shortTitle: string;
+  cardTitle: string;
   summary: string;
   problem: string;
   principles: { title: string; body: string }[];
